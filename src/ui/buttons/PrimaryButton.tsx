@@ -45,4 +45,5 @@ const Button = styled.button<{ buttonType?: "default" | "disabled" }>`
     background-color: ${({ buttonType }) =>
       buttonType === "default" ? theme.colors.lightRed : null};
   }
+  transition: all 0.1s linear;
 `;
