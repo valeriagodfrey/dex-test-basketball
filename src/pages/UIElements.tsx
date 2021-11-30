@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import { PrimaryButton } from "../ui/buttons/PrimaryButton";
 import { SecondaryButton } from "../ui/buttons/SecondaryButton";
+import { Checkbox } from "../ui/checkbox/Checkbox";
 import { Input } from "../ui/input/Input";
 import { SearchInput } from "../ui/input/SearchInput";
 
@@ -15,11 +16,19 @@ export const UIElements = () => {
         <SecondaryButton>Programmer</SecondaryButton>
         <SecondaryButton buttonType="disabled">Not a Programmer</SecondaryButton>
       </Buttons>
-      <Input label="Login" />
-      <Input type="password" label="Password" />
-      <Input disabled label="Email" value="hey" />
-      <Input error="Error" label="Age" />
-      <SearchInput placeholder="Search..."></SearchInput>
+      <Inputs>
+        <Input label="Login" />
+        <Input type="password" label="Password" />
+        <Input disabled label="Email" value="hey" />
+        <Input error="Error" label="Age" />
+        <SearchInput placeholder="Search..."></SearchInput>
+      </Inputs>
+      <Checkboxes>
+        <Checkbox text="Check this" />
+        <Checkbox text="Are u sure?" error="You should check!" />
+        <Checkbox disabled text="Disabled" />
+        <Checkbox disabled_check disabled text="You can not check this" />
+      </Checkboxes>
     </Container>
   );
 };
@@ -32,3 +41,5 @@ const Buttons = styled.div`
   display: flex;
   margin: 10px 0px 15px 0;
 `;
+const Inputs = styled.div``;
+const Checkboxes = styled.div``;
