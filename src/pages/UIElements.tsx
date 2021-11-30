@@ -6,11 +6,18 @@ import { SecondaryButton } from "../ui/buttons/SecondaryButton";
 import { Checkbox } from "../ui/checkbox/Checkbox";
 import { Input } from "../ui/input/Input";
 import { SearchInput } from "../ui/input/SearchInput";
+import { CustomLink } from "../ui/Link";
 import { Pagination } from "../ui/Pagination";
 
 export const UIElements = () => {
   return (
     <Container>
+      <CustomLink linkType="active" to={"/players"}>
+        Click here
+      </CustomLink>
+      <CustomLink linkType="disabled" to={"/players"}>
+        You can't click there
+      </CustomLink>
       <Buttons>
         <PrimaryButton>Hello world</PrimaryButton>
         <PrimaryButton buttonType="disabled">Goodbye world</PrimaryButton>
