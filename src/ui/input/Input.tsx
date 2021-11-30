@@ -1,50 +1,47 @@
 import React, { forwardRef, InputHTMLAttributes, useState } from "react";
 import styled from "styled-components";
 
+import closedEye from "../../assets/icons/close_eye_rounded.svg";
+import openedEye from "../../assets/icons/eye_rounded.svg";
 import { theme } from "../../core/theme/theme";
-import ClosedEye from "../assets/icons/close_eye_rounded.svg";
-import OpenedEye from "../assets/icons/eye_rounded.svg";
 type Props = InputHTMLAttributes<HTMLInputElement>;
 
 interface InputProps extends Props {
-  inputType?: "text" | "password";
   error?: string;
   label?: string;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>((params, ref) => {
-  const [type, setType] = useState("password");
+  const [type, setType] = useState(params.type);
+
   const changeType = () => {
-    if (type === "password") {
-      setType("text");
-    } else setType("password");
+    setType(type === "password" ? "text" : "password");
   };
+
   return (
     <Container>
       <Label>{params.label}</Label>
-      <CustomInput
-        inputDisable={params.disabled}
-        style={{
-          color: params.disabled === true ? theme.colors.lightestGrey : theme.colors.grey,
-          borderColor: params.error ? theme.colors.lightestRed : "transparent",
-        }}
-        {...params}
-        ref={ref}
-      >
-        {/* {params.type === "password" && type === "password" ? (
-          <div>
-            {params.value}
-            <img src={ClosedEye} alt="closed_eye" onClick={changeType} />
-          </div>
+      <InputContainer>
+        <CustomInput
+          type={type}
+          inputDisable={params.disabled}
+          style={{
+            color: params.disabled === true ? theme.colors.lightestGrey : theme.colors.grey,
+            borderColor: params.error ? theme.colors.lightestRed : "transparent",
+          }}
+          {...params}
+          ref={ref}
+        />
+        {params.type === "password" && type === "password" ? (
+          <Icon>
+            <img src={closedEye} alt="closed_eye" onClick={changeType} />
+          </Icon>
         ) : params.type === "password" && type === "text" ? (
-          <div>
-            {params.value}
-            <img src={OpenedEye} alt="opened_eye" onClick={changeType} />
-          </div>
-        ) : (
-          <div>Hello</div>
-        )} */}
-      </CustomInput>
+          <Icon>
+            <img src={openedEye} alt="opened_eye" onClick={changeType} />
+          </Icon>
+        ) : null}
+      </InputContainer>
       <Error>{params.error}</Error>
     </Container>
   );
@@ -52,12 +49,25 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((params, ref) => {
 Input.displayName = "CustomInput";
 
 const Container = styled.div`
+  position: relative;
   font-family: Avenir;
   font-style: normal;
   font-weight: 500;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
+`;
+const InputContainer = styled.div`
+  display: inline-flex;
+  flex-direction: row-reverse;
+  align-items: center;
+`;
+const Icon = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin: 12px;
 `;
 
 const Label = styled.label`
@@ -73,8 +83,8 @@ const CustomInput = styled.input<{ inputDisable: boolean | undefined }>`
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
-  line-height: 24px;
-  padding: 8px;
+  line-height: 22px;
+  padding: 8px 12px;
   cursor: pointer;
   border: 1px solid transparent;
   border-radius: 4px;
@@ -86,7 +96,7 @@ const CustomInput = styled.input<{ inputDisable: boolean | undefined }>`
       inputDisable === true ? theme.colors.lightestGrey1 : theme.colors.lightestGrey};
   }
   :focus {
-    box-shadow: 0px 0px 5px #d9d9d9;
+    box-shadow: 0px 0px 5px ${theme.colors.lightestGrey2};
     outline: none;
   }
 `;
