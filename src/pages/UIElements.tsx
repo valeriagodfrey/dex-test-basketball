@@ -6,6 +6,7 @@ import { SecondaryButton } from "../ui/buttons/SecondaryButton";
 import { Checkbox } from "../ui/checkbox/Checkbox";
 import { Input } from "../ui/input/Input";
 import { SearchInput } from "../ui/input/SearchInput";
+import { Pagination } from "../ui/Pagination";
 
 export const UIElements = () => {
   return (
@@ -29,6 +30,7 @@ export const UIElements = () => {
         <Checkbox disabled text="Disabled" />
         <Checkbox disabled_check disabled text="You can not check this" />
       </Checkboxes>
+      <Pagination pageCount={12} />
     </Container>
   );
 };
