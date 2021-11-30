@@ -34,7 +34,7 @@ const Button = styled.button<{ buttonType?: "default" | "disabled" }>`
   display: flex;
   justify-content: center;
   cursor: pointer;
-  padding: 10px;
+  padding: 8px;
   color: ${({ buttonType }) =>
     buttonType === "default" ? theme.colors.white : theme.colors.lightestGrey};
   border-radius: 4px;

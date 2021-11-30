@@ -31,12 +31,13 @@ const Button = styled.button<{ buttonType?: "default" | "disabled" }>`
   font-style: normal;
   font-weight: 500;
   font-size: 15px;
+  line-height: 22px;
   align-items: center;
   text-align: center;
   display: flex;
   justify-content: center;
   cursor: pointer;
-  padding: 10px;
+  padding: 8px;
   color: ${({ buttonType }) =>
     buttonType === "default" ? theme.colors.lightGrey : theme.colors.lightestGrey};
   border-radius: 4px;

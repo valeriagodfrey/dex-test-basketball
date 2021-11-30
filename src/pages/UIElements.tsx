@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { PrimaryButton } from "../ui/buttons/PrimaryButton";
 import { SecondaryButton } from "../ui/buttons/SecondaryButton";
 import { Input } from "../ui/input/Input";
+import { SearchInput } from "../ui/input/SearchInput";
 
 export const UIElements = () => {
   return (
@@ -15,9 +16,10 @@ export const UIElements = () => {
         <SecondaryButton buttonType="disabled">Not a Programmer</SecondaryButton>
       </Buttons>
       <Input label="Login" />
-      <Input label="Password" />
+      <Input type="password" label="Password" />
       <Input disabled label="Email" value="hey" />
       <Input error="Error" label="Age" />
+      <SearchInput placeholder="Search..."></SearchInput>
     </Container>
   );
 };

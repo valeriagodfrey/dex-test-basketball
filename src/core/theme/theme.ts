@@ -10,6 +10,7 @@ export const theme = {
     lightGrey: "#9C9C9C",
     lightestGrey: "#D1D1D1",
     lightestGrey1: "#F6F6F6",
+    lightestGrey2: "#d9d9d9",
     blue: "#344472",
   },
 };
