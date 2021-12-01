@@ -1,32 +1,18 @@
 import React, { FC } from "react";
-import ReactPaginate from "react-paginate";
+import ReactPaginate, { ReactPaginateProps } from "react-paginate";
 import styled from "styled-components";
 
-import left from "../assets/icons/chevron_right.svg";
-import { theme } from "../core/theme/theme";
+import left from "../../assets/icons/chevron_right.svg";
 
-export interface IPaginateProps {
-  pageCount: number;
-  forcePage?: number;
-  hrefBuilder?: (pageIndex: number) => void;
-  onPageChange?: (selectedItem: { selected: number }) => void;
-}
-
-export const Pagination: FC<IPaginateProps> = ({
-  pageCount,
-  forcePage,
-  hrefBuilder,
-  onPageChange,
-}) => {
+export const Pagination: FC<
+  Omit<ReactPaginateProps, "pageRangeDisplayed" | "marginPagesDisplayed">
+> = (props) => {
   return (
     <Content>
       <ReactPaginate
-        pageCount={pageCount}
-        forcePage={forcePage}
-        hrefBuilder={hrefBuilder}
+        {...props}
         pageRangeDisplayed={2}
         marginPagesDisplayed={1}
-        onPageChange={onPageChange}
         previousClassName="previous"
         nextClassName="next"
         previousLabel={<PreviousLabel />}
@@ -91,13 +77,12 @@ const Content = styled.div`
 
     li.page a,
     li.break a {
-      font-family: "Segoe UI";
       font-weight: 500;
       font-size: 14px;
       line-height: 24px;
       text-align: center;
       padding: 0 6px;
-      color: ${theme.colors.grey};
+      color: ${({ theme }) => theme.colors.grey};
       cursor: pointer;
       border-radius: 4px;
     }
@@ -105,23 +90,19 @@ const Content = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: Avenir;
-      font-style: normal;
       font-weight: 500;
       font-size: 14px;
       line-height: 24px;
 
       height: 32px;
       min-width: 32px;
-      color: ${theme.colors.grey};
+      color: ${({ theme }) => theme.colors.grey};
       cursor: pointer;
       border-radius: 4px;
     }
     li.previous {
       margin-right: 8px;
       border-radius: 4px;
-      font-family: Avenir;
-      font-style: normal;
       font-weight: 500;
       font-size: 14px;
       line-height: 24px;
@@ -134,8 +115,6 @@ const Content = styled.div`
 
     li.next {
       border-radius: 4px;
-      font-family: Avenir;
-      font-style: normal;
       font-weight: 500;
       font-size: 14px;
       line-height: 24px;
@@ -147,10 +126,10 @@ const Content = styled.div`
     }
 
     li.selected.page {
-      background-color: ${theme.colors.red};
+      background-color: ${({ theme }) => theme.colors.red};
     }
     li.selected.page a {
-      color: ${theme.colors.white};
+      color: ${({ theme }) => theme.colors.white};
     }
 
     li.break a {

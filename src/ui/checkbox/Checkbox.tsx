@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import checkIcon from "../../assets/icons/check.svg";
 import disabledCheck from "../../assets/icons/disabled_check.svg";
-import { theme } from "../../core/theme/theme";
+import { CustomError } from "../error/CustomError";
 
 interface Props {
   text?: string;
@@ -30,20 +30,16 @@ export const Checkbox = ({ text, disabled, error, disabled_check }: Props) => {
           ) : null}
         </CustomCheckbox>
         <Text
-          style={{
-            color:
-              disabled === true || disabled_check === true
-                ? theme.colors.lightestGrey
-                : error && !checked
-                ? theme.colors.lightestRed
-                : theme.colors.grey,
-          }}
+          check={checked}
+          disabled={disabled}
+          disabled_check={disabled_check}
+          error={error}
           onClick={() => setChecked((s) => !s)}
         >
           {text}
         </Text>
       </CheckboxContainer>
-      <Error>{!checked ? error : null}</Error>
+      <CustomError>{!checked ? error : null}</CustomError>
     </Container>
   );
 };
@@ -67,9 +63,9 @@ const CustomCheckbox = styled.div<{ disabled?: boolean; error?: string; disabled
   align-items: center;
   border-radius: 2px;
   margin-right: 10px;
-  background-color: ${({ disabled }) =>
+  background-color: ${({ disabled, theme }) =>
     disabled === true ? theme.colors.lightestGrey1 : theme.colors.white};
-  border-color: ${({ disabled, error }) =>
+  border-color: ${({ disabled, error, theme }) =>
     disabled === true
       ? theme.colors.lightestGrey
       : error
@@ -77,7 +73,7 @@ const CustomCheckbox = styled.div<{ disabled?: boolean; error?: string; disabled
       : theme.colors.lightGrey};
 
   :hover {
-    border-color: ${({ disabled }) => (disabled === true ? null : theme.colors.red)};
+    border-color: ${({ disabled, theme }) => (disabled === true ? null : theme.colors.red)};
   }
   transition: all 0.15s linear;
 `;
@@ -86,20 +82,20 @@ const Icon = styled.img`
   top: -1px;
   left: -1px;
 `;
-const Text = styled.div`
-  font-family: Avenir;
-  font-style: normal;
+const Text = styled.div<{
+  disabled?: boolean;
+  disabled_check?: boolean;
+  error?: string;
+  check?: boolean;
+}>`
   font-weight: 500;
   font-size: 14px;
   line-height: 24px;
-  color: ${theme.colors.grey};
+  color: ${({ disabled, disabled_check, error, check, theme }) =>
+    disabled === true || disabled_check === true
+      ? theme.colors.lightestGrey
+      : error && !check
+      ? theme.colors.lightestRed
+      : theme.colors.grey};
   padding-top: 1px;
-`;
-const Error = styled.div`
-  font-family: Avenir;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 24px;
-  color: ${theme.colors.lightestRed};
 `;

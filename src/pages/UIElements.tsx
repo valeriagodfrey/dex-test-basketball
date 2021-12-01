@@ -1,28 +1,33 @@
 import React from "react";
 import styled from "styled-components";
 
-import { PrimaryButton } from "../ui/buttons/PrimaryButton";
-import { SecondaryButton } from "../ui/buttons/SecondaryButton";
+import { CustomButton } from "../ui/buttons/CustomButton";
 import { Checkbox } from "../ui/checkbox/Checkbox";
 import { Input } from "../ui/input/Input";
 import { SearchInput } from "../ui/input/SearchInput";
-import { CustomLink } from "../ui/Link";
-import { Pagination } from "../ui/Pagination";
+import { CustomLink } from "../ui/link/CustomLink";
+import { Pagination } from "../ui/pagination/Pagination";
+import { CustomSelect } from "../ui/select/CustomSelect";
 
 export const UIElements = () => {
   return (
     <Container>
-      <CustomLink linkType="active" to={"/players"}>
-        Click here
-      </CustomLink>
-      <CustomLink linkType="disabled" to={"/players"}>
-        You can't click there
+      <CustomLink to={"/players"}>Click here</CustomLink>
+      <CustomLink disabled to={"/players"}>
+        You can't click here
       </CustomLink>
       <Buttons>
-        <PrimaryButton>Hello world</PrimaryButton>
-        <PrimaryButton buttonType="disabled">Goodbye world</PrimaryButton>
-        <SecondaryButton>Programmer</SecondaryButton>
-        <SecondaryButton buttonType="disabled">Not a Programmer</SecondaryButton>
+        <CustomButton buttonType="primary">Hello world</CustomButton>
+        <CustomButton buttonType="primary" disabled>
+          Goodbye world
+        </CustomButton>
+        <CustomButton buttonType="primary" svg="add">
+          Add
+        </CustomButton>
+        <CustomButton buttonType="secondary">Programmer</CustomButton>
+        <CustomButton buttonType="secondary" disabled>
+          Not a Programmer
+        </CustomButton>
       </Buttons>
       <Inputs>
         <Input label="Login" />
@@ -37,6 +42,7 @@ export const UIElements = () => {
         <Checkbox disabled text="Disabled" />
         <Checkbox disabled_check disabled text="You can not check this" />
       </Checkboxes>
+      <CustomSelect options={["Orange", "Green"]} />
       <Pagination pageCount={12} />
     </Container>
   );
@@ -47,7 +53,6 @@ const Container = styled.div`
   flex-direction: column;
 `;
 const Buttons = styled.div`
-  display: flex;
   margin: 10px 0px 15px 0;
 `;
 const Inputs = styled.div``;
