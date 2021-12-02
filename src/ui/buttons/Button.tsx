@@ -10,7 +10,7 @@ interface Props {
   onClick?: () => void;
 }
 
-export const CustomButton: FC<Props> = ({
+export const Button: FC<Props> = ({
   buttonType,
   disabled = false,
   svg = "none",
@@ -22,7 +22,7 @@ export const CustomButton: FC<Props> = ({
     setClick(!click);
   };
   return (
-    <Button buttonType={buttonType} onClick={buttonClick} disabled={disabled}>
+    <CustomButton buttonType={buttonType} onClick={buttonClick} disabled={disabled}>
       {svg === "add" ? (
         <div style={{ display: "flex", alignItems: "center" }}>
           {children}
@@ -33,10 +33,10 @@ export const CustomButton: FC<Props> = ({
       ) : (
         <div>{children}</div>
       )}
-    </Button>
+    </CustomButton>
   );
 };
-const Button = styled.button<{ buttonType?: "primary" | "secondary"; disabled?: boolean }>`
+const CustomButton = styled.button<{ buttonType?: "primary" | "secondary"; disabled?: boolean }>`
   font-weight: 500;
   font-size: 15px;
   align-items: center;

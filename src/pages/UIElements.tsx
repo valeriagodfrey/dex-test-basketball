@@ -1,33 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
-import { CustomButton } from "../ui/buttons/CustomButton";
+import { Button } from "../ui/buttons/Button";
 import { Checkbox } from "../ui/checkbox/Checkbox";
 import { Input } from "../ui/input/Input";
 import { SearchInput } from "../ui/input/SearchInput";
 import { CustomLink } from "../ui/link/CustomLink";
 import { Pagination } from "../ui/pagination/Pagination";
 import { CustomSelect } from "../ui/select/CustomSelect";
+import { IOptions } from "../ui/select/data";
 
 export const UIElements = () => {
+  const [check, setCheck] = useState(false);
+
   return (
     <Container>
       <CustomLink to={"/players"}>Click here</CustomLink>
       <CustomLink disabled to={"/players"}>
         You can't click here
       </CustomLink>
+      <CustomSelect options={IOptions} />
       <Buttons>
-        <CustomButton buttonType="primary">Hello world</CustomButton>
-        <CustomButton buttonType="primary" disabled>
+        <Button buttonType="primary">Hello world</Button>
+        <Button buttonType="primary" disabled>
           Goodbye world
-        </CustomButton>
-        <CustomButton buttonType="primary" svg="add">
+        </Button>
+        <Button buttonType="primary" svg="add">
           Add
-        </CustomButton>
-        <CustomButton buttonType="secondary">Programmer</CustomButton>
-        <CustomButton buttonType="secondary" disabled>
+        </Button>
+        <Button buttonType="secondary">Programmer</Button>
+        <Button buttonType="secondary" disabled>
           Not a Programmer
-        </CustomButton>
+        </Button>
       </Buttons>
       <Inputs>
         <Input label="Login" />
@@ -37,12 +41,16 @@ export const UIElements = () => {
         <SearchInput placeholder="Search..."></SearchInput>
       </Inputs>
       <Checkboxes>
-        <Checkbox text="Check this" />
-        <Checkbox text="Are u sure?" error="You should check!" />
-        <Checkbox disabled text="Disabled" />
-        <Checkbox disabled_check disabled text="You can not check this" />
+        <Checkbox onChange={() => setCheck((s) => !s)} checked={check} label="Check this" />
+        <Checkbox
+          onChange={() => setCheck((s) => !s)}
+          checked={check}
+          label="Are u sure?"
+          error="You should check!"
+        />
+        <Checkbox onChange={setCheck} disabled label="Disabled" />
+        <Checkbox onChange={setCheck} checked disabled label="You can not check this" />
       </Checkboxes>
-      <CustomSelect options={["Orange", "Green"]} />
       <Pagination pageCount={12} />
     </Container>
   );

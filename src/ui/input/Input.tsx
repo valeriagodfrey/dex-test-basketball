@@ -74,7 +74,10 @@ const Label = styled.label`
   line-height: 24px;
   color: ${({ theme }) => theme.colors.grey};
 `;
-const CustomInput = styled.input<{ inputDisable: boolean | undefined; error?: string }>`
+const CustomInput = styled.input<{
+  inputDisable: boolean | undefined;
+  error?: string;
+}>`
   font-weight: 500;
   font-size: 14px;
   line-height: 22px;
