@@ -3,7 +3,6 @@ import "./App.css";
 import React from "react";
 import { Routes } from "react-router";
 import { BrowserRouter, Route } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 
 import { theme } from "./core/theme/theme";

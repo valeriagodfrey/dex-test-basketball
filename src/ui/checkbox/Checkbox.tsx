@@ -6,40 +6,38 @@ import disabledCheck from "../../assets/icons/disabled_check.svg";
 import { CustomError } from "../error/CustomError";
 
 interface Props {
-  text?: string;
+  label?: string;
   disabled?: boolean;
   error?: string;
-  disabled_check?: boolean;
+  checked?: boolean;
+  onChange: (value: boolean) => void;
 }
-export const Checkbox = ({ text, disabled, error, disabled_check }: Props) => {
-  const [checked, setChecked] = useState(false);
-
+export const Checkbox = ({ label, disabled, error, checked, onChange }: Props) => {
   return (
     <Container>
       <CheckboxContainer>
         <CustomCheckbox
-          onClick={() => setChecked((s) => !s)}
+          checked={checked}
+          onClick={(value) => onChange(!value)}
           disabled={disabled}
           error={error}
-          disabled_check={disabled_check}
         >
-          {checked && disabled !== true ? (
-            <Icon src={checkIcon} alt="check" />
-          ) : disabled_check && disabled ? (
-            <Icon src={disabledCheck} alt="disabled_check" />
-          ) : null}
+          <Icon
+            checked={checked}
+            src={checked && disabled !== true ? checkIcon : disabledCheck}
+            alt="check"
+          />
         </CustomCheckbox>
-        <Text
-          check={checked}
+        <Label
+          checked={checked}
           disabled={disabled}
-          disabled_check={disabled_check}
           error={error}
-          onClick={() => setChecked((s) => !s)}
+          onClick={(value) => onChange(!value)}
         >
-          {text}
-        </Text>
+          {label}
+        </Label>
       </CheckboxContainer>
-      <CustomError>{!checked ? error : null}</CustomError>
+      <CustomError>{checked === false ? error : null}</CustomError>
     </Container>
   );
 };
@@ -54,7 +52,7 @@ const CheckboxContainer = styled.div`
   align-items: center;
   margin-bottom: 2px;
 `;
-const CustomCheckbox = styled.div<{ disabled?: boolean; error?: string; disabled_check?: boolean }>`
+const CustomCheckbox = styled.div<{ disabled?: boolean; error?: string; checked?: boolean }>`
   width: 12px;
   height: 12px;
   border: 1px solid;
@@ -77,24 +75,24 @@ const CustomCheckbox = styled.div<{ disabled?: boolean; error?: string; disabled
   }
   transition: all 0.15s linear;
 `;
-const Icon = styled.img`
+const Icon = styled.img<{ checked?: boolean }>`
   position: absolute;
   top: -1px;
   left: -1px;
+  visibility: ${({ checked }) => (checked ? "visible" : "hidden")};
 `;
-const Text = styled.div<{
+const Label = styled.div<{
   disabled?: boolean;
-  disabled_check?: boolean;
   error?: string;
-  check?: boolean;
+  checked?: boolean;
 }>`
   font-weight: 500;
   font-size: 14px;
   line-height: 24px;
-  color: ${({ disabled, disabled_check, error, check, theme }) =>
-    disabled === true || disabled_check === true
+  color: ${({ disabled, error, checked, theme }) =>
+    disabled === true || (checked === true && disabled !== false)
       ? theme.colors.lightestGrey
-      : error && !check
+      : error && !checked
       ? theme.colors.lightestRed
       : theme.colors.grey};
   padding-top: 1px;
