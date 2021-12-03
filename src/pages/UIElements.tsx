@@ -9,6 +9,7 @@ import { CustomLink } from "../ui/link/CustomLink";
 import { Pagination } from "../ui/pagination/Pagination";
 import { CustomSelect } from "../ui/select/CustomSelect";
 import { IOptions } from "../ui/select/data";
+import { Multiselect } from "../ui/select/Multiselect";
 
 export const UIElements = () => {
   const [check, setCheck] = useState(false);
@@ -19,7 +20,10 @@ export const UIElements = () => {
       <CustomLink disabled to={"/players"}>
         You can't click here
       </CustomLink>
-      <CustomSelect options={IOptions} />
+      <Selects>
+        <CustomSelect options={IOptions} />
+        <Multiselect options={IOptions} />
+      </Selects>
       <Buttons>
         <Button buttonType="primary">Hello world</Button>
         <Button buttonType="primary" disabled>
@@ -61,7 +65,12 @@ const Container = styled.div`
   flex-direction: column;
 `;
 const Buttons = styled.div`
+  display: flex;
   margin: 10px 0px 15px 0;
 `;
 const Inputs = styled.div``;
 const Checkboxes = styled.div``;
+const Selects = styled.div`
+  margin-top: 15px;
+  display: flex;
+`;

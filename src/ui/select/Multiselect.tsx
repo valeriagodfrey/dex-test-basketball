@@ -7,17 +7,24 @@ import { IOption, IOptions } from "./data";
 interface Props {
   options: typeof IOptions;
 }
-export const CustomSelect = ({ options }: Props) => {
+export const Multiselect = ({ options }: Props) => {
   return (
-    <Select placeholder="Select..." defaultValue={options[0]} options={options} styles={Styles} />
+    <Select
+      closeMenuOnSelect={false}
+      isMulti
+      placeholder="Select..."
+      defaultValue={options[0]}
+      options={options}
+      styles={Styles}
+    />
   );
 };
 
 const Styles: StylesConfig<IOption> = {
   control: (styles, { menuIsOpen }) => ({
     ...styles,
-    backgroundColor: theme.colors.lightestGrey1,
-    borderColor: "transparent",
+    backgroundColor: theme.colors.white,
+    borderColor: theme.colors.lightestGrey,
     outline: menuIsOpen ? 0 : undefined,
     cursor: "pointer",
     padding: `1px`,
@@ -46,8 +53,30 @@ const Styles: StylesConfig<IOption> = {
         color: theme.colors.white,
       },
       transition: "all 0.05s linear",
+      ":nth-last-child": {
+        ...styles[":nth-last-child"],
+        borderBottom: theme.colors.lightGrey,
+      },
     };
   },
   menuList: (styles) => ({ ...styles, boxShadow: `0px 0px 5px ${theme.colors.lightestGrey2}` }),
   placeholder: (styles) => ({ ...styles, color: theme.colors.grey }),
+  multiValue: (styles) => {
+    return {
+      ...styles,
+      backgroundColor: theme.colors.red,
+    };
+  },
+  multiValueLabel: (styles) => ({
+    ...styles,
+    color: theme.colors.white,
+  }),
+  multiValueRemove: (styles) => ({
+    ...styles,
+    color: theme.colors.white,
+    ":hover": {
+      backgroundColor: "pink",
+      color: "blue",
+    },
+  }),
 };
