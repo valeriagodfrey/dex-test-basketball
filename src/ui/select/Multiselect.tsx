@@ -6,12 +6,13 @@ import { IOption, IOptions } from "./data";
 
 interface Props {
   options: typeof IOptions;
+  isMulti?: boolean;
 }
-export const Multiselect = ({ options }: Props) => {
+export const Multiselect = ({ options, isMulti }: Props) => {
   return (
     <Select
       closeMenuOnSelect={false}
-      isMulti
+      isMulti={isMulti}
       placeholder="Select..."
       defaultValue={options[0]}
       options={options}
@@ -21,11 +22,10 @@ export const Multiselect = ({ options }: Props) => {
 };
 
 const Styles: StylesConfig<IOption> = {
-  control: (styles, { menuIsOpen }) => ({
+  control: (styles, { isMulti, menuIsOpen }) => ({
     ...styles,
-    backgroundColor: theme.colors.white,
-    borderColor: theme.colors.lightestGrey,
-    outline: menuIsOpen ? 0 : undefined,
+    backgroundColor: isMulti && !menuIsOpen ? theme.colors.white : theme.colors.lightestGrey1,
+    borderColor: isMulti ? theme.colors.lightestGrey : "transparent",
     cursor: "pointer",
     padding: `1px`,
     alignItems: "center",
@@ -40,6 +40,7 @@ const Styles: StylesConfig<IOption> = {
       ...styles,
       backgroundColor: isSelected ? theme.colors.darkRed : undefined,
       color: isSelected ? theme.colors.white : theme.colors.lightGrey,
+
       cursor: "pointer",
       ":active": {
         ...styles[":active"],
@@ -52,14 +53,16 @@ const Styles: StylesConfig<IOption> = {
         backgroundColor: theme.colors.lightRed,
         color: theme.colors.white,
       },
-      transition: "all 0.05s linear",
-      ":nth-last-child": {
-        ...styles[":nth-last-child"],
-        borderBottom: theme.colors.lightGrey,
+      ":not(:last-child)": {
+        borderBottom: `1px solid ${theme.colors.lightestGrey}`,
       },
+      transition: "all 0.05s linear",
     };
   },
-  menuList: (styles) => ({ ...styles, boxShadow: `0px 0px 5px ${theme.colors.lightestGrey2}` }),
+  menuList: (styles) => ({
+    ...styles,
+    boxShadow: `0px 0px 5px ${theme.colors.lightestGrey2}`,
+  }),
   placeholder: (styles) => ({ ...styles, color: theme.colors.grey }),
   multiValue: (styles) => {
     return {
@@ -75,8 +78,9 @@ const Styles: StylesConfig<IOption> = {
     ...styles,
     color: theme.colors.white,
     ":hover": {
-      backgroundColor: "pink",
-      color: "blue",
+      backgroundColor: theme.colors.lightRed,
+      color: theme.colors.darkRed,
     },
+    transition: "all 0.05s linear",
   }),
 };

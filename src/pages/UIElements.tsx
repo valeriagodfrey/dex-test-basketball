@@ -16,14 +16,20 @@ export const UIElements = () => {
 
   return (
     <Container>
-      <CustomLink to={"/players"}>Click here</CustomLink>
-      <CustomLink disabled to={"/players"}>
-        You can't click here
-      </CustomLink>
+      <b>Демонстрация UI-elements</b>
+      <Links>
+        <b>Link</b>
+        <CustomLink to={"/players"}>Click here</CustomLink>
+        <CustomLink disabled to={"/players"}>
+          You can't click here
+        </CustomLink>
+      </Links>
+      <b>Select and multiselect</b>
       <Selects>
-        <CustomSelect options={IOptions} />
         <Multiselect options={IOptions} />
+        <Multiselect isMulti={true} options={IOptions} />
       </Selects>
+      <b>Buttons</b>
       <Buttons>
         <Button buttonType="primary">Hello world</Button>
         <Button buttonType="primary" disabled>
@@ -37,6 +43,7 @@ export const UIElements = () => {
           Not a Programmer
         </Button>
       </Buttons>
+      <b>Inputs</b>
       <Inputs>
         <Input label="Login" />
         <Input type="password" label="Password" />
@@ -44,6 +51,7 @@ export const UIElements = () => {
         <Input error="Error" label="Age" />
         <SearchInput placeholder="Search..."></SearchInput>
       </Inputs>
+      <b>Checkbox</b>
       <Checkboxes>
         <Checkbox onChange={() => setCheck((s) => !s)} checked={check} label="Check this" />
         <Checkbox
@@ -55,6 +63,7 @@ export const UIElements = () => {
         <Checkbox onChange={setCheck} disabled label="Disabled" />
         <Checkbox onChange={setCheck} checked disabled label="You can not check this" />
       </Checkboxes>
+      <b>Pagination</b>
       <Pagination pageCount={12} />
     </Container>
   );
@@ -68,9 +77,19 @@ const Buttons = styled.div`
   display: flex;
   margin: 10px 0px 15px 0;
 `;
-const Inputs = styled.div``;
-const Checkboxes = styled.div``;
+const Inputs = styled.div`
+  margin: 0 0 10px 0;
+`;
+const Checkboxes = styled.div`
+  margin: 10px;
+`;
 const Selects = styled.div`
-  margin-top: 15px;
+  margin: 10px 0;
   display: flex;
+`;
+const Links = styled.div`
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
