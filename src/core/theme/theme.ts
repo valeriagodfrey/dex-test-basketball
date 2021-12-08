@@ -12,5 +12,6 @@ export const theme = {
     lightestGrey1: "#F6F6F6",
     lightestGrey2: "#d9d9d9",
     blue: "#344472",
+    lightBlue: "#F5FBFF",
   },
 };

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import styled from "styled-components";
 
 import { Button } from "../ui/buttons/Button";
@@ -7,20 +8,20 @@ import { Input } from "../ui/input/Input";
 import { SearchInput } from "../ui/input/SearchInput";
 import { CustomLink } from "../ui/link/CustomLink";
 import { Pagination } from "../ui/pagination/Pagination";
-import { CustomSelect } from "../ui/select/CustomSelect";
 import { IOptions } from "../ui/select/data";
 import { Multiselect } from "../ui/select/Multiselect";
-
+export const notify = () => toast.success("Hello");
 export const UIElements = () => {
   const [check, setCheck] = useState(false);
 
   return (
     <Container>
+      <div onClick={notify}>Hello</div>
       <b>Демонстрация UI-elements</b>
       <Links>
         <b>Link</b>
-        <CustomLink to={"/players"}>Click here</CustomLink>
-        <CustomLink disabled to={"/players"}>
+        <CustomLink to={"/authorization"}>Click here</CustomLink>
+        <CustomLink disabled to={"/authorization"}>
           You can't click here
         </CustomLink>
       </Links>

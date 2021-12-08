@@ -22,18 +22,20 @@ export const Button: FC<Props> = ({
     setClick(!click);
   };
   return (
-    <CustomButton buttonType={buttonType} onClick={buttonClick} disabled={disabled}>
-      {svg === "add" ? (
-        <div style={{ display: "flex", alignItems: "center" }}>
-          {children}
-          <IconContainer>
-            <Icon src={addIcon} alt="closed_eye" onClick={onClick} />
-          </IconContainer>
-        </div>
-      ) : (
-        <div>{children}</div>
-      )}
-    </CustomButton>
+    <>
+      <CustomButton buttonType={buttonType} onClick={buttonClick} disabled={disabled}>
+        {svg === "add" ? (
+          <div style={{ display: "flex", alignItems: "center" }}>
+            {children}
+            <IconContainer>
+              <Icon src={addIcon} alt="add" onClick={onClick} />
+            </IconContainer>
+          </div>
+        ) : (
+          <div>{children}</div>
+        )}
+      </CustomButton>
+    </>
   );
 };
 const CustomButton = styled.button<{ buttonType?: "primary" | "secondary"; disabled?: boolean }>`
