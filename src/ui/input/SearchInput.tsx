@@ -2,6 +2,7 @@ import React, { forwardRef, InputHTMLAttributes } from "react";
 import styled from "styled-components";
 
 import searchIcon from "../../assets/icons/search.svg";
+import { InputCss } from "./style";
 
 type Props = InputHTMLAttributes<HTMLInputElement>;
 
@@ -32,14 +33,9 @@ const Icon = styled.div`
   margin: 12px;
 `;
 const Search = styled.input`
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 23px;
-  display: flex;
-  padding: 8px 12px;
-  border-radius: 4px;
+  ${InputCss};
   color: ${({ theme }) => theme.colors.grey};
-  border: ${({ theme }) => `0.5px solid ${theme.colors.lightestGrey}`};
+  border: ${({ theme }) => `1px solid ${theme.colors.lightestGrey}`};
   background-color: ${({ theme }) => theme.colors.white};
   :hover {
     box-shadow: ${({ theme }) => ` 0px 0px 5px ${theme.colors.lightestGrey2}`};

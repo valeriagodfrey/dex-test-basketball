@@ -16,5 +16,5 @@ export const CustomLink: FC<Props> = ({ children, disabled = false, ...rest }) =
 const CustomizeLink = styled(Link)<{ disabled?: boolean }>`
   pointer-events: ${({ disabled }) => (disabled === true ? "none" : "initial")};
   color: ${({ theme, disabled }) =>
-    disabled === true ? theme.colors.lightestGrey : theme.colors.lightRed};
+    disabled === true ? theme.colors.lightestGrey : theme.colors.red};
 `;

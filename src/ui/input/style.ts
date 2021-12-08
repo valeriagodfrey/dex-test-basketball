@@ -1,7 +1,6 @@
-import styled from "styled-components";
+import { css } from "styled-components";
 
-export const InputStyle = styled.style`
-  font-weight: 500;
+export const InputCss = css`
   font-size: 14px;
   line-height: 22px;
   padding: 8px 12px;

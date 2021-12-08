@@ -4,6 +4,7 @@ import styled from "styled-components";
 import closedEye from "../../assets/icons/close_eye_rounded.svg";
 import openedEye from "../../assets/icons/eye_rounded.svg";
 import { CustomError } from "../error/CustomError";
+import { InputCss } from "./style";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string;
@@ -54,11 +55,13 @@ const Container = styled.div`
   display: flex;
   align-items: flex-start;
   flex-direction: column;
+  width: auto;
 `;
 const InputContainer = styled.div`
   display: inline-flex;
   flex-direction: row-reverse;
   align-items: center;
+  width: 100%;
 `;
 const Icon = styled.div`
   position: absolute;
@@ -78,17 +81,13 @@ const CustomInput = styled.input<{
   inputDisable: boolean | undefined;
   error?: string;
 }>`
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 22px;
-  padding: 8px 12px;
-  cursor: pointer;
-  border: 1px solid transparent;
-  border-radius: 4px;
+  ${InputCss};
+  width: 100%;
   color: ${({ inputDisable, theme }) =>
     inputDisable === true ? theme.colors.lightestGrey : theme.colors.grey};
   border-color: ${({ theme, error }) =>
     error ? theme.colors.lightestRed : theme.colors.lightestGrey1};
+  background-color: ${({ theme }) => theme.colors.lightestGrey1};
   transition: all 0.15s linear;
   :hover {
     background-color: ${({ inputDisable, theme }) =>
