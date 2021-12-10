@@ -2,20 +2,24 @@ import "./App.css";
 import "react-toastify/dist/ReactToastify.minimal.css";
 
 import React from "react";
+import { Provider } from "react-redux";
 import { Routes } from "react-router";
 import { BrowserRouter, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 // import { ToastContainer } from "react-toastify";
-import { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 
+import { store } from "./core/redux/store";
 import { theme } from "./core/theme/theme";
-import Auth from "./pages/authorization";
-import Registration from "./pages/registration";
+import Auth from "./pages/authorization/authorization";
+import Registration from "./pages/authorization/registration";
 import { UIElements } from "./pages/UIElements";
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      {/* <StyledContainer
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        {/* <ToastContainer
         position="top-right"
         autoClose={5000}
         hideProgressBar={false}
@@ -26,14 +30,15 @@ function App() {
         draggable
         pauseOnHover
       /> */}
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<UIElements />}></Route>
-          <Route path="/authorization" element={<Auth />}></Route>
-          <Route path="/registration" element={<Registration />}></Route>
-        </Routes>
-      </BrowserRouter>
-    </ThemeProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<UIElements />}></Route>
+            <Route path="/authorization" element={<Auth />}></Route>
+            <Route path="/registration" element={<Registration />}></Route>
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
+    </Provider>
   );
 }
 // const StyledContainer = styled(ToastContainer)`

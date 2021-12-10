@@ -44,7 +44,6 @@ export const Checkbox = ({ label, disabled, error, checked, onChange }: Props) =
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
 `;
 const CheckboxContainer = styled.div`
   cursor: pointer;

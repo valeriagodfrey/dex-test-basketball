@@ -1,79 +1,55 @@
+import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import styled from "styled-components";
 
-import regImg from "../assets/icons/reg_img.svg";
-import { Button } from "../ui/buttons/Button";
-import { Input } from "../ui/input/Input";
-import { CustomLink } from "../ui/link/CustomLink";
-interface RegisterProps {
-  name: string;
+import authImg from "../assets/icons/auth_img.svg";
+import { Button } from "../../ui/buttons/Button";
+import { Input } from "../../ui/input/Input";
+import { CustomLink } from "../../ui/link/CustomLink";
+interface AuthProps {
   login: string;
   password: string;
-  passwordCheck: string;
 }
 
-export default function Registration() {
+export default function Auth() {
   const {
     register,
-    getValues,
     formState: { errors },
     handleSubmit,
-  } = useForm<RegisterProps>();
+  } = useForm<AuthProps>();
   // eslint-disable-next-line no-console
-  const onSubmit: SubmitHandler<RegisterProps> = (data: RegisterProps) => console.log(data);
-
-  const password = getValues("password");
-  const passwordCheck = getValues("passwordCheck");
+  const onSubmit: SubmitHandler<AuthProps> = (data: AuthProps) => console.log(data);
 
   return (
     <WrapperContainer>
       <FormContainer>
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <Label>Sign Up</Label>
+          <Label>Sign In</Label>
           <InputContainer>
             <Input
-              label="Name:"
-              {...register("name", { required: true })}
-              error={errors.name?.type === "required" ? "Please, enter your name." : ""}
-            ></Input>
-          </InputContainer>
-          <InputContainer>
-            <Input
-              label="Login:"
+              label="Login"
               {...register("login", { required: true })}
               error={errors.login?.type === "required" ? "Please, enter your login." : ""}
             ></Input>
           </InputContainer>
           <InputContainer>
             <Input
-              label="Password:"
+              label="Password"
               type="password"
               {...register("password", { required: true })}
               error={errors.password?.type === "required" ? "Please, enter your password." : ""}
             ></Input>
           </InputContainer>
-          <InputContainer>
-            <Input
-              label="Enter your password again:"
-              type="password"
-              {...register("passwordCheck", { required: true })}
-              error={
-                password !== passwordCheck && passwordCheck !== ""
-                  ? "Please, enter right password."
-                  : errors.passwordCheck?.type === "required"
-                  ? "Please, enter your password again"
-                  : ""
-              }
-            ></Input>
-          </InputContainer>
-          <Button buttonType="primary">Sign Up</Button>
+
+          <Button buttonType="primary">Sign In</Button>
+
           <Caption>
-            Already a member? <CustomLink to={"/authorization"}>Sign In</CustomLink>
+            Not a member yet? <CustomLink to={"/registration"}>Sign Up</CustomLink>
           </Caption>
         </Form>
       </FormContainer>
       <ImageContainer>
-        <Img src={regImg} alt="basketball" />
+        <Img src={authImg} alt="basketball" />
       </ImageContainer>
     </WrapperContainer>
   );
@@ -89,7 +65,7 @@ const Form = styled.form`
 
   margin-left: auto;
   margin-right: auto;
-  margin-top: 226px;
+  margin-top: 327px;
   width: 55%;
 `;
 const FormContainer = styled.div`
@@ -103,10 +79,10 @@ const ImageContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.lightBlue};
 `;
 const Img = styled.img`
-  width: 75%;
+  width: 65%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 305px;
+  margin-top: 307px;
 `;
 const Label = styled.div`
   margin-bottom: 32px;

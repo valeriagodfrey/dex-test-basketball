@@ -74,8 +74,9 @@ const Icon = styled.div`
 const Label = styled.label`
   font-weight: 500;
   font-size: 14px;
-  line-height: 24px;
+  line-height: 22px;
   color: ${({ theme }) => theme.colors.grey};
+  margin-bottom: 8px;
 `;
 const CustomInput = styled.input<{
   inputDisable: boolean | undefined;
