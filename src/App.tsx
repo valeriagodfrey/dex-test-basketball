@@ -1,7 +1,7 @@
 import "./App.css";
-import "react-toastify/dist/ReactToastify.minimal.css";
+import "react-toastify/dist/ReactToastify.css";
 
-import React from "react";
+import React, { useState } from "react";
 import { Provider } from "react-redux";
 import { Routes } from "react-router";
 import { BrowserRouter, Route } from "react-router-dom";
@@ -16,40 +16,55 @@ import Registration from "./pages/authorization/registration";
 import { UIElements } from "./pages/UIElements";
 
 function App() {
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  window.addEventListener(
+    "storage",
+    function (event) {
+      if (event.storageArea === localStorage) {
+        setToken(localStorage.getItem("token"));
+      }
+    },
+    false,
+  );
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        {/* <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss={true}
-        draggable
-        pauseOnHover
-      /> */}
+        <StyledContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss={true}
+          draggable
+          pauseOnHover
+        />
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<UIElements />}></Route>
-            <Route path="/authorization" element={<Auth />}></Route>
-            <Route path="/registration" element={<Registration />}></Route>
-          </Routes>
+          {token ? (
+            <Routes>
+              <Route path="/" element={<UIElements />}></Route>
+            </Routes>
+          ) : (
+            <Routes>
+              <Route path="/authorization" element={<Auth />}></Route>
+              <Route path="/registration" element={<Registration />}></Route>
+            </Routes>
+          )}
         </BrowserRouter>
       </ThemeProvider>
     </Provider>
   );
 }
-// const StyledContainer = styled(ToastContainer)`
-//   .Toastify__toast-container {
-//   }
-//   .Toastify__toast--success {
-//     background-color: ${({ theme }) => theme.colors.red};
-//   }
-//   .Toastify__toast-body {
-//   }
-//   .Toastify__progress-bar {
-//   }
-// `;
+const StyledContainer = styled(ToastContainer)`
+  .Toastify__toast-container {
+  }
+  .Toastify__toast--success {
+    background-color: ${({ theme }) => theme.colors.red};
+  }
+  .Toastify__toast-body {
+  }
+  .Toastify__progress-bar {
+  }
+`;
 export default App;
