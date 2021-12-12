@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 
-import regImg from "../assets/icons/reg_img.svg";
+import regImg from "../../assets/icons/reg_img.svg";
+import { fetchRegistration } from "../../modules/authorization/authorizationThunk";
 import { Button } from "../../ui/buttons/Button";
 import { Checkbox } from "../../ui/checkbox/Checkbox";
 import { Input } from "../../ui/input/Input";
 import { CustomLink } from "../../ui/link/CustomLink";
 interface RegisterProps {
-  name: string;
+  userName: string;
   login: string;
   password: string;
   password2: string;
@@ -18,6 +20,7 @@ interface RegisterProps {
 
 export default function Registration() {
   const [check, setCheck] = useState(false);
+  const dispatch = useDispatch();
   const notify = () => toast.success("Wow so easy!");
   const {
     register,
@@ -26,10 +29,8 @@ export default function Registration() {
     handleSubmit,
   } = useForm<RegisterProps>();
 
-  const onSubmit: SubmitHandler<RegisterProps> = (data: RegisterProps) => console.log(data);
-
-  const password = getValues("password");
-  const password2 = getValues("password2");
+  const onSubmit: SubmitHandler<RegisterProps> = (data: RegisterProps) =>
+    dispatch(fetchRegistration(data));
 
   return (
     <WrapperContainer>
@@ -39,8 +40,8 @@ export default function Registration() {
           <Container>
             <Input
               label="Name:"
-              {...register("name", { required: true })}
-              error={errors.name?.type === "required" ? "Please, enter your name." : ""}
+              {...register("userName", { required: true })}
+              error={errors.userName?.type === "required" ? "Please, enter your name." : ""}
             ></Input>
           </Container>
           <Container>
@@ -54,7 +55,9 @@ export default function Registration() {
             <Input
               label="Password:"
               type="password"
-              {...register("password", { required: true })}
+              {...register("password", {
+                required: true,
+              })}
               error={errors.password?.type === "required" ? "Please, enter your password." : ""}
             ></Input>
           </Container>
@@ -62,9 +65,12 @@ export default function Registration() {
             <Input
               label="Enter your password again:"
               type="password"
-              {...register("password2", { required: true })}
+              {...register("password2", {
+                required: true,
+                validate: () => getValues("password2") === getValues("password"),
+              })}
               error={
-                password !== password2 && password2 !== ""
+                errors.password2 && errors.password2.type === "validate"
                   ? "Please, enter right password."
                   : errors.password2?.type === "required"
                   ? "Please, enter your password again"

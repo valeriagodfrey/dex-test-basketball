@@ -3,7 +3,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import React, { useState } from "react";
 import { Provider } from "react-redux";
-import { Routes } from "react-router";
+import { Navigate, Routes } from "react-router";
 import { BrowserRouter, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 // import { ToastContainer } from "react-toastify";
@@ -44,11 +44,14 @@ function App() {
           {token ? (
             <Routes>
               <Route path="/" element={<UIElements />}></Route>
+              <Route path="/authorization" element={<Navigate to="/" />}></Route>
+              <Route path="/registration" element={<Navigate to="/" />}></Route>
             </Routes>
           ) : (
             <Routes>
               <Route path="/authorization" element={<Auth />}></Route>
               <Route path="/registration" element={<Registration />}></Route>
+              <Route path="*" element={<Navigate to="/authorization" />} />
             </Routes>
           )}
         </BrowserRouter>

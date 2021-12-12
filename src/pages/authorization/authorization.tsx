@@ -1,30 +1,35 @@
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
-import authImg from "../assets/icons/auth_img.svg";
+import authImg from "../../assets/icons/auth_img.svg";
+import { fetchAuthorization } from "../../modules/authorization/authorizationThunk";
 import { Button } from "../../ui/buttons/Button";
 import { Input } from "../../ui/input/Input";
 import { CustomLink } from "../../ui/link/CustomLink";
+import { notify } from "../UIElements";
 interface AuthProps {
   login: string;
   password: string;
 }
 
-export default function Auth() {
+export default function Authorization() {
+  const dispatch = useDispatch();
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm<AuthProps>();
-  // eslint-disable-next-line no-console
-  const onSubmit: SubmitHandler<AuthProps> = (data: AuthProps) => console.log(data);
+
+  const onSubmit: SubmitHandler<AuthProps> = (data: AuthProps) =>
+    dispatch(fetchAuthorization(data));
 
   return (
     <WrapperContainer>
       <FormContainer>
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <Label>Sign In</Label>
+          <Label onClick={notify}>Sign In</Label>
           <InputContainer>
             <Input
               label="Login"

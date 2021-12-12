@@ -1,12 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import { fetchAuthorizationReducer } from "./fetchAuthorizationSlice";
-import { fetchRegistrationReducer } from "./fetchRegistrationSlice";
+import { fetchAuthorizationReducer } from "../../modules/authorization/authorizationSlise";
 
 export const store = configureStore({
   reducer: {
     authorizationReducer: fetchAuthorizationReducer,
-    registrationReducer: fetchRegistrationReducer,
   },
 });
 export type RootState = ReturnType<typeof store.getState>;

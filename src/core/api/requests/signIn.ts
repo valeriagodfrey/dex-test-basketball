@@ -1,8 +1,8 @@
 import { baseRequest } from "../baseRequest";
-import { ISignInRequest, ISignInResponse } from "../dto/ISignIn";
+import { IRegistrationResponse, ISignInRequest } from "../dto/ISignIn";
 
 export const signIn = (params: ISignInRequest) =>
-  baseRequest<ISignInRequest, ISignInResponse>({
+  baseRequest<ISignInRequest, IRegistrationResponse>({
     url: "/api/Auth/SignIn",
     method: "POST",
     params,
