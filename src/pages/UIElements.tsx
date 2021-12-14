@@ -17,7 +17,12 @@ export const UIElements = () => {
   return (
     <Container>
       <div onClick={notify}>Hello</div>
-      <Button buttonType="primary" onClick={() => localStorage.removeItem("token")} svg="add">
+      <Button
+        buttonType="primary"
+        onClick={() => {
+          localStorage.removeItem("token");
+        }}
+      >
         Sign out
       </Button>
       <b>Демонстрация UI-elements</b>

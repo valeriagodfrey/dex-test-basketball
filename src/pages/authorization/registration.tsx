@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import styled from "styled-components";
@@ -21,9 +21,10 @@ interface RegisterProps {
 export default function Registration() {
   const [check, setCheck] = useState(false);
   const dispatch = useDispatch();
-  const notify = () => toast.success("Wow so easy!");
+
   const {
     register,
+    control,
     getValues,
     formState: { errors },
     handleSubmit,
@@ -36,7 +37,7 @@ export default function Registration() {
     <WrapperContainer>
       <FormContainer>
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <Label onClick={notify}>Sign Up</Label>
+          <Label>Sign Up</Label>
           <Container>
             <Input
               label="Name:"
@@ -79,12 +80,31 @@ export default function Registration() {
             ></Input>
           </Container>
           <Container>
-            <Checkbox
+            {/* <Checkbox
               {...register("check", { required: true })}
               error={errors.check?.type === "required" ? "Please, check his." : ""}
               onChange={() => setCheck((s) => !s)}
               checked={check}
               label="I accept the agreement"
+            /> */}
+            <Controller
+              name="check"
+              control={control}
+              render={(props) => (
+                <Container>
+                  <Checkbox
+                    {...register("check", { required: true })}
+                    {...props}
+                    checked={props.field.value}
+                    onChange={(value) => {
+                      value = !props.field.value;
+                      props.field.onChange(value);
+                    }}
+                    error={errors.check?.type === "required" ? "Please, check this." : ""}
+                    label="I accept the agreement"
+                  />
+                </Container>
+              )}
             />
           </Container>
           <Button buttonType="primary">Sign Up</Button>

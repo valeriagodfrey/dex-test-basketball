@@ -23,7 +23,12 @@ export const baseRequest = async <Params extends StringifiableRecord, Response>(
       method === "GET" && params ? stringifyUrl({ url, query: params }) : url,
       {
         method,
-        headers: !notAuth ? { ...headers, Authorization: `Bearer ${token}` } : headers,
+        headers: !notAuth
+          ? {
+              ...headers,
+              Authorization: `Bearer ${token}`,
+            }
+          : headers,
         body: method !== "GET" && params ? JSON.stringify(params) : undefined,
       },
     );

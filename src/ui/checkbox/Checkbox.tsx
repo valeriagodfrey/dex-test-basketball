@@ -37,7 +37,7 @@ export const Checkbox = ({ label, disabled, error, checked, onChange }: Props) =
           {label}
         </Label>
       </CheckboxContainer>
-      <CustomError>{checked === false ? error : null}</CustomError>
+      <CustomError>{error}</CustomError>
     </Container>
   );
 };

@@ -41,7 +41,7 @@ function App() {
           pauseOnHover
         />
         <BrowserRouter>
-          {token ? (
+          {token !== null ? (
             <Routes>
               <Route path="/" element={<UIElements />}></Route>
               <Route path="/authorization" element={<Navigate to="/" />}></Route>
@@ -64,6 +64,7 @@ const StyledContainer = styled(ToastContainer)`
   }
   .Toastify__toast--success {
     background-color: ${({ theme }) => theme.colors.red};
+    color: ${({ theme }) => theme.colors.white};
   }
   .Toastify__toast-body {
   }
