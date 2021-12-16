@@ -17,18 +17,14 @@ export const Button: FC<Props> = ({
   onClick,
   children,
 }) => {
-  const [click, setClick] = useState(false);
-  const buttonClick = () => {
-    setClick(!click);
-  };
   return (
     <>
-      <CustomButton buttonType={buttonType} onClick={buttonClick} disabled={disabled}>
+      <CustomButton buttonType={buttonType} onClick={onClick} disabled={disabled}>
         {svg === "add" ? (
           <div style={{ display: "flex", alignItems: "center" }}>
             {children}
             <IconContainer>
-              <Icon src={addIcon} alt="add" onClick={onClick} />
+              <Icon src={addIcon} alt="add" />
             </IconContainer>
           </div>
         ) : (

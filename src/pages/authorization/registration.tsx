@@ -1,7 +1,5 @@
-import { useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { toast } from "react-toastify";
 import styled from "styled-components";
 
 import regImg from "../../assets/icons/reg_img.svg";
@@ -19,7 +17,6 @@ interface RegisterProps {
 }
 
 export default function Registration() {
-  const [check, setCheck] = useState(false);
   const dispatch = useDispatch();
 
   const {
@@ -79,34 +76,26 @@ export default function Registration() {
               }
             ></Input>
           </Container>
-          <Container>
-            {/* <Checkbox
-              {...register("check", { required: true })}
-              error={errors.check?.type === "required" ? "Please, check his." : ""}
-              onChange={() => setCheck((s) => !s)}
-              checked={check}
-              label="I accept the agreement"
-            /> */}
-            <Controller
-              name="check"
-              control={control}
-              render={(props) => (
-                <Container>
-                  <Checkbox
-                    {...register("check", { required: true })}
-                    {...props}
-                    checked={props.field.value}
-                    onChange={(value) => {
-                      value = !props.field.value;
-                      props.field.onChange(value);
-                    }}
-                    error={errors.check?.type === "required" ? "Please, check this." : ""}
-                    label="I accept the agreement"
-                  />
-                </Container>
-              )}
-            />
-          </Container>
+
+          <Controller
+            name="check"
+            control={control}
+            render={(props) => (
+              <Container>
+                <Checkbox
+                  {...register("check", { required: true })}
+                  {...props}
+                  checked={props.field.value}
+                  onChange={(value) => {
+                    value = !props.field.value;
+                    props.field.onChange(value);
+                  }}
+                  error={errors.check?.type === "required" ? "Please, check this." : ""}
+                  label="I accept the agreement"
+                />
+              </Container>
+            )}
+          />
           <Button buttonType="primary">Sign Up</Button>
           <Caption>
             Already a member? <CustomLink to={"/authorization"}>Sign In</CustomLink>
@@ -121,7 +110,7 @@ export default function Registration() {
 }
 const WrapperContainer = styled.div`
   display: flex;
-  min-height: 100vh;
+  min-height: calc(100vh - 226px);
 `;
 const Form = styled.form`
   background-color: ${({ theme }) => theme.colors.white};
@@ -141,6 +130,7 @@ const FormContainer = styled.div`
 const ImageContainer = styled.div`
   display: flex;
   width: 60%;
+
   background-color: ${({ theme }) => theme.colors.lightBlue};
 `;
 const Img = styled.img`

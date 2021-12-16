@@ -1,7 +1,7 @@
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { Navigate, Routes } from "react-router";
 import { BrowserRouter, Route } from "react-router-dom";
@@ -17,15 +17,19 @@ import { UIElements } from "./pages/UIElements";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
-  window.addEventListener(
-    "storage",
-    function (event) {
-      if (event.storageArea === localStorage) {
-        setToken(localStorage.getItem("token"));
-      }
-    },
-    false,
-  );
+
+  const onChangeStorage = useCallback(() => {
+    const newToken = localStorage.getItem("token");
+    if (newToken !== token) {
+      setToken(newToken);
+    }
+  }, [token]);
+
+  useEffect(() => {
+    window.addEventListener("storage", onChangeStorage);
+
+    return () => window.removeEventListener("storage", onChangeStorage);
+  }, [onChangeStorage]);
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>

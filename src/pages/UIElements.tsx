@@ -21,6 +21,7 @@ export const UIElements = () => {
         buttonType="primary"
         onClick={() => {
           localStorage.removeItem("token");
+          window.dispatchEvent(new Event("storage"));
         }}
       >
         Sign out

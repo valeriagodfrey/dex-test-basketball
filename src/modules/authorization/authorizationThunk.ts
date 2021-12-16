@@ -9,6 +9,7 @@ export const fetchRegistration = createAsyncThunk(
   async (params: ISignUpRequest) => {
     const response = await signUp(params);
     localStorage.setItem("token", response.token);
+    window.dispatchEvent(new Event("storage"));
     return response;
   },
 );
@@ -18,6 +19,7 @@ export const fetchAuthorization = createAsyncThunk(
   async (params: ISignInRequest) => {
     const response = await signIn(params);
     localStorage.setItem("token", response.token);
+    window.dispatchEvent(new Event("storage"));
     return response;
   },
 );

@@ -6,6 +6,5 @@ export const signUp = (params: ISignUpRequest) =>
     url: "/api/Auth/SignUp",
     method: "POST",
     params,
-    headers: { "Content-Type": "application/json" },
     notAuth: true,
   });
