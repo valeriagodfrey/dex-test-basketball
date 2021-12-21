@@ -110,22 +110,21 @@ export default function Registration() {
 }
 const WrapperContainer = styled.div`
   display: flex;
-  min-height: calc(100vh - 226px);
+  min-height: 100vh;
 `;
 const Form = styled.form`
   background-color: ${({ theme }) => theme.colors.white};
   display: flex;
   flex-direction: column;
+  margin: 226px auto 220px;
 
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 226px;
-  width: 55%;
+  width: 58%;
 `;
 const FormContainer = styled.div`
   display: flex;
   width: 40%;
   align-items: center;
+  height: min-content;
 `;
 const ImageContainer = styled.div`
   display: flex;
@@ -138,6 +137,7 @@ const Img = styled.img`
   margin-left: auto;
   margin-right: auto;
   margin-top: 305px;
+  height: min-content;
 `;
 const Label = styled.div`
   margin-bottom: 32px;

@@ -67,27 +67,26 @@ const Form = styled.form`
   background-color: ${({ theme }) => theme.colors.white};
   display: flex;
   flex-direction: column;
-
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 327px;
+  margin: 340px auto 334px;
   width: 55%;
 `;
 const FormContainer = styled.div`
   display: flex;
   width: 40%;
   align-items: center;
+  height: min-content;
 `;
 const ImageContainer = styled.div`
   display: flex;
+  flex-direction: column;
   width: 60%;
   background-color: ${({ theme }) => theme.colors.lightBlue};
 `;
 const Img = styled.img`
-  width: 65%;
+  width: 70%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 307px;
+  margin-top: 305px;
 `;
 const Label = styled.div`
   margin-bottom: 32px;
