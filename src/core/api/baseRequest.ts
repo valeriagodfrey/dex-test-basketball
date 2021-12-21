@@ -1,4 +1,5 @@
 import { StringifiableRecord, stringifyUrl } from "query-string";
+import { toast } from "react-toastify";
 
 interface Arguments<Params> {
   url: string;
@@ -37,8 +38,12 @@ export const baseRequest = async <Params extends StringifiableRecord, Response>(
     } else {
       if (res.status === 401 || res.status === 403) {
         localStorage.removeItem("token");
+        toast.error(res.statusText);
         throw new Error("Unauthorized");
+      } else if (res.status === 409) {
+        toast.error(res.statusText);
       } else {
+        toast.error(res.statusText);
         throw new Error("Server error");
       }
     }
