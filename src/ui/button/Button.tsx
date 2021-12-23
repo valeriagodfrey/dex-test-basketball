@@ -1,9 +1,9 @@
-import React, { FC } from "react";
+import React, { ButtonHTMLAttributes, FC } from "react";
 import styled from "styled-components";
 
 import addIcon from "../../assets/icons/add.svg";
 
-interface Props {
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   buttonType?: "primary" | "secondary";
   svg?: "none" | "add";
   disabled?: boolean;
@@ -16,10 +16,11 @@ export const Button: FC<Props> = ({
   svg = "none",
   onClick,
   children,
+  ...rest
 }) => {
   return (
     <>
-      <CustomButton buttonType={buttonType} onClick={onClick} disabled={disabled}>
+      <CustomButton buttonType={buttonType} onClick={onClick} disabled={disabled} {...rest}>
         {svg === "add" ? (
           <div style={{ display: "flex", alignItems: "center" }}>
             {children}
@@ -38,6 +39,7 @@ const CustomButton = styled.button<{ buttonType?: "primary" | "secondary"; disab
   font-weight: 500;
   font-size: 15px;
   align-items: center;
+  width: 100%;
   text-align: center;
   display: flex;
   line-height: 24px;

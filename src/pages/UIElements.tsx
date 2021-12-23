@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import styled from "styled-components";
 
-import { Button } from "../ui/buttons/Button";
+import { Button } from "../ui/button/Button";
 import { Checkbox } from "../ui/checkbox/Checkbox";
 import { Input } from "../ui/input/Input";
 import { SearchInput } from "../ui/input/SearchInput";
 import { CustomLink } from "../ui/link/CustomLink";
 import { Pagination } from "../ui/pagination/Pagination";
+import { CustomSelect } from "../ui/select/CustomSelect";
 import { IOptions } from "../ui/select/data";
-import { Multiselect } from "../ui/select/Multiselect";
 export const notify = () => toast.success("Hello");
 export const UIElements = () => {
   const [check, setCheck] = useState(false);
@@ -36,8 +36,8 @@ export const UIElements = () => {
       </Links>
       <b>Select and multiselect</b>
       <Selects>
-        <Multiselect options={IOptions} />
-        <Multiselect isMulti={true} options={IOptions} />
+        <CustomSelect options={IOptions} />
+        <CustomSelect isMulti={true} options={IOptions} />
       </Selects>
       <b>Buttons</b>
       <Buttons>

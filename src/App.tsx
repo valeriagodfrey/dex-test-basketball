@@ -11,9 +11,10 @@ import styled, { ThemeProvider } from "styled-components";
 
 import { store } from "./core/redux/store";
 import { theme } from "./core/theme/theme";
-import Auth from "./pages/authorization/authorization";
-import Registration from "./pages/authorization/registration";
-import { TeamsList } from "./pages/teams/teamsList";
+import Auth from "./pages/authorization/Authorization";
+import Registration from "./pages/authorization/Registration";
+import { AddTeam } from "./pages/teams/AddTeam";
+import { TeamsList } from "./pages/teams/TeamsList";
 import { UIElements } from "./pages/UIElements";
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
               <Route path="/" element={<TeamsList />}></Route>
               <Route path="/authorization" element={<Navigate to="/" />}></Route>
               <Route path="/registration" element={<Navigate to="/" />}></Route>
+              <Route path="/teams/add" element={<AddTeam />}></Route>
             </Routes>
           ) : (
             <Routes>

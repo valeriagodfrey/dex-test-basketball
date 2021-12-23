@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import regImg from "../../assets/icons/reg_img.svg";
 import { fetchRegistration } from "../../modules/authorization/authorizationThunk";
-import { Button } from "../../ui/buttons/Button";
+import { Button } from "../../ui/button/Button";
 import { Checkbox } from "../../ui/checkbox/Checkbox";
 import { Input } from "../../ui/input/Input";
 import { CustomLink } from "../../ui/link/CustomLink";

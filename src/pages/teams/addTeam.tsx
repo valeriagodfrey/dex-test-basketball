@@ -1,5 +1,10 @@
-import React from "react";
+import { TeamsForm } from "../../ui/form/TeamsForm";
+import { Layout } from "../../ui/layout/Layout";
 
 export const AddTeam = () => {
-  return <div></div>;
+  return (
+    <Layout type="teams">
+      <TeamsForm></TeamsForm>
+    </Layout>
+  );
 };
