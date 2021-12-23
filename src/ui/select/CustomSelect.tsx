@@ -8,7 +8,7 @@ interface Props {
   options: typeof IOptions;
   isMulti?: boolean;
 }
-export const Multiselect = ({ options, isMulti }: Props) => {
+export const CustomSelect = ({ options, isMulti }: Props) => {
   return (
     <Select
       closeMenuOnSelect={false}

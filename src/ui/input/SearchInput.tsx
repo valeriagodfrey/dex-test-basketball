@@ -24,6 +24,7 @@ const SearchContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: row-reverse;
+  width: 100%;
 `;
 const Icon = styled.div`
   position: absolute;
@@ -45,4 +46,5 @@ const Search = styled.input`
     outline: none;
   }
   transition: all 0.1s linear;
+  width: 100%;
 `;

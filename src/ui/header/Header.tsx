@@ -4,12 +4,18 @@ import styled from "styled-components";
 import logo from "../../assets/icons/logo.svg";
 import profile from "../../assets/icons/profile.svg";
 
-export const Header = () => {
+interface Props {
+  userName?: string;
+}
+export const Header = ({ userName }: Props) => {
   return (
     <Container>
       <HeaderLine>
         <Logo src={logo} alt="logo"></Logo>
-        <Profile src={profile} alt="profile"></Profile>
+        <div>
+          <UserName>{userName}</UserName>
+          <Profile src={profile} alt="profile"></Profile>
+        </div>
       </HeaderLine>
     </Container>
   );
@@ -20,7 +26,12 @@ const Container = styled.div`
   position: fixed;
   z-index: 55;
 `;
-
+const UserName = styled.label`
+  color: ${({ theme }) => theme.colors.darkGrey};
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+`;
 const HeaderLine = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   display: flex;
