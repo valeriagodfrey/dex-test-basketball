@@ -7,6 +7,7 @@ import { RootState } from "../../core/redux/store";
 import { getTeams } from "../../modules/teams/getTeamsThunk";
 import { Button } from "../../ui/button/Button";
 import { Card } from "../../ui/cards/Card";
+import { Team } from "../../ui/cards/Team";
 import { SearchInput } from "../../ui/input/SearchInput";
 import { Layout } from "../../ui/layout/Layout";
 
@@ -33,16 +34,16 @@ export const TeamsList = () => {
         </Box>
       </Row>
       <TeamsContainer onClick={() => navigate("/teams/add")}>
-        {status === "loaded" && content?.count !== 0 ? (
+        {status === "loaded" ? (
           <List>
             {content?.data.map((item) => (
-              <Team></Team>
+              <Team name={item.name} foundationYear={item.foundationYear} key={item.id} />
             ))}
           </List>
-        ) : status === "loaded" && content?.count === 0 ? (
+        ) : content?.count === 0 ? (
           <Card type="teams" />
         ) : (
-          "error"
+          ""
         )}
       </TeamsContainer>
     </Layout>
@@ -50,8 +51,11 @@ export const TeamsList = () => {
 };
 
 const TeamsContainer = styled.div``;
-const List = styled.div``;
-const Team = styled.div``;
+const List = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const Row = styled.div`
   width: 100%;
   display: flex;
