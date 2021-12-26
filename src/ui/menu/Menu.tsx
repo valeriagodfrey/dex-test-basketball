@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import signOut from "../../assets/icons/sign_out.svg";
@@ -7,29 +8,30 @@ interface Props {
   type?: "teams" | "players";
 }
 export const Menu = ({ type }: Props) => {
+  const navigate = useNavigate();
   return (
     <Container>
       <MenuLine>
         <Icons>
           {type === "teams" ? (
-            <IconContainer>
+            <IconContainer onClick={() => navigate("/teams")}>
               <Icon type="teams" color="red" />
               <Label color="red">Teams</Label>
             </IconContainer>
           ) : (
-            <IconContainer>
+            <IconContainer onClick={() => navigate("/teams")}>
               <Icon type="teams" color="grey" />
               <Label color="grey">Teams</Label>
             </IconContainer>
           )}
 
           {type === "players" ? (
-            <IconContainer>
+            <IconContainer onClick={() => navigate("/players")}>
               <Icon type="players" color="red" />
               <Label color="red">Players</Label>
             </IconContainer>
           ) : (
-            <IconContainer>
+            <IconContainer onClick={() => navigate("/players")}>
               <Icon type="players" color="grey" />
               <Label color="grey">Players</Label>
             </IconContainer>

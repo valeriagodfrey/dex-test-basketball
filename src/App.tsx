@@ -13,9 +13,9 @@ import { store } from "./core/redux/store";
 import { theme } from "./core/theme/theme";
 import Auth from "./pages/authorization/Authorization";
 import Registration from "./pages/authorization/Registration";
+import { PlayersList } from "./pages/players/PlayersList";
 import { AddTeam } from "./pages/teams/AddTeam";
 import { TeamsList } from "./pages/teams/TeamsList";
-import { UIElements } from "./pages/UIElements";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
@@ -49,9 +49,10 @@ function App() {
         <BrowserRouter>
           {token !== null ? (
             <Routes>
-              <Route path="/" element={<TeamsList />}></Route>
-              <Route path="/authorization" element={<Navigate to="/" />}></Route>
-              <Route path="/registration" element={<Navigate to="/" />}></Route>
+              <Route path="/teams" element={<TeamsList />}></Route>
+              <Route path="/players" element={<PlayersList />}></Route>
+              <Route path="/authorization" element={<Navigate to="/teams" />}></Route>
+              <Route path="/registration" element={<Navigate to="/teams" />}></Route>
               <Route path="/teams/add" element={<AddTeam />}></Route>
             </Routes>
           ) : (
