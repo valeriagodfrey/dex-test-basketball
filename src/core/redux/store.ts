@@ -1,16 +1,37 @@
 import { configureStore } from "@reduxjs/toolkit";
+import {
+  FLUSH,
+  PAUSE,
+  PERSIST,
+  persistReducer,
+  persistStore,
+  PURGE,
+  REGISTER,
+  REHYDRATE,
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
-import { fetchAuthorizationReducer } from "../../modules/authorization/authorizationSlise";
-import { getPlayersReducer } from "../../modules/players/getPlayersSlice";
-import { addTeamsReducer } from "../../modules/teams/addTeamsSlice";
-import { getTeamsReducer } from "../../modules/teams/getTeamsSlice";
+import { rootReducer } from "./rootReducer";
+
+const persistConfig = {
+  key: "root",
+  version: 1,
+  storage,
+  whitelist: ["authorization"],
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-  reducer: {
-    authorization: fetchAuthorizationReducer,
-    getTeams: getTeamsReducer,
-    addTeams: addTeamsReducer,
-    getPlayers: getPlayersReducer,
-  },
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
+
+export const persistor = persistStore(store);
+
 export type RootState = ReturnType<typeof store.getState>;

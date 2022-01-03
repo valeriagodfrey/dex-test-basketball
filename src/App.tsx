@@ -5,9 +5,10 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { Navigate, Routes } from "react-router";
 import { BrowserRouter, Route } from "react-router-dom";
+import { PersistGate } from "redux-persist/integration/react";
 import { ThemeProvider } from "styled-components";
 
-import { store } from "./core/redux/store";
+import { persistor, store } from "./core/redux/store";
 import { theme } from "./core/theme/theme";
 import { Authorization } from "./pages/authorization/Authorization";
 import { Registration } from "./pages/authorization/Registration";
@@ -33,36 +34,39 @@ function App() {
   }, [onChangeStorage]);
   return (
     <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <StyledToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss={true}
-          draggable
-          pauseOnHover
-        />
-        <BrowserRouter>
-          {token !== null ? (
-            <Routes>
-              <Route path="/teams" element={<TeamsList />}></Route>
-              <Route path="/players" element={<PlayersList />}></Route>
-              <Route path="/authorization" element={<Navigate to="/teams" />}></Route>
-              <Route path="/registration" element={<Navigate to="/teams" />}></Route>
-              <Route path="/teams/add" element={<AddTeam />}></Route>
-            </Routes>
-          ) : (
-            <Routes>
-              <Route path="/authorization" element={<Authorization />}></Route>
-              <Route path="/registration" element={<Registration />}></Route>
-              <Route path="*" element={<Navigate to="/authorization" />} />
-            </Routes>
-          )}
-        </BrowserRouter>
-      </ThemeProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <ThemeProvider theme={theme}>
+          <StyledToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss={true}
+            draggable
+            pauseOnHover
+          />
+          <BrowserRouter>
+            {token !== null ? (
+              <Routes>
+                <Route path="/teams" element={<TeamsList />} />
+                <Route path="/players" element={<PlayersList />} />
+                <Route path="/authorization" element={<Navigate to="/teams" />} />
+                <Route path="/registration" element={<Navigate to="/teams" />} />
+                <Route path="/" element={<Navigate to="/teams" />} />
+                <Route path="/teams/add" element={<AddTeam />} />
+              </Routes>
+            ) : (
+              <Routes>
+                <Route path="/authorization" element={<Authorization />} />
+                <Route path="/registration" element={<Registration />} />
+                <Route path="*" element={<Navigate to="/authorization" />} />
+              </Routes>
+            )}
+          </BrowserRouter>
+        </ThemeProvider>
+      </PersistGate>
     </Provider>
   );
 }
