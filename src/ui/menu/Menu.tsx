@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import signOut from "../../assets/icons/sign_out.svg";
+import { media } from "../../core/theme/media";
 import { Icon } from "../icon/Icon";
 interface Props {
   type?: "teams" | "players";
@@ -51,14 +52,18 @@ export const Menu = ({ type }: Props) => {
   );
 };
 const Container = styled.div`
-  min-width: 140px;
-  min-height: calc(100vh - 80px);
-  position: fixed;
-  top: 0;
-  margin-top: 80px;
-  z-index: 1;
-  background-color: ${({ theme }) => theme.colors.white};
-  box-shadow: 0px 1px 10px rgba(209, 209, 209, 0.5);
+  display: none;
+  ${media.desktop},${media.largeDesktop} {
+    display: initial;
+    min-width: 140px;
+    min-height: calc(100vh - 80px);
+    position: fixed;
+    top: 0;
+    margin-top: 80px;
+    z-index: 1;
+    background-color: ${({ theme }) => theme.colors.white};
+    box-shadow: 0px 1px 10px rgba(209, 209, 209, 0.5);
+  }
 `;
 
 const MenuLine = styled.div`

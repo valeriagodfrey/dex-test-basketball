@@ -39,7 +39,7 @@ export const TeamsForm = () => {
   return (
     <FormContainer>
       <FormHeader>
-        <Label>Teams/Add new team</Label>
+        <Label>Teams / Add new team</Label>
       </FormHeader>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <MyDropzone />
@@ -125,7 +125,6 @@ const Form = styled.form`
 
 const FormHeader = styled.div`
   display: flex;
-
   padding: 16px;
   ${media.desktop} {
     padding: 24px 32px;
@@ -137,6 +136,7 @@ const Label = styled.div`
   font-weight: 500;
   font-size: 14px;
   line-height: 24px;
+  cursor: pointer;
 `;
 
 const Box = styled.div`
