@@ -1,4 +1,4 @@
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -26,7 +26,16 @@ export const TeamsForm = () => {
     handleSubmit,
   } = useForm<TeamsProps>();
 
-  const onSubmit: SubmitHandler<TeamsProps> = (data: TeamsProps) => dispatch(addTeams(data));
+  const onSubmit = (params: TeamsProps) =>
+    dispatch(
+      addTeams({
+        params,
+        onSuccess: () => {
+          navigate("/");
+        },
+      }),
+    );
+
   return (
     <FormContainer>
       <FormHeader>
@@ -77,9 +86,7 @@ export const TeamsForm = () => {
               </Button>
             </Box>
             <Box>
-              <Button buttonType="primary" onClick={() => navigate("/")}>
-                Save
-              </Button>
+              <Button buttonType="primary">Save</Button>
             </Box>
           </Buttons>
         </Information>
