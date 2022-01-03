@@ -1,4 +1,4 @@
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
@@ -8,6 +8,7 @@ import { Button } from "../../ui/button/Button";
 import { Checkbox } from "../../ui/checkbox/Checkbox";
 import { Input } from "../../ui/input/Input";
 import { CustomLink } from "../../ui/link/CustomLink";
+
 interface RegisterProps {
   userName: string;
   login: string;
@@ -27,8 +28,7 @@ export const Registration = () => {
     handleSubmit,
   } = useForm<RegisterProps>();
 
-  const onSubmit: SubmitHandler<RegisterProps> = (data: RegisterProps) =>
-    dispatch(fetchRegistration(data));
+  const onSubmit = (data: RegisterProps) => dispatch(fetchRegistration(data));
 
   return (
     <WrapperContainer>
@@ -108,10 +108,12 @@ export const Registration = () => {
     </WrapperContainer>
   );
 };
+
 const WrapperContainer = styled.div`
   display: flex;
   min-height: 100vh;
 `;
+
 const Form = styled.form`
   background-color: ${({ theme }) => theme.colors.white};
   display: flex;
@@ -120,18 +122,21 @@ const Form = styled.form`
 
   width: 58%;
 `;
+
 const FormContainer = styled.div`
   display: flex;
   width: 40%;
   align-items: center;
   height: min-content;
 `;
+
 const ImageContainer = styled.div`
   display: flex;
   width: 60%;
 
   background-color: ${({ theme }) => theme.colors.lightBlue};
 `;
+
 const Img = styled.img`
   width: 75%;
   margin-left: auto;
@@ -139,6 +144,7 @@ const Img = styled.img`
   margin-top: 305px;
   height: min-content;
 `;
+
 const Label = styled.div`
   margin-bottom: 32px;
   font-size: 36px;
@@ -146,9 +152,11 @@ const Label = styled.div`
   color: ${({ theme }) => theme.colors.blue};
   margin-right: auto;
 `;
+
 const Container = styled.div`
   margin-bottom: 24px;
 `;
+
 const Caption = styled.div`
   font-size: 14px;
   line-height: 24px;

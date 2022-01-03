@@ -1,5 +1,5 @@
 import React from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
@@ -23,8 +23,7 @@ export const Authorization = () => {
     handleSubmit,
   } = useForm<AuthProps>();
 
-  const onSubmit: SubmitHandler<AuthProps> = (data: AuthProps) =>
-    dispatch(fetchAuthorization(data));
+  const onSubmit = (data: AuthProps) => dispatch(fetchAuthorization(data));
 
   return (
     <WrapperContainer>

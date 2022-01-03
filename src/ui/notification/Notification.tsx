@@ -1,21 +1,40 @@
-import React, { FC } from "react";
-import { toast, ToastContainer } from "react-toastify";
-import styled, { css } from "styled-components";
+import { ToastContainer } from "react-toastify";
+import styled from "styled-components";
 
-export const Notification: FC = ({ children }) => {
-  const notify = () => toast.warning({ children });
-  return <StyledContainer>{notify}</StyledContainer>;
-};
-const StyledContainer = styled(ToastContainer).attrs({
-  // пользовательские реквизиты
-})`
+export const StyledToastContainer = styled(ToastContainer)`
   .Toastify__toast-container {
   }
+  .Toastify__toast--error {
+    background-color: ${({ theme }) => theme.colors.lightRed};
+  }
+  .Toastify__toast-theme--light {
+    color: var(--toastify-color-light);
+  }
   .Toastify__toast {
-    background-color: ${({ theme }) => theme.colors.red};
+    min-height: 24px;
+    display: flex;
   }
+  svg {
+    width: 100%;
+    height: 100%;
+    display: none;
+  }
+
   .Toastify__toast-body {
+    padding: 3px 16px;
+    margin: 0;
+    display: block;
   }
-  .Toastify__progress-bar {
+  .Toastify_toast-icon {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .Toastify__progress-bar--error {
+    background: var(--toastify-color-null);
+  }
+  .Toastify__zoom-enter {
+    animation-name: null;
   }
 `;

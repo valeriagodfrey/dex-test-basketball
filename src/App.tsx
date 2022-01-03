@@ -5,8 +5,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { Navigate, Routes } from "react-router";
 import { BrowserRouter, Route } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
-import styled, { ThemeProvider } from "styled-components";
+import { ThemeProvider } from "styled-components";
 
 import { store } from "./core/redux/store";
 import { theme } from "./core/theme/theme";
@@ -15,6 +14,7 @@ import { Registration } from "./pages/authorization/Registration";
 import { PlayersList } from "./pages/players/PlayersList";
 import { AddTeam } from "./pages/teams/AddTeam";
 import { TeamsList } from "./pages/teams/TeamsList";
+import { StyledToastContainer } from "./ui/notification/Notification";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
@@ -34,7 +34,7 @@ function App() {
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <StyledContainer
+        <StyledToastContainer
           position="top-right"
           autoClose={5000}
           hideProgressBar={false}
@@ -66,41 +66,5 @@ function App() {
     </Provider>
   );
 }
-const StyledContainer = styled(ToastContainer)`
-  .Toastify__toast-container {
-  }
-  .Toastify__toast--error {
-    background-color: ${({ theme }) => theme.colors.lightRed};
-  }
-  .Toastify__toast-theme--light {
-    color: var(--toastify-color-light);
-  }
-  .Toastify__toast {
-    min-height: 24px;
-    display: flex;
-  }
-  svg {
-    width: 100%;
-    height: 100%;
-    display: none;
-  }
 
-  .Toastify__toast-body {
-    padding: 3px 16px;
-    margin: 0;
-    display: block;
-  }
-  .Toastify_toast-icon {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
-  }
-  .Toastify__progress-bar--error {
-    background: var(--toastify-color-null);
-  }
-  .Toastify__zoom-enter {
-    animation-name: null;
-  }
-`;
 export default App;

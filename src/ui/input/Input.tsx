@@ -29,19 +29,15 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((params, ref) => {
           error={params.error}
           ref={ref}
         />
-        <Icon>
-          <img
-            src={
-              params.type === "password" && type === "password"
-                ? closedEye
-                : params.type === "password" && type === "text"
-                ? openedEye
-                : ""
-            }
-            alt={params.type === "password" && (type === "password" || "text") ? "eye" : ""}
-            onClick={changeType}
-          />
-        </Icon>
+        {params.type === "password" && (
+          <Icon>
+            <img
+              src={type === "password" ? closedEye : openedEye}
+              alt={"eye"}
+              onClick={changeType}
+            />
+          </Icon>
+        )}
       </InputContainer>
       <CustomError>{params.error}</CustomError>
     </Container>
@@ -57,12 +53,14 @@ const Container = styled.div`
   flex-direction: column;
   width: auto;
 `;
+
 const InputContainer = styled.div`
   display: inline-flex;
   flex-direction: row-reverse;
   align-items: center;
   width: 100%;
 `;
+
 const Icon = styled.div`
   position: absolute;
   display: flex;
@@ -78,6 +76,7 @@ const Label = styled.label`
   color: ${({ theme }) => theme.colors.grey};
   margin-bottom: 8px;
 `;
+
 const CustomInput = styled.input<{
   inputDisable: boolean | undefined;
   error?: string;
