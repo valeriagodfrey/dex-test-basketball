@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
 import regImg from "../../assets/icons/reg_img.svg";
+import { media } from "../../core/theme/media";
 import { fetchRegistration } from "../../modules/authorization/authorizationThunk";
 import { Button } from "../../ui/button/Button";
 import { Checkbox } from "../../ui/checkbox/Checkbox";
@@ -34,22 +35,22 @@ export const Registration = () => {
     <WrapperContainer>
       <FormContainer>
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <Label>Sign Up</Label>
-          <Container>
+          <Title>Sign Up</Title>
+          <InputContainer>
             <Input
               label="Name:"
               {...register("userName", { required: true })}
               error={errors.userName?.type === "required" ? "Please, enter your name." : ""}
             ></Input>
-          </Container>
-          <Container>
+          </InputContainer>
+          <InputContainer>
             <Input
               label="Login:"
               {...register("login", { required: true })}
               error={errors.login?.type === "required" ? "Please, enter your login." : ""}
             ></Input>
-          </Container>
-          <Container>
+          </InputContainer>
+          <InputContainer>
             <Input
               label="Password:"
               type="password"
@@ -58,8 +59,8 @@ export const Registration = () => {
               })}
               error={errors.password?.type === "required" ? "Please, enter your password." : ""}
             ></Input>
-          </Container>
-          <Container>
+          </InputContainer>
+          <InputContainer>
             <Input
               label="Enter your password again:"
               type="password"
@@ -75,13 +76,13 @@ export const Registration = () => {
                   : ""
               }
             ></Input>
-          </Container>
+          </InputContainer>
 
           <Controller
             name="check"
             control={control}
             render={(props) => (
-              <Container>
+              <InputContainer>
                 <Checkbox
                   {...register("check", { required: true })}
                   {...props}
@@ -93,7 +94,7 @@ export const Registration = () => {
                   error={errors.check?.type === "required" ? "Please, check this." : ""}
                   label="I accept the agreement"
                 />
-              </Container>
+              </InputContainer>
             )}
           />
           <Button buttonType="primary">Sign Up</Button>
@@ -110,50 +111,58 @@ export const Registration = () => {
 };
 
 const WrapperContainer = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr;
   min-height: 100vh;
+  ${media.desktop} {
+    grid-template-columns: 606px 1fr;
+  }
 `;
 
 const Form = styled.form`
-  background-color: ${({ theme }) => theme.colors.white};
   display: flex;
   flex-direction: column;
-  margin: 226px auto 220px;
-
-  width: 58%;
+  width: 100%;
+  max-width: 366px;
 `;
 
 const FormContainer = styled.div`
   display: flex;
-  width: 40%;
+  justify-content: center;
   align-items: center;
-  height: min-content;
+  padding: 24px;
 `;
 
 const ImageContainer = styled.div`
-  display: flex;
-  width: 60%;
-
+  justify-content: center;
+  align-items: center;
   background-color: ${({ theme }) => theme.colors.lightBlue};
+  padding: 0 64px;
+
+  display: none;
+  ${media.desktop} {
+    display: flex;
+  }
 `;
 
 const Img = styled.img`
-  width: 75%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 305px;
-  height: min-content;
+  width: 100%;
+  max-width: 660px;
 `;
 
-const Label = styled.div`
+const Title = styled.div`
   margin-bottom: 32px;
   font-size: 36px;
   line-height: 49px;
   color: ${({ theme }) => theme.colors.blue};
-  margin-right: auto;
+
+  text-align: center;
+  ${media.desktop} {
+    text-align: left;
+  }
 `;
 
-const Container = styled.div`
+const InputContainer = styled.div`
   margin-bottom: 24px;
 `;
 
