@@ -16,7 +16,7 @@ interface RegisterProps {
   check: boolean;
 }
 
-export default function Registration() {
+export const Registration = () => {
   const dispatch = useDispatch();
 
   const {
@@ -107,7 +107,7 @@ export default function Registration() {
       </ImageContainer>
     </WrapperContainer>
   );
-}
+};
 const WrapperContainer = styled.div`
   display: flex;
   min-height: 100vh;

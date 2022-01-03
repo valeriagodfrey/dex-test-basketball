@@ -6,13 +6,12 @@ import { Provider } from "react-redux";
 import { Navigate, Routes } from "react-router";
 import { BrowserRouter, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-// import { ToastContainer } from "react-toastify";
 import styled, { ThemeProvider } from "styled-components";
 
 import { store } from "./core/redux/store";
 import { theme } from "./core/theme/theme";
-import Auth from "./pages/authorization/Authorization";
-import Registration from "./pages/authorization/Registration";
+import { Authorization } from "./pages/authorization/Authorization";
+import { Registration } from "./pages/authorization/Registration";
 import { PlayersList } from "./pages/players/PlayersList";
 import { AddTeam } from "./pages/teams/AddTeam";
 import { TeamsList } from "./pages/teams/TeamsList";
@@ -57,7 +56,7 @@ function App() {
             </Routes>
           ) : (
             <Routes>
-              <Route path="/authorization" element={<Auth />}></Route>
+              <Route path="/authorization" element={<Authorization />}></Route>
               <Route path="/registration" element={<Registration />}></Route>
               <Route path="*" element={<Navigate to="/authorization" />} />
             </Routes>

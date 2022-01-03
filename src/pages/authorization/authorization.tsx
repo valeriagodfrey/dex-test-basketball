@@ -14,7 +14,7 @@ interface AuthProps {
   password: string;
 }
 
-export default function Authorization() {
+export const Authorization = () => {
   const dispatch = useDispatch();
   const {
     register,
@@ -58,7 +58,7 @@ export default function Authorization() {
       </ImageContainer>
     </WrapperContainer>
   );
-}
+};
 const WrapperContainer = styled.div`
   display: flex;
   min-height: 100vh;
