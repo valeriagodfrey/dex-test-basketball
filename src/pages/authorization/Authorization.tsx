@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
 import authImg from "../../assets/icons/auth_img.svg";
+import { media } from "../../core/theme/media";
 import { fetchAuthorization } from "../../modules/authorization/authorizationThunk";
 import { Button } from "../../ui/button/Button";
 import { Input } from "../../ui/input/Input";
@@ -29,7 +30,7 @@ export const Authorization = () => {
     <WrapperContainer>
       <FormContainer>
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <Label onClick={notify}>Sign In</Label>
+          <Title onClick={notify}>Sign In</Title>
           <InputContainer>
             <Input
               label="Login"
@@ -60,44 +61,61 @@ export const Authorization = () => {
   );
 };
 const WrapperContainer = styled.div`
-  display: flex;
   min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  ${media.desktop} {
+    grid-template-columns: 606px 1fr;
+  }
 `;
-const Form = styled.form`
-  background-color: ${({ theme }) => theme.colors.white};
-  display: flex;
-  flex-direction: column;
-  margin: 340px auto 334px;
-  width: 55%;
-`;
+
 const FormContainer = styled.div`
   display: flex;
-  width: 40%;
+  justify-content: center;
   align-items: center;
-  height: min-content;
+  padding: 24px;
 `;
-const ImageContainer = styled.div`
+
+const Form = styled.form`
   display: flex;
   flex-direction: column;
-  width: 60%;
+  width: 100%;
+  max-width: 366px;
+`;
+
+const ImageContainer = styled.div`
+  justify-content: center;
+  align-items: center;
   background-color: ${({ theme }) => theme.colors.lightBlue};
+  padding: 0 64px;
+
+  display: none;
+  ${media.desktop} {
+    display: flex;
+  }
 `;
+
 const Img = styled.img`
-  width: 70%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 305px;
+  width: 100%;
+  max-width: 606px;
 `;
-const Label = styled.div`
+
+const Title = styled.div`
   margin-bottom: 32px;
   font-size: 36px;
   line-height: 49px;
   color: ${({ theme }) => theme.colors.blue};
-  margin-right: auto;
+
+  text-align: center;
+  ${media.desktop} {
+    text-align: left;
+  }
 `;
+
 const InputContainer = styled.div`
   margin-bottom: 24px;
 `;
+
 const Caption = styled.div`
   font-size: 14px;
   line-height: 24px;
