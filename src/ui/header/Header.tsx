@@ -1,13 +1,14 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 import logo from "../../assets/icons/logo.svg";
 import profile from "../../assets/icons/profile.svg";
+import { RootState } from "../../core/redux/store";
 
-interface Props {
-  userName?: string;
-}
-export const Header = ({ userName }: Props) => {
+export const Header = () => {
+  const userName = useSelector((state: RootState) => state.authorization.content?.name);
+
   return (
     <Container>
       <HeaderLine>

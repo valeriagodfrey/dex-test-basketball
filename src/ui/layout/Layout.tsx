@@ -7,12 +7,11 @@ import { Menu } from "../menu/Menu";
 
 interface Props {
   type?: "teams" | "players";
-  userName?: string;
 }
-export const Layout: FC<Props> = ({ children, userName, type }) => {
+export const Layout: FC<Props> = ({ children, type }) => {
   return (
     <Container>
-      <Header userName={userName} />
+      <Header />
       <Main>{children}</Main>
       {type === "teams" ? <Menu type="teams" /> : <Menu type="players" />}
     </Container>
