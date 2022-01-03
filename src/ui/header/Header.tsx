@@ -1,4 +1,3 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 
@@ -13,26 +12,29 @@ export const Header = () => {
     <Container>
       <HeaderLine>
         <Logo src={logo} alt="logo"></Logo>
-        <div>
+        <LogoContainer>
           <UserName>{userName}</UserName>
           <Profile src={profile} alt="profile"></Profile>
-        </div>
+        </LogoContainer>
       </HeaderLine>
     </Container>
   );
 };
+
 const Container = styled.div`
   height: auto;
   width: 100%;
   position: fixed;
   z-index: 55;
 `;
+
 const UserName = styled.label`
   color: ${({ theme }) => theme.colors.darkGrey};
   font-weight: 500;
   font-size: 14px;
   line-height: 24px;
 `;
+
 const HeaderLine = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   display: flex;
@@ -41,11 +43,19 @@ const HeaderLine = styled.div`
   padding: 16px 51px;
   box-shadow: 0px 1px 10px rgba(209, 209, 209, 0.5);
 `;
+
+const LogoContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const Logo = styled.img`
   width: 191px;
   cursor: pointer;
 `;
+
 const Profile = styled.img`
   width: 36px;
   cursor: pointer;
+  margin-left: 19px;
 `;

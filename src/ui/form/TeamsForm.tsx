@@ -1,9 +1,9 @@
-import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+import { media } from "../../core/theme/media";
 import { addTeams } from "../../modules/teams/addTeamsThunk";
 import { Button } from "../button/Button";
 import { MyDropzone } from "../dropzone/Dropzone";
@@ -33,7 +33,7 @@ export const TeamsForm = () => {
         <Label>Teams/Add new team</Label>
       </FormHeader>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <MyDropzone></MyDropzone>
+        <MyDropzone />
         <Information>
           <Container>
             <Input
@@ -87,38 +87,66 @@ export const TeamsForm = () => {
     </FormContainer>
   );
 };
+
 const FormContainer = styled.div`
   width: 100%;
+  background-color: ${({ theme }) => theme.colors.white};
+
+  ${media.desktop} {
+    border-radius: 10px;
+  }
 `;
+
 const Form = styled.form`
-  background-color: ${({ theme }) => theme.colors.white};
-  display: flex;
-  justify-content: space-between;
-  border-radius: 0px 0px 10px 10px;
-  padding: 48px 229px 48px 73px;
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 48px 24px;
+  grid-row-gap: 48px;
+
+  ${media.desktop} {
+    grid-template-columns: 185px 1fr;
+    grid-column-gap: 80px;
+    padding: 48px;
+  }
+
+  ${media.largeDesktop} {
+    grid-template-columns: 336px 1fr;
+    grid-column-gap: 136px;
+    padding: 48px 73px;
+  }
 `;
+
 const FormHeader = styled.div`
-  background-color: ${({ theme }) => theme.colors.white};
   display: flex;
-  padding: 24px 32px;
-  border-radius: 10px 10px 0px 0px;
+
+  padding: 16px;
+  ${media.desktop} {
+    padding: 24px 32px;
+  }
 `;
+
 const Label = styled.div`
   color: ${({ theme }) => theme.colors.red};
   font-weight: 500;
   font-size: 14px;
   line-height: 24px;
 `;
+
 const Box = styled.div`
   width: 45%;
 `;
+
 const Container = styled.div`
   margin-bottom: 24px;
 `;
 
 const Information = styled.div`
-  width: 44%;
+  width: 100%;
+  ${media.desktop} {
+    max-width: 366px;
+  }
 `;
+
 const Buttons = styled.div`
   display: flex;
   justify-content: space-between;
