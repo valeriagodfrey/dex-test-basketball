@@ -3,33 +3,44 @@ import styled from "styled-components";
 
 import { media } from "../../core/theme/media";
 
-export const Main: FC = ({ children }) => {
+interface IProps {
+  fullWidthForMobile?: boolean;
+}
+export const Main: FC<IProps> = ({ children, fullWidthForMobile }) => {
   return (
     <MainContainer>
-      <MainBlock>{children}</MainBlock>
+      <MainBlock fullWidthForMobile={fullWidthForMobile}>{children}</MainBlock>
     </MainContainer>
   );
 };
 const MainContainer = styled.main`
+  display: flex;
+  justify-content: center;
   margin-left: 0px;
+  background-color: ${({ theme }) => theme.colors.lightestGrey1};
   width: 100%;
-  padding-top: 80px;
-  display: block;
+  padding-top: 62px;
   min-height: calc(100vh - 80px);
-  ${media.desktop},${media.largeDesktop} {
+  ${media.desktop} {
+    padding-top: 80px;
     margin-left: 140px;
     max-width: calc(100vw - 140px);
   }
 `;
 
-const MainBlock = styled.div`
-  padding: 16px 0px;
+const MainBlock = styled.div<{ fullWidthForMobile?: boolean }>`
   display: flex;
   align-items: center;
   flex-direction: column;
-  background-color: ${({ theme }) => theme.colors.lightestGrey1};
-  ${media.desktop},${media.largeDesktop} {
-    padding: 30px 80px;
+
+  padding: ${({ fullWidthForMobile }) => (fullWidthForMobile ? "16px 0" : "16px 12px")};
+  width: 100%;
+  ${media.desktop} {
+    padding: 32px 0;
+    max-width: 804px;
     min-height: 100vh;
+  }
+  ${media.extraLargeDesktop} {
+    max-width: 1140px;
   }
 `;

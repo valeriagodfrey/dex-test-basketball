@@ -45,7 +45,7 @@ const CustomButton = styled.button<{ buttonType?: "primary" | "secondary"; disab
   line-height: 24px;
   justify-content: center;
   cursor: pointer;
-  padding: 8px;
+  padding: 8px 24px;
   color: ${({ buttonType, theme, disabled }) =>
     buttonType === "primary" && disabled === false
       ? theme.colors.white

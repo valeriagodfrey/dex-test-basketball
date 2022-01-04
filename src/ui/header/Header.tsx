@@ -46,10 +46,11 @@ const HeaderLine = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 16px 51px;
+  padding: 14px 51px;
   box-shadow: 0px 1px 10px rgba(209, 209, 209, 0.5);
   ${media.desktop},${media.largeDesktop} {
     justify-content: space-between;
+    padding: 16px 51px;
   }
 `;
 
