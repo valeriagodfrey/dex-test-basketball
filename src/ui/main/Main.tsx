@@ -24,7 +24,7 @@ const MainContainer = styled.main`
   ${media.desktop} {
     padding-top: 80px;
     margin-left: 140px;
-    max-width: calc(100vw - 140px);
+    max-width: calc(100% - 140px);
   }
 `;
 
