@@ -12,7 +12,7 @@ export const Layout: FC<Props> = ({ children, type }) => {
   return (
     <Container>
       <Header />
-      {/* <Main>{children}</Main> */}
+      <Main>{children}</Main>
       {type === "teams" ? <Menu type="teams" /> : <Menu type="players" />}
     </Container>
   );
