@@ -13,9 +13,7 @@ export const Header = () => {
   return (
     <Container>
       <HeaderLine>
-        <Burger>
-          <img src={burger} alt="burger" />
-        </Burger>
+        <Burger src={burger} alt="burger" />
 
         <Logo src={logo} alt="logo"></Logo>
         <ProfileContainer>
@@ -28,8 +26,11 @@ export const Header = () => {
 };
 
 const Container = styled.div`
-  height: auto;
+  background-color: ${({ theme }) => theme.colors.white};
+  box-shadow: 0px 1px 10px rgba(209, 209, 209, 0.5);
   width: 100%;
+  top: 0;
+  display: flex;
   position: fixed;
   z-index: 55;
 `;
@@ -42,31 +43,38 @@ const UserName = styled.label`
 `;
 
 const HeaderLine = styled.div`
-  background-color: ${({ theme }) => theme.colors.white};
-  display: flex;
-  justify-content: center;
+  position: relative;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: 24px 1fr 24px;
+  grid-gap: 24px;
   align-items: center;
-  padding: 14px 51px;
-  box-shadow: 0px 1px 10px rgba(209, 209, 209, 0.5);
-  ${media.desktop},${media.largeDesktop} {
-    justify-content: space-between;
-    padding: 16px 51px;
+  justify-items: center;
+  flex: 1;
+
+  ${media.desktop} {
+    grid-template-columns: 1fr auto;
+    justify-items: flex-start;
+  }
+
+  margin: 14px 12px;
+  ${media.desktop} {
+    margin: 16px 51px;
   }
 `;
 
 const ProfileContainer = styled.div`
   display: none;
-  ${media.desktop},${media.largeDesktop} {
+  ${media.desktop} {
     display: flex;
     align-items: center;
+    justify-items: flex-end;
   }
 `;
 
-const Burger = styled.div`
-  position: absolute;
-  left: 24px;
+const Burger = styled.img`
   cursor: pointer;
-  ${media.desktop},${media.largeDesktop} {
+  ${media.desktop} {
     display: none;
   }
 `;
@@ -75,7 +83,7 @@ const Logo = styled.img`
   display: flex;
   justify-content: flex-start;
   height: 34px;
-  ${media.desktop},${media.largeDesktop} {
+  ${media.desktop} {
     height: 48px;
   }
 `;
