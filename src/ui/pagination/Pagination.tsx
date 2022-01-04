@@ -46,7 +46,6 @@ const BreakLabel: FC<{ onClick?: () => void }> = ({ onClick }) => {
 const Content = styled.div`
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
 
   a {
     text-decoration: none;

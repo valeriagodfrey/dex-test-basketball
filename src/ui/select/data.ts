@@ -1,7 +1,7 @@
 export interface IOption {
-  value: string;
+  value: string | number;
   label: string;
-  color: string;
+  color?: string;
 }
 export const IOptions: IOption[] = [
   { value: "ocean", label: "Ocean", color: "#00B8D9" },

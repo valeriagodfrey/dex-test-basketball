@@ -1,5 +1,5 @@
 import React from "react";
-import Select, { StylesConfig } from "react-select";
+import Select, { ActionMeta, MultiValue, SingleValue, StylesConfig } from "react-select";
 
 import { theme } from "../../core/theme/theme";
 import { IOption, IOptions } from "./data";
@@ -7,8 +7,12 @@ import { IOption, IOptions } from "./data";
 interface Props {
   options: typeof IOptions;
   isMulti?: boolean;
+  onChange?: (
+    newValue: MultiValue<IOption> | SingleValue<IOption>,
+    actionMeta: ActionMeta<IOption>,
+  ) => void;
 }
-export const CustomSelect = ({ options, isMulti }: Props) => {
+export const CustomSelect = ({ options, isMulti, onChange }: Props) => {
   return (
     <Select
       closeMenuOnSelect={false}
@@ -17,6 +21,8 @@ export const CustomSelect = ({ options, isMulti }: Props) => {
       defaultValue={options[0]}
       options={options}
       styles={Styles}
+      menuPlacement="top"
+      onChange={onChange}
     />
   );
 };
