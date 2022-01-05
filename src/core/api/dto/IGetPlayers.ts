@@ -4,21 +4,22 @@ export type IGetPlayersParams = {
   page?: number;
   pageSize?: number;
 };
+
+export type IPlayer = {
+  name: string;
+  number: number;
+  position: string;
+  team: number;
+  birthday: string;
+  height: number;
+  weight: number;
+  avatarUrl: string;
+  id: number;
+};
+
 export type IGetPlayersResponse = {
-  data: [
-    {
-      name: string;
-      number: 0;
-      position: string;
-      team: 0;
-      birthday: "2021-12-26T02:16:52.490Z";
-      height: 0;
-      weight: 0;
-      avatarUrl: string;
-      id: 0;
-    },
-  ];
-  count: 0;
-  page: 0;
-  size: 0;
+  data: IPlayer[];
+  count: number;
+  page: number;
+  size: number;
 };

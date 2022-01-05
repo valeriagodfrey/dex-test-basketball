@@ -1,6 +1,6 @@
 export type IAddTeamsRequest = {
   name: string;
-  foundationYear: 0;
+  foundationYear: number;
   division: string;
   conference: string;
   imageUrl: string;
@@ -8,9 +8,9 @@ export type IAddTeamsRequest = {
 
 export type IAddTeamsResponse = {
   name: string;
-  foundationYear: 0;
+  foundationYear: number;
   division: string;
   conference: string;
   imageUrl: string;
-  id: 0;
+  id: number;
 };

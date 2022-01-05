@@ -1,34 +1,49 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+import { IGetTeamResponse } from "../../core/api/dto/IGetTeams";
 import { media } from "../../core/theme/media";
 import { addTeams } from "../../modules/teams/addTeamsThunk";
+import { updateTeams } from "../../modules/teams/updateTeamsThunk";
 import { Button } from "../button/Button";
 import { MyDropzone } from "../dropzone/Dropzone";
 import { Input } from "../input/Input";
 
-interface TeamsProps {
+interface FormProps {
   name: string;
-  foundationYear: 0;
+  foundationYear: number;
   division: string;
   conference: string;
   imageUrl: string;
-  id: 0;
+  id: number;
 }
-export const TeamsForm = () => {
+
+interface IProps {
+  data?: IGetTeamResponse;
+  isEdit?: boolean;
+}
+export const TeamsForm = ({ data, isEdit }: IProps) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm<TeamsProps>();
+    reset,
+  } = useForm<FormProps>();
 
-  const onSubmit = (params: TeamsProps) =>
+  useEffect(() => {
+    reset(data);
+  }, [data, reset]);
+
+  const action = isEdit ? updateTeams : addTeams;
+
+  const onSubmit = (params: FormProps) =>
     dispatch(
-      addTeams({
+      action({
         params,
         onSuccess: () => {
           navigate("/");

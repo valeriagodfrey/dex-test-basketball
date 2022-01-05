@@ -1,7 +1,7 @@
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { Navigate, Routes } from "react-router";
 import { BrowserRouter, Route } from "react-router-dom";
@@ -13,7 +13,9 @@ import { theme } from "./core/theme/theme";
 import { Authorization } from "./pages/authorization/Authorization";
 import { Registration } from "./pages/authorization/Registration";
 import { PlayersList } from "./pages/players/PlayersList";
-import { AddTeam } from "./pages/teams/AddTeam";
+import { Team } from "./pages/team/Team";
+import { AddTeam } from "./pages/teamAdd/AddTeam";
+import { EditTeam } from "./pages/teamEdit/EditTeam";
 import { TeamsList } from "./pages/teams/TeamsList";
 import { StyledToastContainer } from "./ui/notification/Notification";
 
@@ -55,7 +57,9 @@ function App() {
                 <Route path="/authorization" element={<Navigate to="/teams" />} />
                 <Route path="/registration" element={<Navigate to="/teams" />} />
                 <Route path="/" element={<Navigate to="/teams" />} />
-                <Route path="/teams/add" element={<AddTeam />} />
+                <Route path="/teams/add" element={<AddTeam />} />s
+                <Route path="/teams/:id" element={<Team />} />
+                <Route path="/teams/:id/edit" element={<EditTeam />} />
               </Routes>
             ) : (
               <Routes>

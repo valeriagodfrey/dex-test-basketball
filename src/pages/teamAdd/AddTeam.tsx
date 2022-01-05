@@ -4,7 +4,7 @@ import { Layout } from "../../ui/layout/Layout";
 export const AddTeam = () => {
   return (
     <Layout type="teams">
-      <TeamsForm></TeamsForm>
+      <TeamsForm />
     </Layout>
   );
 };

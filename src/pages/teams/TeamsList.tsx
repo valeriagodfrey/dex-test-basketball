@@ -10,7 +10,7 @@ import { media } from "../../core/theme/media";
 import { getTeams } from "../../modules/teams/getTeamsThunk";
 import { Button } from "../../ui/button/Button";
 import { Card } from "../../ui/cards/Card";
-import { Team } from "../../ui/cards/Team";
+import { TeamItem } from "./components/Team";
 import { SearchInput } from "../../ui/input/SearchInput";
 import { Layout } from "../../ui/layout/Layout";
 import { Pagination } from "../../ui/pagination/Pagination";
@@ -55,11 +55,16 @@ export const TeamsList = () => {
           Add
         </Button>
       </Row>
-      <TeamsContainer onClick={() => navigate("/teams/add")}>
+      <TeamsContainer>
         {status === "loaded" ? (
           <List>
             {content?.data.map((item) => (
-              <Team name={item.name} foundationYear={item.foundationYear} key={item.id} />
+              <TeamItem
+                id={item.id}
+                name={item.name}
+                foundationYear={item.foundationYear}
+                key={item.id}
+              />
             ))}
           </List>
         ) : content?.count === 0 ? (
