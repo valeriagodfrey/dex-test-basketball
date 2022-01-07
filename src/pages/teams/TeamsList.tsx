@@ -10,12 +10,12 @@ import { media } from "../../core/theme/media";
 import { getTeams } from "../../modules/teams/getTeamsThunk";
 import { Button } from "../../ui/button/Button";
 import { Card } from "../../ui/cards/Card";
-import { TeamItem } from "./components/Team";
 import { SearchInput } from "../../ui/input/SearchInput";
 import { Layout } from "../../ui/layout/Layout";
 import { Pagination } from "../../ui/pagination/Pagination";
 import { CustomSelect } from "../../ui/select/CustomSelect";
 import { IOption } from "../../ui/select/data";
+import { TeamItem } from "./components/TeamItem";
 
 export const TeamsList = () => {
   const dispatch = useDispatch();
@@ -55,8 +55,8 @@ export const TeamsList = () => {
           Add
         </Button>
       </Row>
-      <TeamsContainer>
-        {status === "loaded" ? (
+      {status === "loaded" ? (
+        <TeamsContainer>
           <List>
             {content?.data.map((item) => (
               <TeamItem
@@ -67,23 +67,34 @@ export const TeamsList = () => {
               />
             ))}
           </List>
-        ) : content?.count === 0 ? (
-          <Card type="teams" />
-        ) : (
-          ""
-        )}
-      </TeamsContainer>
+        </TeamsContainer>
+      ) : content?.count === 0 ? (
+        <TeamsContainer empty>
+          <Card type="teams" onClick={() => navigate("/teams/add")} />
+        </TeamsContainer>
+      ) : (
+        ""
+      )}
+
       <PaginationRow>
         <Pagination pageCount={pageCount} onPageChange={onPageChange} />
         {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-        <CustomSelect options={paginationOptions} onChange={onSelectChange as any} />
+        <CustomSelect
+          options={paginationOptions}
+          placement="top"
+          onChange={onSelectChange as any}
+        />
       </PaginationRow>
     </Layout>
   );
 };
 
-const TeamsContainer = styled.div`
+const TeamsContainer = styled.div<{ empty?: boolean }>`
   width: 100%;
+  justify-content: center;
+  align-items: center;
+  display: ${({ empty }) => (empty ? "flex" : "initial")};
+  margin: ${({ empty }) => (empty ? "99px 0px 107px" : "0px")};
 `;
 
 const List = styled.div`

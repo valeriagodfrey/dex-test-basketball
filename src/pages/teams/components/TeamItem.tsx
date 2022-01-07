@@ -8,7 +8,7 @@ import { media } from "../../../core/theme/media";
 interface Props {
   name: string;
   id: number;
-  foundationYear: 0;
+  foundationYear: number;
 }
 export const TeamItem = ({ name, foundationYear, id }: Props) => {
   return (

@@ -18,12 +18,12 @@ export const TeamInfo = ({ ...rest }: TeamInfoProps) => {
   return (
     <CardContainer>
       <Header>
-        <Crumbs>Teams / Add new team</Crumbs>
+        <Crumbs>Teams / Team</Crumbs>
         <Icons>
           <Link to={`/teams/${rest.id}/edit`}>
             <Icon src={createSvg} alt="create"></Icon>
           </Link>
-          <Icon src={deleteSvg} alt="delete"></Icon>
+          <Icon src={deleteSvg} alt="delete" onClick={}></Icon>
         </Icons>
       </Header>
       <CardInfo>

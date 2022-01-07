@@ -54,7 +54,7 @@ export const TeamsForm = ({ data, isEdit }: IProps) => {
   return (
     <FormContainer>
       <FormHeader>
-        <Label>Teams / Add new team</Label>
+        <Crumbs>Teams / Add new team</Crumbs>
       </FormHeader>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <MyDropzone />
@@ -133,7 +133,7 @@ const Form = styled.form`
 
   ${media.largeDesktop} {
     grid-template-columns: 336px 1fr;
-    grid-column-gap: 136px;
+    grid-column-gap: 110px;
     padding: 48px 73px;
   }
 `;
@@ -146,7 +146,7 @@ const FormHeader = styled.div`
   }
 `;
 
-const Label = styled.div`
+const Crumbs = styled.div`
   color: ${({ theme }) => theme.colors.red};
   font-weight: 500;
   font-size: 14px;

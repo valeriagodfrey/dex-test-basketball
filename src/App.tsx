@@ -12,6 +12,9 @@ import { persistor, store } from "./core/redux/store";
 import { theme } from "./core/theme/theme";
 import { Authorization } from "./pages/authorization/Authorization";
 import { Registration } from "./pages/authorization/Registration";
+import { Player } from "./pages/player/Player";
+import { AddPlayer } from "./pages/playerAdd/AddPlayer";
+import { EditPlayer } from "./pages/playerEdit/EditPlayer";
 import { PlayersList } from "./pages/players/PlayersList";
 import { Team } from "./pages/team/Team";
 import { AddTeam } from "./pages/teamAdd/AddTeam";
@@ -57,9 +60,12 @@ function App() {
                 <Route path="/authorization" element={<Navigate to="/teams" />} />
                 <Route path="/registration" element={<Navigate to="/teams" />} />
                 <Route path="/" element={<Navigate to="/teams" />} />
-                <Route path="/teams/add" element={<AddTeam />} />s
+                <Route path="/teams/add" element={<AddTeam />} />
                 <Route path="/teams/:id" element={<Team />} />
                 <Route path="/teams/:id/edit" element={<EditTeam />} />
+                <Route path="/players/add" element={<AddPlayer />} />
+                <Route path="/players/:id" element={<Player />} />
+                <Route path="/players/:id/edit" element={<EditPlayer />} />
               </Routes>
             ) : (
               <Routes>

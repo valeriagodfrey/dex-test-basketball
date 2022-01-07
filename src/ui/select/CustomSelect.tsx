@@ -1,45 +1,64 @@
 import React from "react";
 import Select, { ActionMeta, MultiValue, SingleValue, StylesConfig } from "react-select";
+import styled from "styled-components";
 
 import { theme } from "../../core/theme/theme";
+import { CustomError } from "../error/CustomError";
 import { IOption, IOptions } from "./data";
 
 interface Props {
+  error?: string;
+  label?: string;
   options: typeof IOptions;
   isMulti?: boolean;
+  placement?: "top" | "bottom";
   onChange?: (
     newValue: MultiValue<IOption> | SingleValue<IOption>,
     actionMeta: ActionMeta<IOption>,
   ) => void;
 }
-export const CustomSelect = ({ options, isMulti, onChange }: Props) => {
+export const CustomSelect = ({
+  label,
+  error,
+  options,
+  placement = "bottom",
+  isMulti,
+  onChange,
+}: Props) => {
   return (
-    <Select
-      closeMenuOnSelect={false}
-      isMulti={isMulti}
-      placeholder="Select..."
-      defaultValue={options[0]}
-      options={options}
-      styles={Styles}
-      menuPlacement="top"
-      onChange={onChange}
-    />
+    <>
+      <Label>{label}</Label>
+      <Select
+        closeMenuOnSelect={false}
+        isMulti={isMulti}
+        placeholder="Select..."
+        defaultValue={options[0]}
+        options={options}
+        styles={Styles}
+        menuPlacement={placement}
+        onChange={onChange}
+      />
+      <CustomError>{error}</CustomError>
+    </>
   );
 };
 
+const Label = styled.label`
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  color: ${({ theme }) => theme.colors.grey};
+  margin-bottom: 8px;
+`;
 const Styles: StylesConfig<IOption> = {
   control: (styles, { isMulti, menuIsOpen }) => ({
     ...styles,
-    backgroundColor: isMulti && !menuIsOpen ? theme.colors.white : theme.colors.lightestGrey1,
-    borderColor: isMulti ? theme.colors.lightestGrey : "transparent",
+    backgroundColor: theme.colors.white,
+    borderColor: theme.colors.lightestGrey,
     cursor: "pointer",
     padding: `1px`,
     alignItems: "center",
     display: "flex",
-    ":hover": {
-      ...styles[":hover"],
-      borderColor: theme.colors.lightestGrey,
-    },
   }),
   option: (styles, { isSelected }) => {
     return {

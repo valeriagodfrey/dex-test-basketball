@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { RootState } from "../../core/redux/store";
 import { getTeam } from "../../modules/teams/getTeamThunk";
 import { Layout } from "../../ui/layout/Layout";
+import { PlayerInfo } from "../player/components/PlayerInfo";
 import { Roster } from "./components/roster/Roster";
 import { TeamInfo } from "./components/TeamInfo";
 
@@ -33,7 +34,7 @@ export const Team = () => {
           <Roster />
         </Container>
       ) : (
-        "Loading..."
+        "loading..."
       )}
     </Layout>
   );

@@ -7,23 +7,23 @@ export type IGetTeamsResponse = {
   data: [
     {
       name: string;
-      foundationYear: 0;
+      foundationYear: number;
       division: string;
       conference: string;
       imageUrl: string;
       id: number;
     },
   ];
-  count: 0;
-  page: 0;
-  size: 0;
+  count: number;
+  page: number;
+  size: number;
 };
 export type IGetTeamParams = {
   id: number | undefined;
 };
 export type IGetTeamResponse = {
   name: string;
-  foundationYear: 0;
+  foundationYear: number;
   division: string;
   conference: string;
   imageUrl: string;

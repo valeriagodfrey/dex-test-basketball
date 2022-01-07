@@ -23,3 +23,20 @@ export type IGetPlayersResponse = {
   page: number;
   size: number;
 };
+
+export type IGetPlayerParams = {
+  id: number | undefined;
+};
+
+export type IGetPlayerResponse = {
+  name: string;
+  number: number;
+  position: string;
+  team: number;
+  birthday: string;
+  height: number;
+  weight: number;
+  avatarUrl: string;
+  id: number;
+  teamName: string;
+};
