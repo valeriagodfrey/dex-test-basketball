@@ -4,9 +4,9 @@ import { ContentLoading } from "../../common/loading";
 import { IAddTeamsResponse } from "../../core/api/dto/IAddTeams";
 import { updateTeams } from "./updateTeamsThunk";
 
-export type GetAddTeamsState = ContentLoading<IAddTeamsResponse | undefined>;
+export type GetUpdateTeamsState = ContentLoading<IAddTeamsResponse | undefined>;
 
-const initialState: GetAddTeamsState = {
+const initialState: GetUpdateTeamsState = {
   content: undefined,
   status: "init",
 };
