@@ -1,10 +1,12 @@
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import createSvg from "../../../assets/icons/create.svg";
 import deleteSvg from "../../../assets/icons/delete.svg";
 import denver_nuggets from "../../../assets/icons/denver_nuggets.svg";
 import { media } from "../../../core/theme/media";
+import { deleteTeam } from "../../../modules/teams/deleteTeamThunk";
 
 interface TeamInfoProps {
   id?: number;
@@ -15,6 +17,9 @@ interface TeamInfoProps {
   imageUrl?: string;
 }
 export const TeamInfo = ({ ...rest }: TeamInfoProps) => {
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  const navigate = useNavigate();
   return (
     <CardContainer>
       <Header>
@@ -23,7 +28,20 @@ export const TeamInfo = ({ ...rest }: TeamInfoProps) => {
           <Link to={`/teams/${rest.id}/edit`}>
             <Icon src={createSvg} alt="create"></Icon>
           </Link>
-          <Icon src={deleteSvg} alt="delete" onClick={}></Icon>
+          <Icon
+            src={deleteSvg}
+            alt="delete"
+            onClick={() =>
+              dispatch(
+                deleteTeam({
+                  params: { id: Number(id) },
+                  onSuccess: () => {
+                    navigate("/");
+                  },
+                }),
+              )
+            }
+          ></Icon>
         </Icons>
       </Header>
       <CardInfo>

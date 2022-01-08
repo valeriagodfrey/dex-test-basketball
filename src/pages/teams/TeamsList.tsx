@@ -82,7 +82,9 @@ export const TeamsList = () => {
         <CustomSelect
           options={paginationOptions}
           placement="top"
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           onChange={onSelectChange as any}
+          defaultValue={paginationOptions[0]}
         />
       </PaginationRow>
     </Layout>

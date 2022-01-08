@@ -32,7 +32,7 @@ export const PlayerInfo = ({ ...rest }: PlayerInfoProps) => {
         </Icons>
       </Header>
       <CardInfo>
-        <Image src={player} alt="logo" />
+        <Image src={rest.avatarUrl || player} alt="logo" />
         <Info>
           <Title>
             <Name>{rest.name}</Name>
@@ -141,8 +141,8 @@ const Image = styled.img`
   width: 143px;
 
   ${media.desktop} {
-    padding-top: 106px;
     width: 400px;
+    align-self: flex-end;
   }
   ${media.extraLargeDesktop} {
     padding-top: 35px;

@@ -1,6 +1,6 @@
 export type IGetPlayersParams = {
   name?: string;
-  teamIds?: [number];
+  teamIds?: number[];
   page?: number;
   pageSize?: number;
 };
@@ -10,6 +10,7 @@ export type IPlayer = {
   number: number;
   position: string;
   team: number;
+  teamName: string;
   birthday: string;
   height: number;
   weight: number;

@@ -3,19 +3,17 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import player from "../../../assets/icons/player.svg";
+import { IPlayer } from "../../../core/api/dto/IGetPlayers";
 import { media } from "../../../core/theme/media";
 
 interface Props {
-  name: string;
-  number: number;
-  team?: number;
-  id?: number;
+  data: IPlayer;
 }
-export const PlayerItem = ({ name, number, team, id }: Props) => {
+export const PlayerItem = ({ data: { name, avatarUrl, number, team, id } }: Props) => {
   return (
     <Container to={`/players/${id}`}>
       <LogoContainer>
-        <Image src={player} alt="player" />
+        <Image src={avatarUrl || player} alt="player" />
       </LogoContainer>
       <Info>
         <Box>

@@ -1,31 +1,51 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import addImage from "../../assets/icons/add_photo.svg";
 import { media } from "../../core/theme/media";
-export const MyDropzone = () => {
-  const onDrop = useCallback((acceptedFiles) => {
-    // eslint-disable-next-line no-console
-    console.log(acceptedFiles);
-  }, []);
+
+interface IProps {
+  onChange?: (file: string) => void;
+  defaultValue?: string;
+}
+export const MyDropzone = ({ onChange, defaultValue }: IProps) => {
+  const [file, setFile] = useState<string | null>(defaultValue || null);
+  useEffect(() => {
+    setFile(defaultValue || null);
+  }, [defaultValue]);
+
+  const onDrop = useCallback(
+    (files) => {
+      // eslint-disable-next-line no-console
+
+      if (FileReader && files && files.length) {
+        const fr = new FileReader();
+        fr.onload = function () {
+          const result = fr.result as string;
+          setFile(result);
+          onChange?.(files[0]);
+        };
+        fr.readAsDataURL(files[0]);
+      }
+    },
+    [onChange],
+  );
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
     <AddImage {...getRootProps()}>
       <input {...getInputProps()} />
-      {isDragActive ? (
-        "error"
-      ) : (
-        <ImageContainer>
-          <Image src={addImage} alt="add_image"></Image>
-        </ImageContainer>
-      )}
+      <ImageContainer isDragActive={isDragActive}>
+        {!file && <EmptyImage src={addImage} alt="add_image" />}
+        {file && <Image src={file} />}
+      </ImageContainer>
     </AddImage>
   );
 };
-const ImageContainer = styled.div`
+const ImageContainer = styled.div<{ isDragActive?: boolean }>`
   display: flex;
+  overflow: hidden;
 
   height: 144px;
   width: 185px;
@@ -40,6 +60,12 @@ const ImageContainer = styled.div`
   cursor: pointer;
   background-color: ${({ theme }) => theme.colors.lightGrey};
   border-radius: 10px;
+
+  ${({ isDragActive }) =>
+    isDragActive &&
+    css`
+      opacity: 0.8;
+    `}
 `;
 const AddImage = styled.div`
   display: flex;
@@ -48,6 +74,11 @@ const AddImage = styled.div`
     justify-self: stretch;
   }
 `;
-const Image = styled.img`
+const EmptyImage = styled.img`
   margin: auto;
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
 `;

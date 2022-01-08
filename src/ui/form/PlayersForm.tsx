@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { format } from "date-fns";
+import { useCallback, useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -8,11 +9,16 @@ import { IGetPlayerResponse } from "../../core/api/dto/IGetPlayers";
 import { media } from "../../core/theme/media";
 import { addPlayers } from "../../modules/players/addPlayersThunk";
 import { updatePlayers } from "../../modules/players/updatePlayersThunk";
+import { getPositionsSelector } from "../../modules/positions/getPositionsSelector";
+import { getPositions } from "../../modules/positions/getPositionsThunk";
+import { saveImage } from "../../modules/saveImage/saveImageThunk";
+import { getTeamsOptionsSelector } from "../../modules/teams/getTeamsSelector";
+import { getTeams } from "../../modules/teams/getTeamsThunk";
 import { Button } from "../button/Button";
 import { MyDropzone } from "../dropzone/Dropzone";
 import { Input } from "../input/Input";
 import { CustomSelect } from "../select/CustomSelect";
-import { IOptions } from "../select/data";
+import { IOption } from "../select/data";
 
 interface FormProps {
   name: string;
@@ -39,24 +45,42 @@ export const PlayersForm = ({ data, isEdit }: IProps) => {
     control,
     formState: { errors },
     handleSubmit,
+    setValue,
     reset,
   } = useForm<FormProps>();
 
   useEffect(() => {
-    reset(data);
+    reset({
+      ...data,
+      birthday: format(new Date(data?.birthday || ""), "yyyy-MM-dd"),
+    });
   }, [data, reset]);
+
+  useEffect(() => {
+    dispatch(getPositions());
+    dispatch(getTeams());
+  }, [dispatch]);
+  const positions = useSelector(getPositionsSelector);
+  const teams = useSelector(getTeamsOptionsSelector);
 
   const action = isEdit ? updatePlayers : addPlayers;
 
   const onSubmit = (params: FormProps) =>
     dispatch(
       action({
-        params,
+        params: { ...params, birthday: new Date(params.birthday).toISOString() },
         onSuccess: () => {
           navigate("/players");
         },
       }),
     );
+
+  const onChangeImage = useCallback(
+    (file) => {
+      dispatch(saveImage({ file, onSuccess: (avatarUrl) => setValue("avatarUrl", avatarUrl) }));
+    },
+    [dispatch, setValue],
+  );
 
   return (
     <FormContainer>
@@ -64,7 +88,7 @@ export const PlayersForm = ({ data, isEdit }: IProps) => {
         <Сrumbs>Players / Add new player</Сrumbs>
       </FormHeader>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <MyDropzone />
+        <MyDropzone onChange={onChangeImage} defaultValue={data?.avatarUrl} />
         <Information>
           <Container>
             <Input
@@ -73,55 +97,58 @@ export const PlayersForm = ({ data, isEdit }: IProps) => {
               error={errors.name?.type === "required" ? "Please, enter a player's name." : ""}
             ></Input>
           </Container>
-          {/* <Container>
+          <Container>
             <Controller
               name="position"
               control={control}
               rules={{ required: true }}
               render={(props) => (
                 <CustomSelect
-                  {...register("position", { required: true })}
-                  {...props}
-                  options={[{ value: "Denver", label = "Denver" }]}
-                  isMulti
+                  options={positions || []}
+                  value={(positions || []).filter((i) => i.value === props.field.value)[0]}
+                  onChange={(value) => props.field.onChange((value as IOption).value)}
                   error={
                     errors.position && errors.position.type === "required"
                       ? "Please, choose a position."
                       : ""
                   }
-                  label="I accept the agreement"
+                  label="Position"
                 />
               )}
-            /> */}
-          <Container>
-            <Input
-              label="Position"
-              {...register("position", { required: true })}
-              error={errors.position?.type === "required" ? "Please, choose a position." : ""}
-            ></Input>
+            />
           </Container>
           <Container>
-            <Input
-              label="Team"
-              {...register("team", { required: true })}
-              error={errors.team?.type === "required" ? "Please, choose a team." : ""}
-            ></Input>
+            <Controller
+              name="team"
+              control={control}
+              rules={{ required: true }}
+              render={(props) => (
+                <CustomSelect
+                  options={teams}
+                  value={teams.filter((i) => i.value === props.field.value)[0]}
+                  onChange={(value) => props.field.onChange((value as IOption).value)}
+                  error={
+                    errors.position && errors.position.type === "required"
+                      ? "Please, choose a team."
+                      : ""
+                  }
+                  label="Team"
+                />
+              )}
+            />
           </Container>
-          {/* <Container>
-            <CustomSelect options={IOptions} label="Team" />
-          </Container> */}
           <Box>
             <Container>
               <Input
                 label="Height"
-                {...register("height", { required: true })}
+                {...register("height", { required: true, valueAsNumber: true })}
                 error={errors.height?.type === "required" ? "Please, enter a player's height." : ""}
               ></Input>
             </Container>
             <Container>
               <Input
                 label="Weight"
-                {...register("weight", { required: true })}
+                {...register("weight", { required: true, valueAsNumber: true })}
                 error={errors.weight?.type === "required" ? "Please, enter a player's weight." : ""}
               ></Input>
             </Container>
@@ -130,6 +157,7 @@ export const PlayersForm = ({ data, isEdit }: IProps) => {
             <Container>
               <Input
                 label="Birthday"
+                type="date"
                 {...register("birthday", { required: true })}
                 error={
                   errors.birthday?.type === "required" ? "Please, choose a player's birthday." : ""
@@ -139,7 +167,7 @@ export const PlayersForm = ({ data, isEdit }: IProps) => {
             <Container>
               <Input
                 label="Number"
-                {...register("number", { required: true })}
+                {...register("number", { required: true, valueAsNumber: true })}
                 error={errors.number?.type === "required" ? "Please, enter a player's number." : ""}
               ></Input>
             </Container>

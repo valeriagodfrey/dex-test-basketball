@@ -1,5 +1,11 @@
 import React from "react";
-import Select, { ActionMeta, MultiValue, SingleValue, StylesConfig } from "react-select";
+import Select, {
+  ActionMeta,
+  MultiValue,
+  PropsValue,
+  SingleValue,
+  StylesConfig,
+} from "react-select";
 import styled from "styled-components";
 
 import { theme } from "../../core/theme/theme";
@@ -16,30 +22,23 @@ interface Props {
     newValue: MultiValue<IOption> | SingleValue<IOption>,
     actionMeta: ActionMeta<IOption>,
   ) => void;
+  value?: PropsValue<IOption>;
+  defaultValue?: PropsValue<IOption>;
 }
-export const CustomSelect = ({
-  label,
-  error,
-  options,
-  placement = "bottom",
-  isMulti,
-  onChange,
-}: Props) => {
+export const CustomSelect = ({ label, error, options, placement = "bottom", ...rest }: Props) => {
   return (
-    <>
+    <div>
       <Label>{label}</Label>
       <Select
-        closeMenuOnSelect={false}
-        isMulti={isMulti}
+        closeMenuOnSelect={!rest.isMulti}
         placeholder="Select..."
-        defaultValue={options[0]}
         options={options}
         styles={Styles}
         menuPlacement={placement}
-        onChange={onChange}
+        {...rest}
       />
       <CustomError>{error}</CustomError>
-    </>
+    </div>
   );
 };
 
@@ -93,8 +92,14 @@ const Styles: StylesConfig<IOption> = {
     return {
       ...styles,
       backgroundColor: theme.colors.red,
+      borderRadius: 4,
     };
   },
+  valueContainer: (styles) => ({
+    ...styles,
+    // overflow: "hidden",
+    // flexWrap: "nowrap",
+  }),
   multiValueLabel: (styles) => ({
     ...styles,
     color: theme.colors.white,

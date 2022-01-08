@@ -21,6 +21,7 @@ import { AddTeam } from "./pages/teamAdd/AddTeam";
 import { EditTeam } from "./pages/teamEdit/EditTeam";
 import { TeamsList } from "./pages/teams/TeamsList";
 import { StyledToastContainer } from "./ui/notification/Notification";
+import { Page404 } from "./pages/Page404";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
@@ -66,6 +67,7 @@ function App() {
                 <Route path="/players/add" element={<AddPlayer />} />
                 <Route path="/players/:id" element={<Player />} />
                 <Route path="/players/:id/edit" element={<EditPlayer />} />
+                <Route path="*" element={<Page404 />} />
               </Routes>
             ) : (
               <Routes>

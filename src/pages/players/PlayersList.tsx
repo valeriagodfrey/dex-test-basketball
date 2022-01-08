@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { MultiValue, SingleValue } from "react-select";
 import styled from "styled-components";
 import { useDebouncedCallback } from "use-debounce/lib";
 
@@ -8,6 +9,8 @@ import { paginationOptions } from "../../core/constants/pagination";
 import { RootState } from "../../core/redux/store";
 import { media } from "../../core/theme/media";
 import { getPlayers } from "../../modules/players/getPlayersThunk";
+import { getTeamsOptionsSelector } from "../../modules/teams/getTeamsSelector";
+import { getTeams } from "../../modules/teams/getTeamsThunk";
 import { Button } from "../../ui/button/Button";
 import { Card } from "../../ui/cards/Card";
 import { SearchInput } from "../../ui/input/SearchInput";
@@ -38,36 +41,46 @@ export const PlayersList = () => {
     setName(e.target.value);
   }, 800);
 
+  const [teamIds, setTeamIds] = useState<number[]>([]);
+  const onChangeTeamIds = useDebouncedCallback(
+    (value: MultiValue<IOption> | SingleValue<IOption>) => {
+      setTeamIds((value as MultiValue<IOption>).map((i) => Number(i.value)));
+    },
+    800,
+  );
+
   useEffect(() => {
-    dispatch(getPlayers({ page, pageSize, name }));
-  }, [dispatch, name, page, pageSize]);
+    dispatch(getPlayers({ page, pageSize, name, teamIds }));
+  }, [dispatch, name, page, pageSize, teamIds]);
 
   const pageCount = useMemo(
     () => Math.ceil((content?.count || 0) / pageSize),
     [content?.count, pageSize],
   );
 
+  useEffect(() => {
+    dispatch(getTeams());
+  }, [dispatch]);
+  const teams = useSelector(getTeamsOptionsSelector);
+
   return (
     <Layout type="players">
       <Row>
         <SearchInput placeholder="Search..." onChange={onChangeName} />
+        <CustomSelect options={teams} isMulti onChange={onChangeTeamIds} />
 
-        <Button buttonType="primary" svg="add" onClick={() => navigate("/players/add")}>
-          Add
-        </Button>
+        <ButtonContainer>
+          <Button buttonType="primary" svg="add" onClick={() => navigate("/players/add")}>
+            Add
+          </Button>
+        </ButtonContainer>
       </Row>
 
-      {/* {status === "loaded" && content?.count !== 0 ? (
+      {status === "loaded" && content?.count !== 0 ? (
         <PlayersContainer>
           <List>
             {content?.data.map((item) => (
-              <PlayerItem
-                id={item.id}
-                name={item.name}
-                number={item.number}
-                team={item.team}
-                key={item.id}
-              />
+              <PlayerItem data={item} key={item.id} />
             ))}
           </List>
         </PlayersContainer>
@@ -77,14 +90,7 @@ export const PlayersList = () => {
         </PlayersContainer>
       ) : (
         ""
-      )} */}
-      <PlayersContainer>
-        <List>
-          <PlayerItem name="Jonh" number={3} />
-          <PlayerItem name="Jonh" number={3} />
-          <PlayerItem name="Jonh" number={3} />
-        </List>
-      </PlayersContainer>
+      )}
 
       <PaginationRow>
         <Pagination pageCount={pageCount} onPageChange={onPageChange} />
@@ -93,6 +99,7 @@ export const PlayersList = () => {
           options={paginationOptions}
           placement="top"
           onChange={onSelectChange as any}
+          defaultValue={paginationOptions[0]}
         />
       </PaginationRow>
     </Layout>
@@ -122,13 +129,14 @@ const List = styled.div`
 
 const Row = styled.div`
   width: 100%;
+  align-items: flex-start;
 
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 16px;
 
   ${media.desktop} {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr 1fr 1fr;
     margin-bottom: 40px;
 
     & > :first-child {
@@ -142,4 +150,10 @@ const PaginationRow = styled.div`
   align-self: stretch;
   display: flex;
   justify-content: space-between;
+`;
+
+const ButtonContainer = styled.div`
+  ${media.desktop} {
+    justify-self: flex-end;
+  }
 `;

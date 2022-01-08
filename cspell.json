@@ -3,7 +3,15 @@
   "ignorePaths": [],
   "dictionaryDefinitions": [],
   "dictionaries": [],
-  "words": ["arrowParens", "browserslist", "persistor", "reduxjs", "toastify", "TTFB"],
+  "words": [
+    "arrowParens",
+    "browserslist",
+    "persistor",
+    "reduxjs",
+    "Stringifiable",
+    "toastify",
+    "TTFB"
+  ],
   "ignoreWords": [],
   "import": []
 }

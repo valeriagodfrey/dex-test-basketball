@@ -9,6 +9,7 @@ interface Arguments<Params> {
   };
   params?: Params;
   notAuth?: boolean;
+  formData?: FormData;
 }
 
 export const baseRequest = async <Params extends StringifiableRecord, Response>({
@@ -17,19 +18,26 @@ export const baseRequest = async <Params extends StringifiableRecord, Response>(
   headers,
   params,
   notAuth,
+  formData,
 }: Arguments<Params>): Promise<Response> => {
   try {
     const token = localStorage.getItem("token");
+    const body = formData
+      ? formData
+      : method !== "GET" && params
+      ? JSON.stringify(params)
+      : undefined;
+
     const res = await fetch(
       method === "GET" && params ? stringifyUrl({ url, query: params }) : url,
       {
         method,
         headers: {
           ...headers,
-          "Content-Type": "application/json",
+          ...(!formData ? { "Content-Type": "application/json" } : {}),
           ...(!notAuth ? { Authorization: `Bearer ${token}` } : {}),
         },
-        body: method !== "GET" && params ? JSON.stringify(params) : undefined,
+        body,
       },
     );
     let data;
