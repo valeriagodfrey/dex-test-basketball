@@ -50,10 +50,11 @@ const Label = styled.label`
   margin-bottom: 8px;
 `;
 const Styles: StylesConfig<IOption> = {
-  control: (styles, { isMulti, menuIsOpen }) => ({
+  control: (styles, { isMulti }) => ({
     ...styles,
-    backgroundColor: theme.colors.white,
-    borderColor: theme.colors.lightestGrey,
+    backgroundColor: isMulti ? theme.colors.white : theme.colors.lightestGrey1,
+
+    border: isMulti ? `0.5px solid ${theme.colors.lightestGrey}` : "none",
     cursor: "pointer",
     padding: `1px`,
     alignItems: "center",

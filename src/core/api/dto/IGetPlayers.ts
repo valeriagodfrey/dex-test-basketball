@@ -26,7 +26,7 @@ export type IGetPlayersResponse = {
 };
 
 export type IGetPlayerParams = {
-  id: number | undefined;
+  id?: number;
 };
 
 export type IGetPlayerResponse = {

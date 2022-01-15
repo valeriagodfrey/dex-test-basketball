@@ -2,6 +2,7 @@ import { combineReducers } from "@reduxjs/toolkit";
 
 import { fetchAuthorizationReducer } from "../../modules/authorization/authorizationSlise";
 import { addPlayersReducer } from "../../modules/players/addPlayersSlice";
+import { deletePlayerReducer } from "../../modules/players/deletePlayerSlice";
 import { getPlayerReducer } from "../../modules/players/getPlayerSlice";
 import { getPlayersReducer } from "../../modules/players/getPlayersSlice";
 import { updatePlayersReducer } from "../../modules/players/updatePlayersSlice";
@@ -23,5 +24,6 @@ export const rootReducer = combineReducers({
   getPlayer: getPlayerReducer,
   addPlayers: addPlayersReducer,
   updatePlayers: updatePlayersReducer,
+  deletePLayers: deletePlayerReducer,
   getPositions: getPositionsReducer,
 });

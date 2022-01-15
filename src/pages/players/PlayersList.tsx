@@ -94,10 +94,10 @@ export const PlayersList = () => {
 
       <PaginationRow>
         <Pagination pageCount={pageCount} onPageChange={onPageChange} />
-        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-        <CustomSelect
+        <Select
           options={paginationOptions}
           placement="top"
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           onChange={onSelectChange as any}
           defaultValue={paginationOptions[0]}
         />
@@ -156,4 +156,10 @@ const ButtonContainer = styled.div`
   ${media.desktop} {
     justify-self: flex-end;
   }
+`;
+
+const Select = styled(CustomSelect)`
+  background-color: ${({ theme }) => theme.colors.white};
+  border: ${({ theme }) => `0.5px solid ${theme.colors.lightestGrey}`};
+  border-radius: 4px;
 `;

@@ -2,7 +2,7 @@ import { format } from "date-fns";
 import { useCallback, useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import { IGetPlayerResponse } from "../../core/api/dto/IGetPlayers";
@@ -14,6 +14,7 @@ import { getPositions } from "../../modules/positions/getPositionsThunk";
 import { saveImage } from "../../modules/saveImage/saveImageThunk";
 import { getTeamsOptionsSelector } from "../../modules/teams/getTeamsSelector";
 import { getTeams } from "../../modules/teams/getTeamsThunk";
+import { Breadcrumbs } from "../breadcrumbs/Breadcrumbs";
 import { Button } from "../button/Button";
 import { MyDropzone } from "../dropzone/Dropzone";
 import { Input } from "../input/Input";
@@ -52,7 +53,7 @@ export const PlayersForm = ({ data, isEdit }: IProps) => {
   useEffect(() => {
     reset({
       ...data,
-      birthday: format(new Date(data?.birthday || ""), "yyyy-MM-dd"),
+      // birthday: format(new Date(data?.birthday || ""), "yyyy-MM-dd"),
     });
   }, [data, reset]);
 
@@ -81,11 +82,16 @@ export const PlayersForm = ({ data, isEdit }: IProps) => {
     },
     [dispatch, setValue],
   );
+  const location = useLocation();
+  const paths = [
+    { path: "/players", name: "Players" },
+    { path: location.pathname, name: data ? data.name : "Add new player" },
+  ];
 
   return (
     <FormContainer>
       <FormHeader>
-        <Сrumbs>Players / Add new player</Сrumbs>
+        <Breadcrumbs data={paths} />
       </FormHeader>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <MyDropzone onChange={onChangeImage} defaultValue={data?.avatarUrl} />
@@ -220,14 +226,6 @@ const FormHeader = styled.div`
   }
 `;
 
-const Сrumbs = styled.div`
-  color: ${({ theme }) => theme.colors.red};
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 24px;
-  cursor: pointer;
-`;
-
 const Box = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -236,6 +234,7 @@ const Box = styled.div`
 
 const Container = styled.div`
   margin-bottom: 24px;
+  cursor: pointer;
 `;
 
 const Information = styled.div`

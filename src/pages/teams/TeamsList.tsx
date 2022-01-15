@@ -55,16 +55,11 @@ export const TeamsList = () => {
           Add
         </Button>
       </Row>
-      {status === "loaded" ? (
+      {status === "loaded" && content?.count !== 0 ? (
         <TeamsContainer>
           <List>
             {content?.data.map((item) => (
-              <TeamItem
-                id={item.id}
-                name={item.name}
-                foundationYear={item.foundationYear}
-                key={item.id}
-              />
+              <TeamItem data={item} key={item.id} />
             ))}
           </List>
         </TeamsContainer>
@@ -79,7 +74,7 @@ export const TeamsList = () => {
       <PaginationRow>
         <Pagination pageCount={pageCount} onPageChange={onPageChange} />
         {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-        <CustomSelect
+        <Select
           options={paginationOptions}
           placement="top"
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -134,4 +129,9 @@ const PaginationRow = styled.div`
   align-self: stretch;
   display: flex;
   justify-content: space-between;
+`;
+const Select = styled(CustomSelect)`
+  background-color: ${({ theme }) => theme.colors.white};
+  border: ${({ theme }) => `0.5px solid ${theme.colors.lightestGrey}`};
+  border-radius: 4px;
 `;

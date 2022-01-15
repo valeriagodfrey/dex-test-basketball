@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import createSvg from "../../../assets/icons/create.svg";
@@ -6,6 +7,8 @@ import deleteSvg from "../../../assets/icons/delete.svg";
 import player from "../../../assets/icons/player.svg";
 import { calculateAge } from "../../../core/helpers/calculateAge";
 import { media } from "../../../core/theme/media";
+import { deletePlayer } from "../../../modules/players/deletePlayerThunk";
+import { Breadcrumbs } from "../../../ui/breadcrumbs/Breadcrumbs";
 
 interface PlayerInfoProps {
   name?: string;
@@ -20,15 +23,36 @@ interface PlayerInfoProps {
   teamName?: string;
 }
 export const PlayerInfo = ({ ...rest }: PlayerInfoProps) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const data = [
+    { path: "/players", name: "Players" },
+    { path: location.pathname, name: rest.name },
+  ];
+
   return (
     <CardContainer>
       <Header>
-        <Crumbs>Players / Player</Crumbs>
+        <Breadcrumbs data={data} />
         <Icons>
           <Link to={`/players/${rest.id}/edit`}>
             <Icon src={createSvg} alt="create"></Icon>
           </Link>
-          <Icon src={deleteSvg} alt="delete"></Icon>
+          <Icon
+            src={deleteSvg}
+            alt="delete"
+            onClick={() =>
+              dispatch(
+                deletePlayer({
+                  params: { id: rest.id },
+                  onSuccess: () => {
+                    navigate("/players");
+                  },
+                }),
+              )
+            }
+          ></Icon>
         </Icons>
       </Header>
       <CardInfo>
@@ -109,14 +133,6 @@ const Header = styled.div`
   ${media.desktop} {
     padding: 24px 32px;
   }
-`;
-
-const Crumbs = styled.div`
-  color: ${({ theme }) => theme.colors.red};
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 24px;
-  cursor: pointer;
 `;
 
 const Icon = styled.img`

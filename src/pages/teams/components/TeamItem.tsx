@@ -3,18 +3,17 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import denver_nuggets from "../../../assets/icons/denver_nuggets.svg";
+import { ITeam } from "../../../core/api/dto/IGetTeams";
 import { media } from "../../../core/theme/media";
 
 interface Props {
-  name: string;
-  id: number;
-  foundationYear: number;
+  data: ITeam;
 }
-export const TeamItem = ({ name, foundationYear, id }: Props) => {
+export const TeamItem = ({ data: { name, foundationYear, id, imageUrl } }: Props) => {
   return (
     <Container to={`/teams/${id}`}>
       <LogoContainer>
-        <Image src={denver_nuggets} alt="denver_nuggets" />
+        <Image src={imageUrl || denver_nuggets} alt="team" />
       </LogoContainer>
       <Info>
         <Name>{name}</Name>

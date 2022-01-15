@@ -1,12 +1,12 @@
 import { useDispatch } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import createSvg from "../../../assets/icons/create.svg";
 import deleteSvg from "../../../assets/icons/delete.svg";
-import denver_nuggets from "../../../assets/icons/denver_nuggets.svg";
 import { media } from "../../../core/theme/media";
 import { deleteTeam } from "../../../modules/teams/deleteTeamThunk";
+import { Breadcrumbs } from "../../../ui/breadcrumbs/Breadcrumbs";
 
 interface TeamInfoProps {
   id?: number;
@@ -20,10 +20,15 @@ export const TeamInfo = ({ ...rest }: TeamInfoProps) => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
+  const data = [
+    { path: "/teams", name: "Teams" },
+    { path: location.pathname, name: rest.name },
+  ];
   return (
     <CardContainer>
       <Header>
-        <Crumbs>Teams / Team</Crumbs>
+        <Breadcrumbs data={data} />
         <Icons>
           <Link to={`/teams/${rest.id}/edit`}>
             <Icon src={createSvg} alt="create"></Icon>
@@ -45,7 +50,7 @@ export const TeamInfo = ({ ...rest }: TeamInfoProps) => {
         </Icons>
       </Header>
       <CardInfo>
-        <Image src={denver_nuggets} alt="logo" />
+        <Image src={rest.imageUrl} alt="logo" />
         <Info>
           <Name>{rest.name}</Name>
           <Wrapper>
@@ -109,14 +114,6 @@ const Header = styled.div`
   }
 `;
 
-const Crumbs = styled.div`
-  color: ${({ theme }) => theme.colors.red};
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 24px;
-  cursor: pointer;
-`;
-
 const Icon = styled.img`
   cursor: pointer;
   :first-child {
@@ -131,11 +128,11 @@ const Icons = styled.div`
 
 const Image = styled.img`
   width: 90px;
-  ${media.largeDesktop} {
-    width: 210px;
-  }
   ${media.desktop} {
     width: 180px;
+  }
+  ${media.extraLargeDesktop} {
+    width: 210px;
   }
 `;
 

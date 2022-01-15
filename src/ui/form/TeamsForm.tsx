@@ -1,13 +1,15 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import { IGetTeamResponse } from "../../core/api/dto/IGetTeams";
 import { media } from "../../core/theme/media";
+import { saveImage } from "../../modules/saveImage/saveImageThunk";
 import { addTeams } from "../../modules/teams/addTeamsThunk";
 import { updateTeams } from "../../modules/teams/updateTeamsThunk";
+import { Breadcrumbs } from "../breadcrumbs/Breadcrumbs";
 import { Button } from "../button/Button";
 import { MyDropzone } from "../dropzone/Dropzone";
 import { Input } from "../input/Input";
@@ -33,6 +35,7 @@ export const TeamsForm = ({ data, isEdit }: IProps) => {
     formState: { errors },
     handleSubmit,
     reset,
+    setValue,
   } = useForm<FormProps>();
 
   useEffect(() => {
@@ -50,14 +53,24 @@ export const TeamsForm = ({ data, isEdit }: IProps) => {
         },
       }),
     );
-
+  const onChangeImage = useCallback(
+    (file) => {
+      dispatch(saveImage({ file, onSuccess: (imageUrl) => setValue("imageUrl", imageUrl) }));
+    },
+    [dispatch, setValue],
+  );
+  const location = useLocation();
+  const paths = [
+    { path: "/teams", name: "Teams" },
+    { path: location.pathname, name: data ? data.name : "Add new team" },
+  ];
   return (
     <FormContainer>
       <FormHeader>
-        <Crumbs>Teams / Add new team</Crumbs>
+        <Breadcrumbs data={paths} />
       </FormHeader>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <MyDropzone />
+        <MyDropzone onChange={onChangeImage} defaultValue={data?.imageUrl} />
         <Information>
           <Container>
             <Input
@@ -144,14 +157,6 @@ const FormHeader = styled.div`
   ${media.desktop} {
     padding: 24px 32px;
   }
-`;
-
-const Crumbs = styled.div`
-  color: ${({ theme }) => theme.colors.red};
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 24px;
-  cursor: pointer;
 `;
 
 const Box = styled.div`

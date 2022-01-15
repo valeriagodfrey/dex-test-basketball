@@ -12,6 +12,7 @@ import { persistor, store } from "./core/redux/store";
 import { theme } from "./core/theme/theme";
 import { Authorization } from "./pages/authorization/Authorization";
 import { Registration } from "./pages/authorization/Registration";
+import { Page404 } from "./pages/Page404";
 import { Player } from "./pages/player/Player";
 import { AddPlayer } from "./pages/playerAdd/AddPlayer";
 import { EditPlayer } from "./pages/playerEdit/EditPlayer";
@@ -21,7 +22,6 @@ import { AddTeam } from "./pages/teamAdd/AddTeam";
 import { EditTeam } from "./pages/teamEdit/EditTeam";
 import { TeamsList } from "./pages/teams/TeamsList";
 import { StyledToastContainer } from "./ui/notification/Notification";
-import { Page404 } from "./pages/Page404";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));

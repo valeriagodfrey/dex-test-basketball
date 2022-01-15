@@ -38,8 +38,6 @@ const LogoContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 274px;
-
   padding: 32px 24px 24px;
   ${media.desktop} {
     padding: 73px 45px 0px;
@@ -54,7 +52,6 @@ const Image = styled.img`
 `;
 
 const Info = styled.div`
-  max-width: 364px;
   background-color: ${({ theme }) => theme.colors.darkGrey};
   color: ${({ theme }) => theme.colors.white};
   border-radius: 0 0 4px 4px;
