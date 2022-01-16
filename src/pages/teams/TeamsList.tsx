@@ -113,6 +113,7 @@ const Row = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 16px;
+  margin-bottom: 16px;
 
   ${media.desktop} {
     grid-template-columns: 1fr auto;

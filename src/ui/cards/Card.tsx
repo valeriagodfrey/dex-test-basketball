@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import emptyPlayers from "../../assets/icons/empty_players.svg";
 import emptyTeams from "../../assets/icons/empty_teams.svg";
+import { media } from "../../core/theme/media";
 interface Props {
   type?: "teams" | "players";
   onClick?: () => void;
@@ -36,6 +37,10 @@ const Container = styled.div<{ type?: "teams" | "players" }>`
 const Image = styled.img`
   max-height: 320px;
   margin-bottom: 48px;
+  max-width: 339px;
+  ${media.desktop} {
+    max-width: 480px;
+  }
 `;
 const Label = styled.label`
   color: ${({ theme }) => theme.colors.lightRed};

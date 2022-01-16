@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import { RootState } from "../../core/redux/store";
+import { getPlayers } from "../../modules/players/getPlayersThunk";
 import { getTeam } from "../../modules/teams/getTeamThunk";
 import { Layout } from "../../ui/layout/Layout";
 import { Roster } from "./components/roster/Roster";
@@ -14,8 +15,13 @@ export const Team = () => {
   const dispatch = useDispatch();
 
   const { content, status } = useSelector((state: RootState) => state.getTeam);
+  const player = useSelector((state: RootState) => state.getPlayers);
+
   useEffect(() => {
     dispatch(getTeam({ id: Number(id) }));
+  }, [dispatch, id]);
+  useEffect(() => {
+    dispatch(getPlayers({ teamIds: [Number(id)] }));
   }, [dispatch, id]);
 
   return (
@@ -30,7 +36,7 @@ export const Team = () => {
             division={content?.division}
             conference={content?.conference}
           />
-          <Roster />
+          <Roster data={player.content?.data} />
         </Container>
       ) : (
         "loading..."

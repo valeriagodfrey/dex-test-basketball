@@ -7,12 +7,13 @@ import { Menu } from "../menu/Menu";
 
 interface Props {
   type?: "teams" | "players";
+  fullWidthForMobile?: boolean;
 }
-export const Layout: FC<Props> = ({ children, type }) => {
+export const Layout: FC<Props> = ({ children, type, fullWidthForMobile }) => {
   return (
     <Container>
       <Header />
-      <Main>{children}</Main>
+      <Main fullWidthForMobile={fullWidthForMobile}>{children}</Main>
       {type === "teams" ? <Menu type="teams" /> : <Menu type="players" />}
     </Container>
   );

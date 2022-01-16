@@ -57,23 +57,25 @@ const Info = styled.div`
   align-items: center;
   flex-direction: column;
   flex: 1;
+  padding: 11px;
+  min-height: 72px;
+  justify-content: center;
 `;
 
 const Name = styled.label`
   font-weight: 500;
   font-size: 15px;
   line-height: 20px;
-  margin-bottom: 12px;
-  margin-top: 24px;
+  margin-bottom: 6px;
+  text-align: center;
   ${media.desktop} {
     font-size: 18px;
   }
 `;
 
 const Year = styled.label`
-  font-size: 14px;
+  font-size: 13px;
   line-height: 20px;
   text-align: center;
-  margin-bottom: 24px;
   color: ${({ theme }) => theme.colors.lightGrey};
 `;

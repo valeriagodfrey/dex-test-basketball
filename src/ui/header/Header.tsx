@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 
@@ -6,22 +7,26 @@ import logo from "../../assets/icons/logo.svg";
 import profile from "../../assets/icons/profile.svg";
 import { RootState } from "../../core/redux/store";
 import { media } from "../../core/theme/media";
+import { Drawer } from "../drawer/Drawer";
+import { Hamburger } from "../hamburger/Hamburger";
 
 export const Header = () => {
   const userName = useSelector((state: RootState) => state.authorization.content?.name);
-
+  const [show, setShow] = useState(false);
   return (
-    <Container>
-      <HeaderLine>
-        <Burger src={burger} alt="burger" />
-
-        <Logo src={logo} alt="logo"></Logo>
-        <ProfileContainer>
-          <UserName>{userName}</UserName>
-          <Profile src={profile} alt="profile"></Profile>
-        </ProfileContainer>
-      </HeaderLine>
-    </Container>
+    <div>
+      <Container>
+        <HeaderLine>
+          <Hamburger src={burger} onClick={() => setShow((s) => !s)} alt="burger" />
+          <Logo src={logo} alt="logo"></Logo>
+          <ProfileContainer>
+            <UserName>{userName}</UserName>
+            <Profile src={profile} alt="profile"></Profile>
+          </ProfileContainer>
+        </HeaderLine>
+      </Container>
+      <Drawer onClick={() => setShow((s) => !s)} visible={show} userName={userName} />
+    </div>
   );
 };
 
@@ -51,7 +56,6 @@ const HeaderLine = styled.div`
   align-items: center;
   justify-items: center;
   flex: 1;
-
   ${media.desktop} {
     grid-template-columns: 1fr auto;
     justify-items: flex-start;
@@ -72,12 +76,6 @@ const ProfileContainer = styled.div`
   }
 `;
 
-const Burger = styled.img`
-  cursor: pointer;
-  ${media.desktop} {
-    display: none;
-  }
-`;
 const Logo = styled.img`
   cursor: pointer;
   display: flex;

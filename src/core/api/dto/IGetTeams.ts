@@ -18,7 +18,7 @@ export type IGetTeamsResponse = {
   size: number;
 };
 export type IGetTeamParams = {
-  id: number;
+  id?: number;
 };
 export type IGetTeamResponse = {
   name: string;

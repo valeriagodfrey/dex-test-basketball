@@ -53,7 +53,7 @@ export const PlayersForm = ({ data, isEdit }: IProps) => {
   useEffect(() => {
     reset({
       ...data,
-      // birthday: format(new Date(data?.birthday || ""), "yyyy-MM-dd"),
+      birthday: format(new Date(data?.birthday || ""), "yyyy-MM-dd"),
     });
   }, [data, reset]);
 
@@ -61,7 +61,9 @@ export const PlayersForm = ({ data, isEdit }: IProps) => {
     dispatch(getPositions());
     dispatch(getTeams());
   }, [dispatch]);
+
   const positions = useSelector(getPositionsSelector);
+
   const teams = useSelector(getTeamsOptionsSelector);
 
   const action = isEdit ? updatePlayers : addPlayers;
@@ -82,7 +84,9 @@ export const PlayersForm = ({ data, isEdit }: IProps) => {
     },
     [dispatch, setValue],
   );
+
   const location = useLocation();
+
   const paths = [
     { path: "/players", name: "Players" },
     { path: location.pathname, name: data ? data.name : "Add new player" },

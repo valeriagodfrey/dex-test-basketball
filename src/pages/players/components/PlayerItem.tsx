@@ -38,14 +38,14 @@ const LogoContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 32px 24px 24px;
+  padding: 11px 24px 0px;
   ${media.desktop} {
     padding: 73px 45px 0px;
   }
 `;
 
 const Image = styled.img`
-  width: 58px;
+  width: 122px;
   ${media.desktop} {
     width: 274px;
   }
@@ -59,14 +59,13 @@ const Info = styled.div`
   align-items: center;
   flex-direction: column;
   flex: 1;
-  padding-top: 20px;
+  padding: 18px 0px;
 `;
 
 const Name = styled.label`
   font-weight: 500;
   font-size: 15px;
   line-height: 20px;
-
   ${media.desktop} {
     font-size: 18px;
   }
@@ -76,14 +75,16 @@ const Number = styled.div`
   align-items: center;
   color: ${({ theme }) => theme.colors.lightRed};
 `;
+
 const Box = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: 6px;
 `;
+
 const Team = styled.label`
   font-size: 14px;
   line-height: 20px;
   text-align: center;
-  margin-bottom: 24px;
   color: ${({ theme }) => theme.colors.lightGrey};
 `;

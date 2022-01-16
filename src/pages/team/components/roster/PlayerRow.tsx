@@ -4,22 +4,22 @@ import { IPlayer } from "../../../../core/api/dto/IGetPlayers";
 import { calculateAge } from "../../../../core/helpers/calculateAge";
 
 interface IProps {
-  data: Partial<IPlayer>;
+  data?: Partial<IPlayer>;
 }
 export const RosterRow = ({ data }: IProps) => {
   return (
     <Container>
-      <Cell>{data.number}</Cell>
+      <Cell>{data?.number}</Cell>
       <Cell>
-        <Avatar src={data.avatarUrl} />
+        <Avatar src={data?.avatarUrl} />
         <InfoColumn>
-          <Name>{data.name}</Name>
-          <Position>{data.position}</Position>
+          <Name>{data?.name}</Name>
+          <Position>{data?.position}</Position>
         </InfoColumn>
       </Cell>
-      <Cell>{data.height ? `${data.height} cm` : "-"}</Cell>
-      <Cell>{data.weight ? `${data.weight} kg` : "-"}</Cell>
-      <Cell>{data.birthday ? calculateAge(data.birthday) : "-"}</Cell>
+      <Cell>{data?.height ? `${data?.height} cm` : "-"}</Cell>
+      <Cell>{data?.weight ? `${data?.weight} kg` : "-"}</Cell>
+      <Cell>{data?.birthday ? calculateAge(data?.birthday) : "-"}</Cell>
     </Container>
   );
 };

@@ -1,9 +1,13 @@
 import styled from "styled-components";
 
+import { IPlayer } from "../../../../core/api/dto/IGetPlayers";
 import { media } from "../../../../core/theme/media";
 import { RosterRow } from "./PlayerRow";
 
-export const Roster = () => {
+interface IProps {
+  data?: IPlayer[];
+}
+export const Roster = ({ data }: IProps) => {
   return (
     <PlayersContainer>
       <ListHeader>Roster</ListHeader>
@@ -16,17 +20,9 @@ export const Roster = () => {
           <HeaderCell>Weight</HeaderCell>
           <HeaderCell>Age</HeaderCell>
         </Row>
-
-        <RosterRow
-          data={{
-            number: 2,
-            name: "John",
-            position: "Forward",
-            height: 196,
-            weight: 87,
-            birthday: "1999-12-26T02:16:52.490Z",
-          }}
-        />
+        {data?.map((item) => (
+          <RosterRow data={item} key={item.id} />
+        ))}
       </Grid>
     </PlayersContainer>
   );
