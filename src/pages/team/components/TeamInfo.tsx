@@ -33,20 +33,22 @@ export const TeamInfo = ({ ...rest }: TeamInfoProps) => {
           <Link to={`/teams/${rest.id}/edit`}>
             <Icon src={createSvg} alt="create"></Icon>
           </Link>
-          <Icon
-            src={deleteSvg}
-            alt="delete"
-            onClick={() =>
-              dispatch(
-                deleteTeam({
-                  params: { id: Number(id) },
-                  onSuccess: () => {
-                    navigate("/");
-                  },
-                }),
-              )
-            }
-          ></Icon>
+          <DeleteIcon>
+            <Icon
+              src={deleteSvg}
+              alt="delete"
+              onClick={() =>
+                dispatch(
+                  deleteTeam({
+                    params: { id: Number(id) },
+                    onSuccess: () => {
+                      navigate("/");
+                    },
+                  }),
+                )
+              }
+            />
+          </DeleteIcon>
         </Icons>
       </Header>
       <CardInfo>
@@ -116,9 +118,6 @@ const Header = styled.div`
 
 const Icon = styled.img`
   cursor: pointer;
-  :first-child {
-    margin-right: 16px;
-  }
 `;
 
 const Icons = styled.div`
@@ -135,7 +134,9 @@ const Image = styled.img`
     width: 210px;
   }
 `;
-
+const DeleteIcon = styled.div`
+  margin-left: 16px;
+`;
 const Info = styled.div`
   width: 100%;
   display: grid;
