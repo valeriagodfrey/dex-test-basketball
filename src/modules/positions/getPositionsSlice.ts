@@ -21,7 +21,7 @@ const getPositionsSlice = createSlice({
     });
     builder.addCase(getPositions.fulfilled, (state, action) => {
       state.status = "loaded";
-      state.content = action.payload.map((item) => ({
+      state.content = (action.payload || []).map((item) => ({
         value: item,
         label: getPositionsTexts[item],
       }));

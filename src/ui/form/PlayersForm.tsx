@@ -51,11 +51,13 @@ export const PlayersForm = ({ data, isEdit }: IProps) => {
   } = useForm<FormProps>();
 
   useEffect(() => {
-    reset({
-      ...data,
-      birthday: format(new Date(data?.birthday || ""), "yyyy-MM-dd"),
-    });
-  }, [data, reset]);
+    if (isEdit) {
+      reset({
+        ...data,
+        birthday: format(new Date(data?.birthday || ""), "yyyy-MM-dd"),
+      });
+    }
+  }, [data, isEdit, reset]);
 
   useEffect(() => {
     dispatch(getPositions());

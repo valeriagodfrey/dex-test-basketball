@@ -11,7 +11,6 @@ import { media } from "../../core/theme/media";
 import { getPlayers } from "../../modules/players/getPlayersThunk";
 import { getTeamsOptionsSelector } from "../../modules/teams/getTeamsSelector";
 import { getTeams } from "../../modules/teams/getTeamsThunk";
-import { getTeam } from "../../modules/teams/getTeamThunk";
 import { Button } from "../../ui/button/Button";
 import { Card } from "../../ui/cards/Card";
 import { SearchInput } from "../../ui/input/SearchInput";

@@ -1,4 +1,5 @@
 import { useLocation, useMatch, useNavigate } from "react-router-dom";
+import { CSSTransition } from "react-transition-group";
 import styled from "styled-components";
 
 import profile from "../../assets/icons/profile.svg";
@@ -8,70 +9,106 @@ import { Icon } from "../icon/Icon";
 
 interface Props {
   userName?: string;
-  type?: "teams" | "players";
   visible?: boolean;
   onClick?: () => void;
 }
-export const Drawer = ({ userName, type, visible, onClick }: Props) => {
+export const Drawer = ({ userName, visible, onClick }: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
   const teamUrl = useMatch("/teams/:id");
   const playerUrl = useMatch("/players/:id");
 
   return (
-    <Container visible={visible}>
-      <Menu visible={visible}>
-        <ProfileContainer>
-          <Profile src={profile} alt="profile"></Profile>
-          <UserName>{userName}</UserName>
-        </ProfileContainer>
-        <MenuLine>
-          <Icons>
-            {location.pathname === "/teams" || teamUrl ? (
-              <IconContainer onClick={() => navigate("/teams")}>
-                <Icon type="teams" color="red" />
-                <Label color="red">Teams</Label>
-              </IconContainer>
-            ) : (
-              <IconContainer onClick={() => navigate("/teams")}>
-                <Icon type="teams" color="grey" />
-                <Label color="grey">Teams</Label>
-              </IconContainer>
-            )}
+    <Container>
+      <CSSTransition in={visible} timeout={300} classNames="drawer-menu" unmountOnExit>
+        <Menu visible={visible}>
+          <ProfileContainer>
+            <Profile src={profile} alt="profile"></Profile>
+            <UserName>{userName}</UserName>
+          </ProfileContainer>
+          <MenuLine>
+            <Icons>
+              {location.pathname === "/teams" || teamUrl ? (
+                <IconContainer onClick={() => navigate("/teams")}>
+                  <Icon type="teams" color="red" />
+                  <Label color="red">Teams</Label>
+                </IconContainer>
+              ) : (
+                <IconContainer onClick={() => navigate("/teams")}>
+                  <Icon type="teams" color="grey" />
+                  <Label color="grey">Teams</Label>
+                </IconContainer>
+              )}
 
-            {location.pathname === "/players" || playerUrl ? (
-              <IconContainer onClick={() => navigate("/players")}>
-                <Icon type="players" color="red" />
-                <Label color="red">Players</Label>
-              </IconContainer>
-            ) : (
-              <IconContainer onClick={() => navigate("/players")}>
-                <Icon type="players" color="grey" />
-                <Label color="grey">Players</Label>
-              </IconContainer>
-            )}
-          </Icons>
-          <SignOut
-            onClick={() => {
-              localStorage.removeItem("token");
-              window.dispatchEvent(new Event("storage"));
-            }}
-          >
-            <img src={signOut} alt="signOut"></img>
-            <Label color="red">Sign out</Label>
-          </SignOut>
-        </MenuLine>
-      </Menu>
-      <Area onClick={onClick}></Area>
+              {location.pathname === "/players" || playerUrl ? (
+                <IconContainer onClick={() => navigate("/players")}>
+                  <Icon type="players" color="red" />
+                  <Label color="red">Players</Label>
+                </IconContainer>
+              ) : (
+                <IconContainer onClick={() => navigate("/players")}>
+                  <Icon type="players" color="grey" />
+                  <Label color="grey">Players</Label>
+                </IconContainer>
+              )}
+            </Icons>
+            <SignOut
+              onClick={() => {
+                localStorage.removeItem("token");
+                window.dispatchEvent(new Event("storage"));
+              }}
+            >
+              <img src={signOut} alt="signOut"></img>
+              <Label color="red">Sign out</Label>
+            </SignOut>
+          </MenuLine>
+        </Menu>
+      </CSSTransition>
+
+      <CSSTransition in={visible} timeout={300} classNames="drawer-area" unmountOnExit>
+        <Area onClick={onClick} />
+      </CSSTransition>
     </Container>
   );
 };
 const Container = styled.div<{ visible?: boolean }>`
-  position: absolute;
+  position: fixed;
   z-index: 10;
-  display: ${({ visible }) => (visible === true ? "grid" : "none")};
   height: 100vh;
-  grid-template-columns: 1fr 3fr;
+
+  .drawer-menu-enter {
+    transform: translateX(-100%);
+  }
+  .drawer-menu-active {
+    transform: translateX(0);
+    transition: transform 300ms;
+  }
+  .drawer-menu-exit {
+    transform: translateX(0);
+  }
+  .drawer-menu-exit-active {
+    transform: translateX(-100%);
+    transition: transform 300ms;
+  }
+
+  .drawer-area-enter {
+    opacity: 0;
+  }
+  .drawer-area-active {
+    opacity: 0.6;
+    transition: opacity 300ms;
+  }
+  .drawer-area-exit {
+    opacity: 0.6;
+  }
+  .drawer-area-exit-active {
+    opacity: 0;
+    transition: opacity 300ms;
+  }
+  .drawer-area-enter-done {
+    opacity: 0.6;
+  }
+
   ${media.desktop} {
     display: none;
   }
@@ -80,13 +117,20 @@ const Container = styled.div<{ visible?: boolean }>`
 const Menu = styled.div<{ visible?: boolean }>`
   padding-top: 62px;
   background-color: ${({ theme }) => theme.colors.white};
-  transform: ${({ visible }) => (visible === true ? `translateX(0)` : `translateX(-100%)`)};
   transition: all 0.5s ease-in-out;
+  min-height: calc(100vh - 62px);
+  display: flex;
+  flex-direction: column;
 `;
 
 const Area = styled.div`
   background: ${({ theme }) => theme.colors.grey};
-  opacity: 0.6;
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 `;
 
 const UserName = styled.label`
@@ -95,6 +139,7 @@ const UserName = styled.label`
   font-size: 14px;
   line-height: 24px;
 `;
+
 const ProfileContainer = styled.div`
   display: flex;
   align-items: center;
@@ -102,11 +147,13 @@ const ProfileContainer = styled.div`
   padding: 20px;
   border-bottom: ${({ theme }) => ` 0.5px solid ${theme.colors.lightGrey}`};
 `;
+
 const Profile = styled.img`
   width: 40px;
   cursor: pointer;
   margin-right: 12px;
 `;
+
 const Label = styled.div<{ color?: "red" | "grey" }>`
   color: ${({ color, theme }) => (color === "red" ? theme.colors.red : theme.colors.lightGrey)};
   display: flex;
@@ -127,13 +174,15 @@ const IconContainer = styled.div`
 `;
 
 const Icons = styled.div``;
+
 const MenuLine = styled.div`
   display: flex;
   flex-direction: column;
   padding: 27px 20px;
   justify-content: space-between;
-  min-height: calc(100vh - 144px);
+  flex: 1;
 `;
+
 const SignOut = styled.div`
   display: flex;
   align-items: center;

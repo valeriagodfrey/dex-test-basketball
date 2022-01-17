@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -15,12 +16,10 @@ export const Breadcrumbs = ({ data }: Props) => {
         key + 1 === data.length ? (
           <span key={key}>{name}</span>
         ) : (
-          <>
-            <ILink key={key} to={path}>
-              {name}
-            </ILink>
+          <Fragment key={key}>
+            <ILink to={path}>{name}</ILink>
             <span> / </span>
-          </>
+          </Fragment>
         ),
       )}
     </Container>
