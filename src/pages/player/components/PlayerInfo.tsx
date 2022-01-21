@@ -39,20 +39,22 @@ export const PlayerInfo = ({ ...rest }: PlayerInfoProps) => {
           <Link to={`/players/${rest.id}/edit`}>
             <Icon src={createSvg} alt="create"></Icon>
           </Link>
-          <Icon
-            src={deleteSvg}
-            alt="delete"
-            onClick={() =>
-              dispatch(
-                deletePlayer({
-                  params: { id: rest.id },
-                  onSuccess: () => {
-                    navigate("/players");
-                  },
-                }),
-              )
-            }
-          ></Icon>
+          <DeleteIcon>
+            <Icon
+              src={deleteSvg}
+              alt="delete"
+              onClick={() =>
+                dispatch(
+                  deletePlayer({
+                    params: { id: rest.id },
+                    onSuccess: () => {
+                      navigate("/players");
+                    },
+                  }),
+                )
+              }
+            />
+          </DeleteIcon>
         </Icons>
       </Header>
       <CardInfo>
@@ -138,9 +140,10 @@ const Header = styled.div`
 const Icon = styled.img`
   cursor: pointer;
   align-items: center;
-  :first-child {
-    margin-right: 16px;
-  }
+`;
+
+const DeleteIcon = styled.div`
+  margin-left: 16px;
 `;
 
 const Icons = styled.div`
