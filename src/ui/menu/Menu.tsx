@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import signOut from "../../assets/icons/sign_out.svg";
@@ -10,11 +10,13 @@ interface Props {
 }
 export const Menu = ({ type }: Props) => {
   const navigate = useNavigate();
+  const path = useLocation();
+
   return (
     <Container>
       <MenuLine>
         <Icons>
-          {type === "teams" ? (
+          {path.pathname === "/teams" ? (
             <IconContainer onClick={() => navigate("/teams")}>
               <Icon type="teams" color="red" />
               <Label color="red">Teams</Label>
@@ -26,7 +28,7 @@ export const Menu = ({ type }: Props) => {
             </IconContainer>
           )}
 
-          {type === "players" ? (
+          {path.pathname === "/players" ? (
             <IconContainer onClick={() => navigate("/players")}>
               <Icon type="players" color="red" />
               <Label color="red">Players</Label>
