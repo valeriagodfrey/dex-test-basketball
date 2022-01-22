@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+import { IGetPlayerResponse } from "../../api/dto/IGetPlayers";
 import { media } from "../../assets/theme/media";
-import { IGetPlayerResponse } from "../../core/api/dto/IGetPlayers";
 import { addPlayers } from "../../modules/players/addPlayersThunk";
 import { updatePlayers } from "../../modules/players/updatePlayersThunk";
 import { getPositionsSelector } from "../../modules/positions/getPositionsSelector";

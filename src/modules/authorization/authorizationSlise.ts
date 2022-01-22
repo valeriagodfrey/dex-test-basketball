@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+import { IRegistrationResponse } from "../../api/dto/ISignIn";
 import { ContentLoading } from "../../common/loading";
-import { IRegistrationResponse } from "../../core/api/dto/ISignIn";
 import { fetchAuthorization, fetchRegistration } from "./authorizationThunk";
 
 export type GetState = ContentLoading<IRegistrationResponse | undefined>;

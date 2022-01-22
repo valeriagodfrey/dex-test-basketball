@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+import { IPosition } from "../../api/dto/IGetPositions";
 import { ContentLoading } from "../../common/loading";
-import { IPosition } from "../../core/api/dto/IGetPositions";
 import { IOption } from "../../ui/select/data";
 import { getPositions } from "./getPositionsThunk";
 

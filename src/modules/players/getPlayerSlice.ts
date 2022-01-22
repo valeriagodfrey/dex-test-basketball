@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+import { IGetPlayerResponse } from "../../api/dto/IGetPlayers";
 import { ContentLoading } from "../../common/loading";
-import { IGetPlayerResponse } from "../../core/api/dto/IGetPlayers";
 import { getPlayer } from "./getPlayerThunk";
 
 export type GetPlayerState = ContentLoading<IGetPlayerResponse | undefined>;

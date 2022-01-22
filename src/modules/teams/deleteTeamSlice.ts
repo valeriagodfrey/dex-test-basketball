@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+import { IGetTeamResponse } from "../../api/dto/IGetTeams";
 import { ContentLoading } from "../../common/loading";
-import { IGetTeamResponse } from "../../core/api/dto/IGetTeams";
 import { deleteTeam } from "./deleteTeamThunk";
 
 export type GetDeleteTeamState = ContentLoading<IGetTeamResponse | undefined>;

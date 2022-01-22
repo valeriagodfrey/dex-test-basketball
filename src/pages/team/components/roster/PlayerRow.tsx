@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { IPlayer } from "../../../../core/api/dto/IGetPlayers";
+import { IPlayer } from "../../../../api/dto/IGetPlayers";
 import { calculateAge } from "../../../../core/helpers/calculateAge";
 
 interface IProps {

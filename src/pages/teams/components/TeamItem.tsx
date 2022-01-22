@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+import { ITeam } from "../../../api/dto/IGetTeams";
 import denver_nuggets from "../../../assets/icons/denver_nuggets.svg";
 import { media } from "../../../assets/theme/media";
-import { ITeam } from "../../../core/api/dto/IGetTeams";
 
 interface Props {
   data: ITeam;

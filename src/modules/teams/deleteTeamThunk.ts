@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { IGetTeamParams } from "../../core/api/dto/IGetTeams";
-import { deleteTeamRequest } from "../../core/api/requests/deleteTeamRequest";
+import { IGetTeamParams } from "../../api/dto/IGetTeams";
+import { deleteTeamRequest } from "../../api/requests/deleteTeamRequest";
 
 export const deleteTeam = createAsyncThunk(
   "deleteTeam",

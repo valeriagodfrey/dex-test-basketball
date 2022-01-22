@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+import { IGetPlayerResponse } from "../../api/dto/IGetPlayers";
 import { ContentLoading } from "../../common/loading";
-import { IGetPlayerResponse } from "../../core/api/dto/IGetPlayers";
 import { deletePlayer } from "./deletePlayerThunk";
 
 export type GetDeletePlayerState = ContentLoading<IGetPlayerResponse | undefined>;

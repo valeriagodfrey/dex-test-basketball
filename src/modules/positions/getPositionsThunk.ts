@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { getPositionsRequest } from "../../core/api/requests/getPositionsRequest";
+import { getPositionsRequest } from "../../api/requests/getPositionsRequest";
 
 export const getPositions = createAsyncThunk(
   "getPositions",

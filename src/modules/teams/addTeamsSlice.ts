@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+import { IAddTeamsResponse } from "../../api/dto/IAddTeams";
 import { ContentLoading } from "../../common/loading";
-import { IAddTeamsResponse } from "../../core/api/dto/IAddTeams";
 import { addTeams } from "./addTeamsThunk";
 
 export type GetAddTeamsState = ContentLoading<IAddTeamsResponse | undefined>;

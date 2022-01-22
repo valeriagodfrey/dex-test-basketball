@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+import { ISaveImageResponse } from "../../api/dto/ISaveImage";
 import { ContentLoading } from "../../common/loading";
-import { ISaveImageResponse } from "../../core/api/dto/ISaveImage";
 import { saveImage } from "./saveImageThunk";
 
 export type GetAddTeamsState = ContentLoading<ISaveImageResponse | undefined>;

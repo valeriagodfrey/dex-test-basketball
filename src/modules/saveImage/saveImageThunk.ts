@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { ISaveImageRequest } from "../../core/api/dto/ISaveImage";
-import { saveImageRequest } from "../../core/api/requests/saveImageRequest";
+import { ISaveImageRequest } from "../../api/dto/ISaveImage";
+import { saveImageRequest } from "../../api/requests/saveImageRequest";
 
 export const saveImage = createAsyncThunk(
   "saveImage",
