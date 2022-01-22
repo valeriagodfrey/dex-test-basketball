@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import createSvg from "../../../assets/icons/create.svg";
 import deleteSvg from "../../../assets/icons/delete.svg";
-import { media } from "../../../core/theme/media";
+import { media } from "../../../assets/theme/media";
 import { deleteTeam } from "../../../modules/teams/deleteTeamThunk";
 import { Breadcrumbs } from "../../../ui/breadcrumbs/Breadcrumbs";
 

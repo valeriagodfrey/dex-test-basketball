@@ -3,7 +3,7 @@ import { useDropzone } from "react-dropzone";
 import styled, { css } from "styled-components";
 
 import addImage from "../../assets/icons/add_photo.svg";
-import { media } from "../../core/theme/media";
+import { media } from "../../assets/theme/media";
 
 interface IProps {
   onChange?: (file: string) => void;

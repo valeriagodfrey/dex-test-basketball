@@ -5,8 +5,8 @@ import styled from "styled-components";
 import burger from "../../assets/icons/burger.svg";
 import logo from "../../assets/icons/logo.svg";
 import profile from "../../assets/icons/profile.svg";
+import { media } from "../../assets/theme/media";
 import { RootState } from "../../core/redux/store";
-import { media } from "../../core/theme/media";
 import { Drawer } from "../drawer/Drawer";
 import { Hamburger } from "../hamburger/Hamburger";
 

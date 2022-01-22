@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { theme } from "../../core/theme/theme";
+import { theme } from "../../assets/theme/theme";
 
 interface Props {
   color?: "red" | "grey";

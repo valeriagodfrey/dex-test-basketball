@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import img from "../assets/icons/404.svg";
-import { media } from "../core/theme/media";
+import { media } from "../assets/theme/media";
 export const Page404 = () => {
   return (
     <Container>

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
 import regImg from "../../assets/icons/reg_img.svg";
-import { media } from "../../core/theme/media";
+import { media } from "../../assets/theme/media";
 import { fetchRegistration } from "../../modules/authorization/authorizationThunk";
 import { Button } from "../../ui/button/Button";
 import { Checkbox } from "../../ui/checkbox/Checkbox";

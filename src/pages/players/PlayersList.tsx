@@ -5,9 +5,9 @@ import { MultiValue, SingleValue } from "react-select";
 import styled from "styled-components";
 import { useDebouncedCallback } from "use-debounce/lib";
 
-import { paginationOptions } from "../../core/constants/pagination";
+import { paginationOptions } from "../../assets/constants/pagination";
+import { media } from "../../assets/theme/media";
 import { RootState } from "../../core/redux/store";
-import { media } from "../../core/theme/media";
 import { getPlayers } from "../../modules/players/getPlayersThunk";
 import { getTeamsOptionsSelector } from "../../modules/teams/getTeamsSelector";
 import { getTeams } from "../../modules/teams/getTeamsThunk";

@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 
-import { emptyArray } from "../../core/constants/empty";
+import { emptyArray } from "../../assets/constants/empty";
 import { RootState } from "../../core/redux/store";
 import { IOption } from "../../ui/select/data";
 

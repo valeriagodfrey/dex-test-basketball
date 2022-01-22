@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import emptyPlayers from "../../assets/icons/empty_players.svg";
 import emptyTeams from "../../assets/icons/empty_teams.svg";
-import { media } from "../../core/theme/media";
+import { media } from "../../assets/theme/media";
 interface Props {
   type?: "teams" | "players";
   onClick?: () => void;

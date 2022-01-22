@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+import { media } from "../../assets/theme/media";
 import { IGetTeamResponse } from "../../core/api/dto/IGetTeams";
-import { media } from "../../core/theme/media";
 import { saveImage } from "../../modules/saveImage/saveImageThunk";
 import { addTeams } from "../../modules/teams/addTeamsThunk";
 import { updateTeams } from "../../modules/teams/updateTeamsThunk";

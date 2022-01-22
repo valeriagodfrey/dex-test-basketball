@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import player from "../../../assets/icons/player.svg";
+import { media } from "../../../assets/theme/media";
 import { IPlayer } from "../../../core/api/dto/IGetPlayers";
-import { media } from "../../../core/theme/media";
 
 interface Props {
   data: IPlayer;

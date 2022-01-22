@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
+import { media } from "../../../../assets/theme/media";
 import { IPlayer } from "../../../../core/api/dto/IGetPlayers";
-import { media } from "../../../../core/theme/media";
 import { RosterRow } from "./PlayerRow";
 
 interface IProps {

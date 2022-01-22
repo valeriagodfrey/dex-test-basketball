@@ -5,8 +5,8 @@ import styled from "styled-components";
 import createSvg from "../../../assets/icons/create.svg";
 import deleteSvg from "../../../assets/icons/delete.svg";
 import player from "../../../assets/icons/player.svg";
+import { media } from "../../../assets/theme/media";
 import { calculateAge } from "../../../core/helpers/calculateAge";
-import { media } from "../../../core/theme/media";
 import { deletePlayer } from "../../../modules/players/deletePlayerThunk";
 import { Breadcrumbs } from "../../../ui/breadcrumbs/Breadcrumbs";
 

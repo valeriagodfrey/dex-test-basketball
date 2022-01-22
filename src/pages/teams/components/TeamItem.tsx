@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import denver_nuggets from "../../../assets/icons/denver_nuggets.svg";
+import { media } from "../../../assets/theme/media";
 import { ITeam } from "../../../core/api/dto/IGetTeams";
-import { media } from "../../../core/theme/media";
 
 interface Props {
   data: ITeam;

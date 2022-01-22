@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useDebouncedCallback } from "use-debounce/lib";
 
-import { paginationOptions } from "../../core/constants/pagination";
+import { paginationOptions } from "../../assets/constants/pagination";
+import { media } from "../../assets/theme/media";
 import { RootState } from "../../core/redux/store";
-import { media } from "../../core/theme/media";
 import { getTeams } from "../../modules/teams/getTeamsThunk";
 import { Button } from "../../ui/button/Button";
 import { Card } from "../../ui/cards/Card";

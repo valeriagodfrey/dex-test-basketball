@@ -8,7 +8,7 @@ import Select, {
 } from "react-select";
 import styled from "styled-components";
 
-import { theme } from "../../core/theme/theme";
+import { theme } from "../../assets/theme/theme";
 import { CustomError } from "../error/CustomError";
 import { IOption, IOptions } from "./data";
 

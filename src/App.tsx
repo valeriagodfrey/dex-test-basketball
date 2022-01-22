@@ -8,8 +8,8 @@ import { BrowserRouter, Route } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 import { ThemeProvider } from "styled-components";
 
+import { theme } from "./assets/theme/theme";
 import { persistor, store } from "./core/redux/store";
-import { theme } from "./core/theme/theme";
 import { Authorization } from "./pages/authorization/Authorization";
 import { Registration } from "./pages/authorization/Registration";
 import { Page404 } from "./pages/Page404";

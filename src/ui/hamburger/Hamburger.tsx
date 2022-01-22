@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { media } from "../../core/theme/media";
+import { media } from "../../assets/theme/media";
 
 interface Props {
   src?: string;

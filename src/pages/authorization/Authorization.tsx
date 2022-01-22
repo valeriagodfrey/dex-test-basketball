@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
 import authImg from "../../assets/icons/auth_img.svg";
-import { media } from "../../core/theme/media";
+import { media } from "../../assets/theme/media";
 import { fetchAuthorization } from "../../modules/authorization/authorizationThunk";
 import { Button } from "../../ui/button/Button";
 import { Input } from "../../ui/input/Input";

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import signOut from "../../assets/icons/sign_out.svg";
-import { media } from "../../core/theme/media";
+import { media } from "../../assets/theme/media";
 import { Icon } from "../icon/Icon";
 interface Props {
   type?: "teams" | "players";
