@@ -18,8 +18,6 @@ export const EditTeam = () => {
   }, [dispatch, id]);
 
   return (
-    <Layout type="teams">
-      {status === "loaded" ? <TeamsForm data={content} isEdit /> : "...loading"}
-    </Layout>
+    <Layout>{status === "loaded" ? <TeamsForm data={content} isEdit /> : "Loading..."}</Layout>
   );
 };

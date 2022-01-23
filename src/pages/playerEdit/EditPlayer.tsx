@@ -18,8 +18,6 @@ export const EditPlayer = () => {
   }, [dispatch, id]);
 
   return (
-    <Layout type="players">
-      {status === "loaded" ? <PlayersForm data={content} isEdit /> : "...loading"}
-    </Layout>
+    <Layout>{status === "loaded" ? <PlayersForm data={content} isEdit /> : "Loading..."}</Layout>
   );
 };

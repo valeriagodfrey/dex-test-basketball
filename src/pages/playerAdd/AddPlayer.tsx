@@ -3,7 +3,7 @@ import { Layout } from "../../ui/layout/Layout";
 
 export const AddPlayer = () => {
   return (
-    <Layout type="players">
+    <Layout fullWidthForMobile>
       <PlayersForm />
     </Layout>
   );

@@ -63,7 +63,7 @@ export const PlayersList = () => {
   }, [dispatch]);
   const teams = useSelector(getTeamsOptionsSelector);
   return (
-    <Layout type="players">
+    <Layout>
       <Row>
         <SearchInput placeholder="Search..." onChange={onChangeName} />
         <CustomSelect options={teams} isMulti onChange={onChangeTeamIds} />

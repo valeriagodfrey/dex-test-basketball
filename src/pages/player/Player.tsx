@@ -18,7 +18,7 @@ export const Player = () => {
   }, [dispatch, id]);
 
   return (
-    <Layout type="players">
+    <Layout fullWidthForMobile>
       {status === "loaded" ? (
         <Container>
           <PlayerInfo

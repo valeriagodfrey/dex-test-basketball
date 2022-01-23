@@ -25,7 +25,7 @@ export const Team = () => {
   }, [dispatch, id]);
 
   return (
-    <Layout type="teams">
+    <Layout fullWidthForMobile>
       {status === "loaded" ? (
         <Container>
           <TeamInfo

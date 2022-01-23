@@ -1,44 +1,30 @@
 import React from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { matchPath } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import signOut from "../../assets/icons/sign_out.svg";
 import { media } from "../../assets/theme/media";
 import { Icon } from "../icon/Icon";
-interface Props {
-  type?: "teams" | "players";
-}
-export const Menu = ({ type }: Props) => {
-  const navigate = useNavigate();
-  const path = useLocation();
 
+export const Menu = () => {
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const isActiveTeams = matchPath("/teams/*", pathname);
+  const isActivePlayers = matchPath("/players/*", pathname);
   return (
     <Container>
       <MenuLine>
         <Icons>
-          {path.pathname === "/teams" ? (
-            <IconContainer onClick={() => navigate("/teams")}>
-              <Icon type="teams" color="red" />
-              <Label color="red">Teams</Label>
-            </IconContainer>
-          ) : (
-            <IconContainer onClick={() => navigate("/teams")}>
-              <Icon type="teams" color="grey" />
-              <Label color="grey">Teams</Label>
-            </IconContainer>
-          )}
+          <IconContainer onClick={() => navigate("/teams")}>
+            <Icon type="teams" color={isActiveTeams ? "red" : "grey"} />
+            <Label color={isActiveTeams ? "red" : "grey"}>Teams</Label>
+          </IconContainer>
 
-          {path.pathname === "/players" ? (
-            <IconContainer onClick={() => navigate("/players")}>
-              <Icon type="players" color="red" />
-              <Label color="red">Players</Label>
-            </IconContainer>
-          ) : (
-            <IconContainer onClick={() => navigate("/players")}>
-              <Icon type="players" color="grey" />
-              <Label color="grey">Players</Label>
-            </IconContainer>
-          )}
+          <IconContainer onClick={() => navigate("/players")}>
+            <Icon type="players" color={isActivePlayers ? "red" : "grey"} />
+            <Label color={isActivePlayers ? "red" : "grey"}>Players</Label>
+          </IconContainer>
         </Icons>
         <SignOut
           onClick={() => {

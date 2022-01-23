@@ -8,7 +8,7 @@ import { fetchAuthorization } from "../../modules/authorization/authorizationThu
 import { Button } from "../../ui/button/Button";
 import { Input } from "../../ui/input/Input";
 import { CustomLink } from "../../ui/link/CustomLink";
-import { notify } from "../UIElements";
+
 interface AuthProps {
   login: string;
   password: string;
@@ -28,7 +28,7 @@ export const Authorization = () => {
     <WrapperContainer>
       <FormContainer>
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <Title onClick={notify}>Sign In</Title>
+          <Title>Sign In</Title>
           <InputContainer>
             <Input
               label="Login"

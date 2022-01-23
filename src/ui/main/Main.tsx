@@ -20,7 +20,7 @@ const MainContainer = styled.main`
   background-color: ${({ theme }) => theme.colors.lightestGrey1};
   width: 100%;
   padding-top: 62px;
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 50px);
   ${media.desktop} {
     padding-top: 80px;
     margin-left: 140px;

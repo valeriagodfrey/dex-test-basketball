@@ -48,7 +48,7 @@ export const TeamsList = () => {
   );
 
   return (
-    <Layout type="teams">
+    <Layout>
       <Row>
         <SearchInput placeholder="Search..." onChange={onChangeName} />
         <Button buttonType="primary" svg="add" onClick={() => navigate("/teams/add")}>

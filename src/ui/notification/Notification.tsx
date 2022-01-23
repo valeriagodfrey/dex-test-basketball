@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 export const StyledToastContainer = styled(ToastContainer)`
   .Toastify__toast-container {
+    width: auto !important;
   }
   .Toastify__toast--error {
     background-color: ${({ theme }) => theme.colors.lightRed};
