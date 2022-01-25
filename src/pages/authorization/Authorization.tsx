@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
-import authImg from "../../assets/icons/auth_img.svg";
+import authImage from "../../assets/images/authImage.png";
 import { media } from "../../assets/theme/media";
 import { fetchAuthorization } from "../../modules/authorization/authorizationThunk";
 import { Button } from "../../ui/button/Button";
@@ -53,7 +53,7 @@ export const Authorization = () => {
         </Form>
       </FormContainer>
       <ImageContainer>
-        <Img src={authImg} alt="basketball" />
+        <Img src={authImage} alt="basketball" />
       </ImageContainer>
     </WrapperContainer>
   );

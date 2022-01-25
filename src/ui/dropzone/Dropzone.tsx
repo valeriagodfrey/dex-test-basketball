@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import styled, { css } from "styled-components";
 
-import addImage from "../../assets/icons/add_photo.svg";
+import addImage from "../../assets/icon/add_photo.svg";
 import { media } from "../../assets/theme/media";
 
 interface IProps {
@@ -34,9 +34,9 @@ export const MyDropzone = ({ onChange, defaultValue }: IProps) => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
-    <AddImage {...getRootProps()}>
+    <AddImage>
       <input {...getInputProps()} />
-      <ImageContainer isDragActive={isDragActive}>
+      <ImageContainer {...getRootProps()} isDragActive={isDragActive}>
         {!file && <EmptyImage src={addImage} alt="add_image" />}
         {file && <Image src={file} />}
       </ImageContainer>
@@ -54,7 +54,8 @@ const ImageContainer = styled.div<{ isDragActive?: boolean }>`
     width: 100%;
   }
   ${media.largeDesktop} {
-    max-height: 261px;
+    max-height: 230px;
+    width: 90%;
     height: auto;
   }
   cursor: pointer;

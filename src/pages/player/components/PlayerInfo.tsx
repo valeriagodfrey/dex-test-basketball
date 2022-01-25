@@ -2,9 +2,9 @@ import { useDispatch } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import createSvg from "../../../assets/icons/create.svg";
-import deleteSvg from "../../../assets/icons/delete.svg";
-import player from "../../../assets/icons/player.svg";
+import { DeleteIcon } from "../../../assets/icons/DeleteIcon";
+import { EditIcon } from "../../../assets/icons/EditIcon";
+import player from "../../../assets/images/player.png";
 import { media } from "../../../assets/theme/media";
 import { calculateAge } from "../../../core/helpers/calculateAge";
 import { deletePlayer } from "../../../modules/players/deletePlayerThunk";
@@ -37,12 +37,10 @@ export const PlayerInfo = ({ ...rest }: PlayerInfoProps) => {
         <Breadcrumbs data={data} />
         <Icons>
           <Link to={`/players/${rest.id}/edit`}>
-            <Icon src={createSvg} alt="create"></Icon>
+            <EditIcon />
           </Link>
-          <DeleteIcon>
-            <Icon
-              src={deleteSvg}
-              alt="delete"
+          <Icon>
+            <DeleteIcon
               onClick={() =>
                 dispatch(
                   deletePlayer({
@@ -54,7 +52,7 @@ export const PlayerInfo = ({ ...rest }: PlayerInfoProps) => {
                 )
               }
             />
-          </DeleteIcon>
+          </Icon>
         </Icons>
       </Header>
       <CardInfo>
@@ -137,12 +135,7 @@ const Header = styled.div`
   }
 `;
 
-const Icon = styled.img`
-  cursor: pointer;
-  align-items: center;
-`;
-
-const DeleteIcon = styled.div`
+const Icon = styled.div`
   margin-left: 16px;
 `;
 

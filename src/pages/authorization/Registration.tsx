@@ -2,7 +2,7 @@ import { Controller, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
-import regImg from "../../assets/icons/reg_img.svg";
+import regImg from "../../assets/images/regImage.png";
 import { media } from "../../assets/theme/media";
 import { fetchRegistration } from "../../modules/authorization/authorizationThunk";
 import { Button } from "../../ui/button/Button";

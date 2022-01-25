@@ -1,26 +1,21 @@
 import styled from "styled-components";
 
+import { BurgerIcon } from "../../assets/icons/BurgerIcon";
 import { media } from "../../assets/theme/media";
 
 interface Props {
-  src?: string;
-  alt?: string;
   onClick?: () => void;
 }
-export const Hamburger = ({ src, alt, onClick }: Props) => {
+export const Hamburger = ({ onClick }: Props) => {
   return (
     <Container onClick={onClick}>
-      <StyledHamburger src={src} alt={alt}></StyledHamburger>
+      <BurgerIcon />
     </Container>
   );
 };
-const StyledHamburger = styled.img`
-  cursor: pointer;
-  ${media.desktop} {
-    display: none;
-  }
-`;
+
 const Container = styled.div`
+  cursor: pointer;
   ${media.desktop} {
     display: none;
   }

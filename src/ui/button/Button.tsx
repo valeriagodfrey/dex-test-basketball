@@ -1,7 +1,7 @@
 import React, { ButtonHTMLAttributes, FC } from "react";
 import styled from "styled-components";
 
-import addIcon from "../../assets/icons/add.svg";
+import { AddIcon } from "../../assets/icons/AddIcon";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   buttonType?: "primary" | "secondary";
@@ -25,7 +25,7 @@ export const Button: FC<Props> = ({
           <div style={{ display: "flex", alignItems: "center" }}>
             {children}
             <IconContainer>
-              <Icon src={addIcon} alt="add" />
+              <Icon />
             </IconContainer>
           </div>
         ) : (
@@ -90,8 +90,9 @@ const IconContainer = styled.div`
   align-items: center;
   min-width: 16px;
   height: 16px;
+  margin-left: 8px;
 `;
-const Icon = styled.img`
+const Icon = styled(AddIcon)`
   height: 9.33px;
   width: 9.33px;
 `;

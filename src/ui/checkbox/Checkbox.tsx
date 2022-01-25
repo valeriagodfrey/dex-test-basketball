@@ -1,8 +1,6 @@
-import React from "react";
 import styled from "styled-components";
 
-import checkIcon from "../../assets/icons/check.svg";
-import disabledCheck from "../../assets/icons/disabled_check.svg";
+import { CheckIcon } from "../../assets/icons/CheckIcon";
 import { CustomError } from "../error/CustomError";
 
 interface Props {
@@ -22,11 +20,7 @@ export const Checkbox = ({ label, disabled, error, checked, onChange }: Props) =
           disabled={disabled}
           error={error}
         >
-          <Icon
-            checked={checked}
-            src={checked && disabled !== true ? checkIcon : disabledCheck}
-            alt="check"
-          />
+          <CheckIcon checked={checked} disabled={disabled} error={error} />
         </CustomCheckbox>
         <Label
           checked={checked}
@@ -54,7 +48,9 @@ const CheckboxContainer = styled.div`
 const CustomCheckbox = styled.div<{ disabled?: boolean; error?: string; checked?: boolean }>`
   width: 12px;
   height: 12px;
-  border: 1px solid;
+
+  display: flex;
+  align-items: center;
   box-sizing: border-box;
   position: relative;
   align-items: center;
@@ -62,24 +58,13 @@ const CustomCheckbox = styled.div<{ disabled?: boolean; error?: string; checked?
   margin-right: 10px;
   background-color: ${({ disabled, theme }) =>
     disabled === true ? theme.colors.lightestGrey1 : theme.colors.white};
-  border-color: ${({ disabled, error, theme }) =>
-    disabled === true
-      ? theme.colors.lightestGrey
-      : error
-      ? theme.colors.lightestRed
-      : theme.colors.lightGrey};
 
   :hover {
     border-color: ${({ disabled, theme }) => (disabled === true ? null : theme.colors.red)};
   }
   transition: all 0.15s linear;
 `;
-const Icon = styled.img<{ checked?: boolean }>`
-  position: absolute;
-  top: -1px;
-  left: -1px;
-  visibility: ${({ checked }) => (checked ? "visible" : "hidden")};
-`;
+
 const Label = styled.div<{
   disabled?: boolean;
   error?: string;

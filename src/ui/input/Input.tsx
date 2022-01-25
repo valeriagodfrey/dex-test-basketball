@@ -1,8 +1,7 @@
 import React, { forwardRef, InputHTMLAttributes, useState } from "react";
 import styled from "styled-components";
 
-import closedEye from "../../assets/icons/close_eye_rounded.svg";
-import openedEye from "../../assets/icons/eye_rounded.svg";
+import { EyeIcon } from "../../assets/icons/EyeIcon";
 import { CustomError } from "../error/CustomError";
 import { InputCss } from "./style";
 
@@ -30,12 +29,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((params, ref) => {
           ref={ref}
         />
         {params.type === "password" && (
-          <Icon>
-            <img
-              src={type === "password" ? closedEye : openedEye}
-              alt={"eye"}
-              onClick={changeType}
-            />
+          <Icon onClick={changeType}>
+            <EyeIcon type={type} />
           </Icon>
         )}
       </InputContainer>
@@ -82,6 +77,12 @@ const CustomInput = styled.input<{
   error?: string;
 }>`
   ${InputCss};
+  ::-webkit-calendar-picker-indicator {
+    filter: invert(75%);
+    :hover {
+      filter: invert(100%);
+    }
+  }
   width: 100%;
   color: ${({ inputDisable, theme }) =>
     inputDisable === true ? theme.colors.lightestGrey : theme.colors.grey};

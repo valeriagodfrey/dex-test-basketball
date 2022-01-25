@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import ReactPaginate, { ReactPaginateProps } from "react-paginate";
 import styled from "styled-components";
 
-import left from "../../assets/icons/chevron_right.svg";
+import { Chevron } from "../../assets/icons/Chevron";
 
 export const Pagination: FC<
   Omit<ReactPaginateProps, "pageRangeDisplayed" | "marginPagesDisplayed">
@@ -28,15 +28,15 @@ export const Pagination: FC<
 
 const PreviousLabel: FC<{ onClick?: () => void }> = ({ onClick }) => {
   return (
-    <PageButton onClick={onClick}>
-      <Icon side="left" src={left} alt="left_chevron" />
+    <PageButton style={{ transform: `rotate(180deg)` }} onClick={onClick}>
+      <Chevron />
     </PageButton>
   );
 };
 const NextLabel: FC<{ onClick?: () => void }> = ({ onClick }) => {
   return (
     <PageButton onClick={onClick}>
-      <Icon side="right" src={left} alt="right_chevron" />
+      <Chevron />
     </PageButton>
   );
 };
@@ -150,9 +150,7 @@ const Content = styled.div`
     }
   }
 `;
-const Icon = styled.img<{ side: "right" | "left" }>`
-  transform: ${({ side }) => (side === "left" ? `rotate(180deg)` : null)};
-`;
+
 const PageButton = styled.div`
   height: 40px;
   width: 40px;

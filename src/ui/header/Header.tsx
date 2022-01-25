@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import burger from "../../assets/icons/burger.svg";
-import logo from "../../assets/icons/logo.svg";
-import profile from "../../assets/icons/profile.svg";
+import { ProfileIcon } from "../../assets/icons/ProfileIcon";
+import logo from "../../assets/images/logo.png";
 import { media } from "../../assets/theme/media";
 import { RootState } from "../../core/redux/store";
 import { Drawer } from "../drawer/Drawer";
@@ -13,15 +13,16 @@ import { Hamburger } from "../hamburger/Hamburger";
 export const Header = () => {
   const userName = useSelector((state: RootState) => state.authorization.content?.name);
   const [show, setShow] = useState(false);
+  const navigate = useNavigate();
   return (
     <div>
       <Container>
         <HeaderLine>
-          <Hamburger src={burger} onClick={() => setShow((s) => !s)} alt="burger" />
-          <Logo src={logo} alt="logo"></Logo>
+          <Hamburger onClick={() => setShow((s) => !s)} />
+          <Logo src={logo} alt="logo" onClick={() => navigate("/")}></Logo>
           <ProfileContainer>
             <UserName>{userName}</UserName>
-            <Profile src={profile} alt="profile"></Profile>
+            <ProfileIcon display="desktop" />
           </ProfileContainer>
         </HeaderLine>
       </Container>
@@ -45,6 +46,7 @@ const UserName = styled.label`
   font-weight: 500;
   font-size: 14px;
   line-height: 24px;
+  margin-right: 19px;
 `;
 
 const HeaderLine = styled.div`
@@ -84,10 +86,4 @@ const Logo = styled.img`
   ${media.desktop} {
     height: 48px;
   }
-`;
-
-const Profile = styled.img`
-  width: 36px;
-  cursor: pointer;
-  margin-left: 19px;
 `;

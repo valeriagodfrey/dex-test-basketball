@@ -1,7 +1,7 @@
 import React, { forwardRef, InputHTMLAttributes } from "react";
 import styled from "styled-components";
 
-import searchIcon from "../../assets/icons/search.svg";
+import { SearchIcon } from "../../assets/icons/SearchIcon";
 import { InputCss } from "./style";
 
 type Props = InputHTMLAttributes<HTMLInputElement>;
@@ -13,7 +13,7 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchProps>((params, re
       <SearchContainer>
         <Search {...params} ref={ref}></Search>
         <Icon>
-          <img src={searchIcon} alt="search" />
+          <SearchIcon />
         </Icon>
       </SearchContainer>
     </>

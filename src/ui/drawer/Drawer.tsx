@@ -1,11 +1,11 @@
-import { useLocation, useMatch, useNavigate } from "react-router-dom";
+import { matchPath, useLocation, useNavigate } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import styled from "styled-components";
 
-import profile from "../../assets/icons/profile.svg";
-import signOut from "../../assets/icons/sign_out.svg";
+import { MenuIcon } from "../../assets/icons/MenuIcon";
+import { ProfileIcon } from "../../assets/icons/ProfileIcon";
+import { SignOutIcon } from "../../assets/icons/SignOutIcon";
 import { media } from "../../assets/theme/media";
-import { Icon } from "../icon/Icon";
 
 interface Props {
   userName?: string;
@@ -14,43 +14,29 @@ interface Props {
 }
 export const Drawer = ({ userName, visible, onClick }: Props) => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const teamUrl = useMatch("/teams/:id");
-  const playerUrl = useMatch("/players/:id");
+  const { pathname } = useLocation();
+  const isActiveTeams = matchPath("/teams/*", pathname);
+  const isActivePlayers = matchPath("/players/*", pathname);
 
   return (
     <Container>
       <CSSTransition in={visible} timeout={300} classNames="drawer-menu" unmountOnExit>
         <Menu visible={visible}>
           <ProfileContainer>
-            <Profile src={profile} alt="profile"></Profile>
+            <ProfileIcon display="mobile" />
             <UserName>{userName}</UserName>
           </ProfileContainer>
           <MenuLine>
             <Icons>
-              {location.pathname === "/teams" || teamUrl ? (
-                <IconContainer onClick={() => navigate("/teams")}>
-                  <Icon type="teams" color="red" />
-                  <Label color="red">Teams</Label>
-                </IconContainer>
-              ) : (
-                <IconContainer onClick={() => navigate("/teams")}>
-                  <Icon type="teams" color="grey" />
-                  <Label color="grey">Teams</Label>
-                </IconContainer>
-              )}
+              <IconContainer onClick={() => navigate("/teams")}>
+                <MenuIcon type="teams" color={isActiveTeams ? "red" : "grey"} />
+                <Label color={isActiveTeams ? "red" : "grey"}>Teams</Label>
+              </IconContainer>
 
-              {location.pathname === "/players" || playerUrl ? (
-                <IconContainer onClick={() => navigate("/players")}>
-                  <Icon type="players" color="red" />
-                  <Label color="red">Players</Label>
-                </IconContainer>
-              ) : (
-                <IconContainer onClick={() => navigate("/players")}>
-                  <Icon type="players" color="grey" />
-                  <Label color="grey">Players</Label>
-                </IconContainer>
-              )}
+              <IconContainer onClick={() => navigate("/players")}>
+                <MenuIcon type="players" color={isActivePlayers ? "red" : "grey"} />
+                <Label color={isActivePlayers ? "red" : "grey"}>Players</Label>
+              </IconContainer>
             </Icons>
             <SignOut
               onClick={() => {
@@ -58,7 +44,7 @@ export const Drawer = ({ userName, visible, onClick }: Props) => {
                 window.dispatchEvent(new Event("storage"));
               }}
             >
-              <img src={signOut} alt="signOut"></img>
+              <SignOutIcon />
               <Label color="red">Sign out</Label>
             </SignOut>
           </MenuLine>
@@ -138,6 +124,7 @@ const UserName = styled.label`
   font-weight: 500;
   font-size: 14px;
   line-height: 24px;
+  margin-left: 12px;
 `;
 
 const ProfileContainer = styled.div`
@@ -146,12 +133,6 @@ const ProfileContainer = styled.div`
   justify-items: flex-end;
   padding: 20px;
   border-bottom: ${({ theme }) => ` 0.5px solid ${theme.colors.lightGrey}`};
-`;
-
-const Profile = styled.img`
-  width: 40px;
-  cursor: pointer;
-  margin-right: 12px;
 `;
 
 const Label = styled.div<{ color?: "red" | "grey" }>`

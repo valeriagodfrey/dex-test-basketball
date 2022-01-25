@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { ITeam } from "../../../api/dto/IGetTeams";
-import denver_nuggets from "../../../assets/icons/denver_nuggets.svg";
+import team from "../../../assets/images/team.png";
 import { media } from "../../../assets/theme/media";
 
 interface Props {
@@ -13,7 +13,7 @@ export const TeamItem = ({ data: { name, foundationYear, id, imageUrl } }: Props
   return (
     <Container to={`/teams/${id}`}>
       <LogoContainer>
-        <Image src={imageUrl || denver_nuggets} alt="team" />
+        <Image src={imageUrl || team} alt="team" />
       </LogoContainer>
       <Info>
         <Name>{name}</Name>

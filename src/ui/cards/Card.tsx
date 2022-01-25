@@ -1,8 +1,7 @@
-import React from "react";
 import styled from "styled-components";
 
-import emptyPlayers from "../../assets/icons/empty_players.svg";
-import emptyTeams from "../../assets/icons/empty_teams.svg";
+import emptyPlayers from "../../assets/images/emptyPlayers.png";
+import emptyTeams from "../../assets/images/emptyTeams.png";
 import { media } from "../../assets/theme/media";
 interface Props {
   type?: "teams" | "players";

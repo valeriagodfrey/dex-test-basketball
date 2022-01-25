@@ -2,8 +2,8 @@ import { useDispatch } from "react-redux";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 
-import createSvg from "../../../assets/icons/create.svg";
-import deleteSvg from "../../../assets/icons/delete.svg";
+import { DeleteIcon } from "../../../assets/icons/DeleteIcon";
+import { EditIcon } from "../../../assets/icons/EditIcon";
 import { media } from "../../../assets/theme/media";
 import { deleteTeam } from "../../../modules/teams/deleteTeamThunk";
 import { Breadcrumbs } from "../../../ui/breadcrumbs/Breadcrumbs";
@@ -31,12 +31,10 @@ export const TeamInfo = ({ ...rest }: TeamInfoProps) => {
         <Breadcrumbs data={data} />
         <Icons>
           <Link to={`/teams/${rest.id}/edit`}>
-            <Icon src={createSvg} alt="create"></Icon>
+            <EditIcon />
           </Link>
-          <DeleteIcon>
-            <Icon
-              src={deleteSvg}
-              alt="delete"
+          <Icon>
+            <DeleteIcon
               onClick={() =>
                 dispatch(
                   deleteTeam({
@@ -48,7 +46,7 @@ export const TeamInfo = ({ ...rest }: TeamInfoProps) => {
                 )
               }
             />
-          </DeleteIcon>
+          </Icon>
         </Icons>
       </Header>
       <CardInfo>
@@ -116,10 +114,6 @@ const Header = styled.div`
   }
 `;
 
-const Icon = styled.img`
-  cursor: pointer;
-`;
-
 const Icons = styled.div`
   display: flex;
   align-items: center;
@@ -134,7 +128,7 @@ const Image = styled.img`
     width: 210px;
   }
 `;
-const DeleteIcon = styled.div`
+const Icon = styled.div`
   margin-left: 16px;
 `;
 const Info = styled.div`

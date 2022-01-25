@@ -219,7 +219,7 @@ const Form = styled.form`
 
   ${media.largeDesktop} {
     grid-template-columns: 336px 1fr;
-    grid-column-gap: 110px;
+    grid-column-gap: 50px;
     padding: 48px 73px;
   }
 `;

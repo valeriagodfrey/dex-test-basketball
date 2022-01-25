@@ -1,11 +1,10 @@
-import React from "react";
 import { matchPath } from "react-router-dom";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import signOut from "../../assets/icons/sign_out.svg";
+import { MenuIcon } from "../../assets/icons/MenuIcon";
+import { SignOutIcon } from "../../assets/icons/SignOutIcon";
 import { media } from "../../assets/theme/media";
-import { Icon } from "../icon/Icon";
 
 export const Menu = () => {
   const navigate = useNavigate();
@@ -17,12 +16,12 @@ export const Menu = () => {
       <MenuLine>
         <Icons>
           <IconContainer onClick={() => navigate("/teams")}>
-            <Icon type="teams" color={isActiveTeams ? "red" : "grey"} />
+            <MenuIcon type="teams" color={isActiveTeams ? "red" : "grey"} />
             <Label color={isActiveTeams ? "red" : "grey"}>Teams</Label>
           </IconContainer>
 
           <IconContainer onClick={() => navigate("/players")}>
-            <Icon type="players" color={isActivePlayers ? "red" : "grey"} />
+            <MenuIcon type="players" color={isActivePlayers ? "red" : "grey"} />
             <Label color={isActivePlayers ? "red" : "grey"}>Players</Label>
           </IconContainer>
         </Icons>
@@ -32,7 +31,7 @@ export const Menu = () => {
             window.dispatchEvent(new Event("storage"));
           }}
         >
-          <img src={signOut} alt="signOut"></img>
+          <SignOutIcon />
           <Label color="red">Sign out</Label>
         </SignOut>
       </MenuLine>

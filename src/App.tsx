@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import { Navigate, Routes } from "react-router";
 import { BrowserRouter, Route } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
-import { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 
 import { theme } from "./assets/theme/theme";
 import { persistor, store } from "./core/redux/store";
@@ -21,6 +21,8 @@ import { Team } from "./pages/team/Team";
 import { AddTeam } from "./pages/teamAdd/AddTeam";
 import { EditTeam } from "./pages/teamEdit/EditTeam";
 import { TeamsList } from "./pages/teams/TeamsList";
+import { Header } from "./ui/header/Header";
+import { Menu } from "./ui/menu/Menu";
 import { StyledToastContainer } from "./ui/notification/Notification";
 
 function App() {
@@ -55,20 +57,24 @@ function App() {
           />
           <BrowserRouter>
             {token !== null ? (
-              <Routes>
-                <Route path="/teams" element={<TeamsList />} />
-                <Route path="/players" element={<PlayersList />} />
-                <Route path="/authorization" element={<Navigate to="/teams" />} />
-                <Route path="/registration" element={<Navigate to="/teams" />} />
-                <Route path="/" element={<Navigate to="/teams" />} />
-                <Route path="/teams/add" element={<AddTeam />} />
-                <Route path="/teams/:id" element={<Team />} />
-                <Route path="/teams/:id/edit" element={<EditTeam />} />
-                <Route path="/players/add" element={<AddPlayer />} />
-                <Route path="/players/:id" element={<Player />} />
-                <Route path="/players/:id/edit" element={<EditPlayer />} />
-                <Route path="*" element={<Page404 />} />
-              </Routes>
+              <PrivatePages>
+                <Header />
+                <Menu />
+                <Routes>
+                  <Route path="/teams" element={<TeamsList />} />
+                  <Route path="/players" element={<PlayersList />} />
+                  <Route path="/authorization" element={<Navigate to="/teams" />} />
+                  <Route path="/registration" element={<Navigate to="/teams" />} />
+                  <Route path="/" element={<Navigate to="/teams" />} />
+                  <Route path="/teams/add" element={<AddTeam />} />
+                  <Route path="/teams/:id" element={<Team />} />
+                  <Route path="/teams/:id/edit" element={<EditTeam />} />
+                  <Route path="/players/add" element={<AddPlayer />} />
+                  <Route path="/players/:id" element={<Player />} />
+                  <Route path="/players/:id/edit" element={<EditPlayer />} />
+                  <Route path="*" element={<Page404 />} />
+                </Routes>
+              </PrivatePages>
             ) : (
               <Routes>
                 <Route path="/authorization" element={<Authorization />} />
@@ -82,5 +88,5 @@ function App() {
     </Provider>
   );
 }
-
+const PrivatePages = styled.div``;
 export default App;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import img from "../assets/icons/404.svg";
+import img from "../assets/images/404.png";
 import { media } from "../assets/theme/media";
 export const Page404 = () => {
   return (

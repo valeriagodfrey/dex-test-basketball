@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { IPlayer } from "../../../api/dto/IGetPlayers";
-import player from "../../../assets/icons/player.svg";
+import player from "../../../assets/images/player.png";
 import { media } from "../../../assets/theme/media";
 
 interface Props {

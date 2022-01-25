@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-import { theme } from "../../assets/theme/theme";
+import { theme } from "../theme/theme";
 
 interface Props {
   color?: "red" | "grey";
   type?: "teams" | "players";
 }
-export const Icon = ({ color, type }: Props) => {
+export const MenuIcon = ({ color, type }: Props) => {
   return (
     <Container>
       {type === "teams" && color === "red" ? (
