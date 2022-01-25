@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { IGetPlayerParams } from "../../api/dto/IGetPlayers";
-import { deletePlayerRequest } from "../../api/requests/deletePlayerRequest";
+import { deletePlayerRequest } from "../../api/requests/playersRequests";
 
 export const deletePlayer = createAsyncThunk(
   "deletePlayer",

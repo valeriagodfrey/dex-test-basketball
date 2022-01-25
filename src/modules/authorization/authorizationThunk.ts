@@ -1,8 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { ISignInRequest, ISignUpRequest } from "../../api/dto/ISignIn";
-import { signIn } from "../../api/requests/signIn";
-import { signUp } from "../../api/requests/signUp";
+import { signIn, signUp } from "../../api/requests/authRequests";
 
 export const fetchRegistration = createAsyncThunk(
   "registration",

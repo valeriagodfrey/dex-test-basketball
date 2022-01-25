@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { IAddTeamsRequest } from "../../api/dto/IAddTeams";
-import { updateTeamsRequest } from "../../api/requests/updateTeamsRequest";
+import { updateTeamsRequest } from "../../api/requests/teamsRequests";
 
 export const updateTeams = createAsyncThunk(
   "updateTeams",
