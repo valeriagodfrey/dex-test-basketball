@@ -8,11 +8,13 @@ import { getPlayer } from "../../modules/players/getPlayerThunk";
 import { Layout } from "../../ui/layout/Layout";
 import { PlayerInfo } from "./components/PlayerInfo";
 
+export const playerSelector = (state: RootState) => state.getPlayer;
+
 export const Player = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const { content, status } = useSelector(playerSelector);
 
-  const { content, status } = useSelector((state: RootState) => state.getPlayer);
   useEffect(() => {
     dispatch(getPlayer({ id: Number(id) }));
   }, [dispatch, id]);

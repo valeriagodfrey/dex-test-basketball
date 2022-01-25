@@ -7,19 +7,23 @@ import { RootState } from "../../core/redux/store";
 import { getPlayers } from "../../modules/players/getPlayersThunk";
 import { getTeam } from "../../modules/teams/getTeamThunk";
 import { Layout } from "../../ui/layout/Layout";
+import { playersSelector } from "../players/PlayersList";
 import { Roster } from "./components/roster/Roster";
 import { TeamInfo } from "./components/TeamInfo";
+
+export const teamSelector = (state: RootState) => state.getTeam;
 
 export const Team = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
 
-  const { content, status } = useSelector((state: RootState) => state.getTeam);
-  const player = useSelector((state: RootState) => state.getPlayers);
+  const { content, status } = useSelector(teamSelector);
+  const player = useSelector(playersSelector);
 
   useEffect(() => {
     dispatch(getTeam({ id: Number(id) }));
   }, [dispatch, id]);
+
   useEffect(() => {
     dispatch(getPlayers({ teamIds: [Number(id)] }));
   }, [dispatch, id]);

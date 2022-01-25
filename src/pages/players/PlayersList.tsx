@@ -20,11 +20,13 @@ import { CustomSelect } from "../../ui/select/CustomSelect";
 import { IOption } from "../../ui/select/data";
 import { PlayerItem } from "./components/PlayerItem";
 
+export const playersSelector = (state: RootState) => state.getPlayers;
+
 export const PlayersList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { content, status } = useSelector((state: RootState) => state.getPlayers);
+  const { content, status } = useSelector(playersSelector);
 
   const [page, setPage] = useState(1);
   const onPageChange = useCallback(({ selected }: { selected: number }) => {
@@ -61,7 +63,9 @@ export const PlayersList = () => {
   useEffect(() => {
     dispatch(getTeams());
   }, [dispatch]);
+
   const teams = useSelector(getTeamsOptionsSelector);
+
   return (
     <Layout>
       <Row>

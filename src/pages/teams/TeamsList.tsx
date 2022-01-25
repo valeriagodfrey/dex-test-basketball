@@ -17,11 +17,13 @@ import { CustomSelect } from "../../ui/select/CustomSelect";
 import { IOption } from "../../ui/select/data";
 import { TeamItem } from "./components/TeamItem";
 
+const teamsSelector = (state: RootState) => state.getTeams;
+
 export const TeamsList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { content, status } = useSelector((state: RootState) => state.getTeams);
+  const { content, status } = useSelector(teamsSelector);
 
   const [page, setPage] = useState(1);
   const onPageChange = useCallback(({ selected }: { selected: number }) => {
