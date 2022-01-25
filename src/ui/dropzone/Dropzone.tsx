@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import styled, { css } from "styled-components";
 
-import addImage from "../../assets/icon/add_photo.svg";
+import addImage from "../../assets/images/addImage.png";
 import { media } from "../../assets/theme/media";
 
 interface IProps {
