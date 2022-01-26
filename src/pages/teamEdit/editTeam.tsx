@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import { getTeam } from "../../modules/teams/getTeamThunk";
+import { getTeam } from "../../modules/teams/teamThunks";
 import { TeamsForm } from "../../ui/form/TeamsForm";
 import { Layout } from "../../ui/layout/Layout";
 import { teamSelector } from "../team/team";

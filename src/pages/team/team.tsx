@@ -5,13 +5,13 @@ import styled from "styled-components";
 
 import { RootState } from "../../core/redux/store";
 import { getPlayers } from "../../modules/players/getPlayersThunk";
-import { getTeam } from "../../modules/teams/getTeamThunk";
+import { getTeam } from "../../modules/teams/teamThunks";
 import { Layout } from "../../ui/layout/Layout";
 import { playersSelector } from "../players/playersList";
 import { Roster } from "./components/roster/Roster";
 import { TeamInfo } from "./components/TeamInfo";
 
-export const teamSelector = (state: RootState) => state.getTeam;
+export const teamSelector = (state: RootState) => state.team;
 
 export const Team = () => {
   const { id } = useParams();

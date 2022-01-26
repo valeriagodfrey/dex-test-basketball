@@ -1,4 +1,4 @@
-export type IAddTeamsRequest = {
+export type IAddTeamRequest = {
   name: string;
   foundationYear: number;
   division: string;
@@ -6,7 +6,7 @@ export type IAddTeamsRequest = {
   imageUrl: string;
 };
 
-export type IAddTeamsResponse = {
+export type IAddTeamResponse = {
   name: string;
   foundationYear: number;
   division: string;

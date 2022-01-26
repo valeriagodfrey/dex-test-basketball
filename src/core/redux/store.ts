@@ -4,20 +4,14 @@ import { fetchAuthorizationReducer } from "../../modules/authorization/authoriza
 import { getPlayersListReducer } from "../../modules/players/getPlayersSlice";
 import { playerReducer } from "../../modules/players/playerSlices";
 import { getPositionsReducer } from "../../modules/positions/getPositionsSlice";
-import { addTeamsReducer } from "../../modules/teams/addTeamsSlice";
-import { deleteTeamReducer } from "../../modules/teams/deleteTeamSlice";
-import { getTeamReducer } from "../../modules/teams/getTeamSlice";
 import { getTeamsReducer } from "../../modules/teams/getTeamsSlice";
-import { updateTeamsReducer } from "../../modules/teams/updateTeamsSlice";
+import { teamReducer } from "../../modules/teams/teamSlices";
 
 export const store = configureStore({
   reducer: {
     authorization: fetchAuthorizationReducer,
     getTeams: getTeamsReducer,
-    getTeam: getTeamReducer,
-    addTeams: addTeamsReducer,
-    deleteTeam: deleteTeamReducer,
-    updateTeams: updateTeamsReducer,
+    team: teamReducer,
     player: playerReducer,
     getPlayersList: getPlayersListReducer,
     getPositions: getPositionsReducer,

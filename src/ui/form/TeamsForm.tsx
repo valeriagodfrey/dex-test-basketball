@@ -7,8 +7,7 @@ import styled from "styled-components";
 import { IGetTeamResponse } from "../../api/dto/IGetTeams";
 import { media } from "../../assets/theme/media";
 import { saveImage } from "../../modules/saveImage/saveImageThunk";
-import { addTeams } from "../../modules/teams/addTeamsThunk";
-import { updateTeams } from "../../modules/teams/updateTeamsThunk";
+import { addTeam, updateTeam } from "../../modules/teams/teamThunks";
 import { Breadcrumbs } from "../breadcrumbs/Breadcrumbs";
 import { Button } from "../button/Button";
 import { MyDropzone } from "../dropzone/Dropzone";
@@ -43,7 +42,7 @@ export const TeamsForm = ({ data, isEdit }: IProps) => {
     reset(data);
   }, [data, reset]);
 
-  const action = isEdit ? updateTeams : addTeams;
+  const action = isEdit ? updateTeam : addTeam;
   const onChangeImage = useCallback(
     (file) => {
       dispatch(

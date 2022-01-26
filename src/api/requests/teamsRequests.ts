@@ -1,7 +1,7 @@
 import { stringifyUrl } from "query-string";
 
 import { baseRequest } from "../baseRequest";
-import { IAddTeamsRequest, IAddTeamsResponse } from "../dto/IAddTeams";
+import { IAddTeamRequest, IAddTeamResponse } from "../dto/IAddTeams";
 import {
   IGetTeamParams,
   IGetTeamResponse,
@@ -9,8 +9,8 @@ import {
   IGetTeamsResponse,
 } from "../dto/IGetTeams";
 
-export const addTeamsRequest = (params: IAddTeamsRequest) =>
-  baseRequest<IAddTeamsRequest, IAddTeamsResponse>({
+export const addTeamRequest = (params: IAddTeamRequest) =>
+  baseRequest<IAddTeamRequest, IAddTeamResponse>({
     url: "/api/Team/Add",
     method: "POST",
     params,
@@ -37,8 +37,8 @@ export const getTeamsRequest = (params?: IGetTeamsParams) =>
     params,
   });
 
-export const updateTeamsRequest = (params: IAddTeamsRequest) =>
-  baseRequest<IAddTeamsRequest, IAddTeamsResponse>({
+export const updateTeamRequest = (params: IAddTeamRequest) =>
+  baseRequest<IAddTeamRequest, IAddTeamResponse>({
     url: "/api/Team/Update",
     method: "PUT",
     params,

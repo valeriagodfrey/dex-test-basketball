@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { DeleteIcon } from "../../../assets/icons/DeleteIcon";
 import { EditIcon } from "../../../assets/icons/EditIcon";
 import { media } from "../../../assets/theme/media";
-import { deleteTeam } from "../../../modules/teams/deleteTeamThunk";
+import { deleteTeam } from "../../../modules/teams/teamThunks";
 import { Breadcrumbs } from "../../../ui/breadcrumbs/Breadcrumbs";
 
 interface TeamInfoProps {
@@ -21,14 +21,14 @@ export const TeamInfo = ({ ...rest }: TeamInfoProps) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const data = [
+  const paths = [
     { path: "/teams", name: "Teams" },
     { path: location.pathname, name: rest.name },
   ];
   return (
     <CardContainer>
       <Header>
-        <Breadcrumbs data={data} />
+        <Breadcrumbs data={paths} />
         <Icons>
           <Link to={`/teams/${rest.id}/edit`}>
             <EditIcon />
