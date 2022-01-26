@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -35,6 +35,7 @@ export const TeamsForm = ({ data, isEdit }: IProps) => {
     formState: { errors },
     handleSubmit,
     reset,
+    control,
     setValue,
   } = useForm<FormProps>();
 
@@ -43,6 +44,19 @@ export const TeamsForm = ({ data, isEdit }: IProps) => {
   }, [data, reset]);
 
   const action = isEdit ? updateTeams : addTeams;
+  const onChangeImage = useCallback(
+    (file) => {
+      dispatch(
+        saveImage({
+          file,
+          onSuccess: (imageUrl) => {
+            setValue("imageUrl", imageUrl);
+          },
+        }),
+      );
+    },
+    [dispatch, setValue],
+  );
 
   const onSubmit = (params: FormProps) =>
     dispatch(
@@ -53,12 +67,7 @@ export const TeamsForm = ({ data, isEdit }: IProps) => {
         },
       }),
     );
-  const onChangeImage = useCallback(
-    (file) => {
-      dispatch(saveImage({ file, onSuccess: (imageUrl) => setValue("imageUrl", imageUrl) }));
-    },
-    [dispatch, setValue],
-  );
+
   const location = useLocation();
   const paths = [
     { path: "/teams", name: "Teams" },
@@ -70,7 +79,18 @@ export const TeamsForm = ({ data, isEdit }: IProps) => {
         <Breadcrumbs data={paths} />
       </FormHeader>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <MyDropzone onChange={onChangeImage} defaultValue={data?.imageUrl} />
+        <Controller
+          name="imageUrl"
+          control={control}
+          rules={{ required: true }}
+          render={(props) => (
+            <MyDropzone
+              onChange={onChangeImage}
+              defaultValue={props.field.value}
+              error={errors.imageUrl?.type === "required" ? "Please, drop any image." : ""}
+            />
+          )}
+        />
         <Information>
           <Container>
             <Input

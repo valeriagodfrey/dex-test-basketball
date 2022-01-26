@@ -46,11 +46,7 @@ export const baseRequest = async <Params extends StringifiableRecord, Response>(
     } else {
       if (res.status === 401 || res.status === 403) {
         localStorage.removeItem("token");
-        toast.error(
-          res.status === 401
-            ? "User with the specified username / password was not found."
-            : "Forbidden",
-        );
+        toast.error(res.status === 401 ? "Unauthorized" : "Forbidden");
         throw new Error("Unauthorized");
       } else if (res.status === 409) {
         toast.error(res.statusText);

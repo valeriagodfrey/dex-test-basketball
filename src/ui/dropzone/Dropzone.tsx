@@ -1,16 +1,20 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
+import { toast } from "react-toastify";
 import styled, { css } from "styled-components";
 
 import addImage from "../../assets/images/addImage.png";
 import { media } from "../../assets/theme/media";
+import { CustomError } from "../error/CustomError";
 
 interface IProps {
   onChange?: (file: string) => void;
   defaultValue?: string;
+  error?: string;
 }
-export const MyDropzone = ({ onChange, defaultValue }: IProps) => {
+export const MyDropzone = ({ onChange, defaultValue, error }: IProps) => {
   const [file, setFile] = useState<string | null>(defaultValue || null);
+
   useEffect(() => {
     setFile(defaultValue || null);
   }, [defaultValue]);
@@ -25,6 +29,7 @@ export const MyDropzone = ({ onChange, defaultValue }: IProps) => {
           const result = fr.result as string;
           setFile(result);
           onChange?.(files[0]);
+          toast.success("Image was uploaded!");
         };
         fr.readAsDataURL(files[0]);
       }
@@ -40,6 +45,7 @@ export const MyDropzone = ({ onChange, defaultValue }: IProps) => {
         {!file && <EmptyImage src={addImage} alt="add_image" />}
         {file && <Image src={file} />}
       </ImageContainer>
+      <CustomError>{error}</CustomError>
     </AddImage>
   );
 };
@@ -54,9 +60,8 @@ const ImageContainer = styled.div<{ isDragActive?: boolean }>`
     width: 100%;
   }
   ${media.largeDesktop} {
-    max-height: 230px;
-    width: 90%;
-    height: auto;
+    width: 100%;
+    height: 261px;
   }
   cursor: pointer;
   background-color: ${({ theme }) => theme.colors.lightGrey};
@@ -71,6 +76,8 @@ const ImageContainer = styled.div<{ isDragActive?: boolean }>`
 const AddImage = styled.div`
   display: flex;
   justify-self: center;
+  flex-direction: column;
+
   ${media.desktop} {
     justify-self: stretch;
   }

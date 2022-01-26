@@ -100,7 +100,18 @@ export const PlayersForm = ({ data, isEdit }: IProps) => {
         <Breadcrumbs data={paths} />
       </FormHeader>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <MyDropzone onChange={onChangeImage} defaultValue={data?.avatarUrl} />
+        <Controller
+          name="avatarUrl"
+          control={control}
+          rules={{ required: true }}
+          render={(props) => (
+            <MyDropzone
+              onChange={onChangeImage}
+              defaultValue={props.field.value}
+              error={errors.avatarUrl?.type === "required" ? "Please, drop any image." : ""}
+            />
+          )}
+        />
         <Information>
           <Container>
             <Input
