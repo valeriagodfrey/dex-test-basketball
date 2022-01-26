@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import { DeleteIcon } from "../../../assets/icons/DeleteIcon";
@@ -18,17 +18,17 @@ interface TeamInfoProps {
 }
 export const TeamInfo = ({ ...rest }: TeamInfoProps) => {
   const dispatch = useDispatch();
-  const { id } = useParams();
+
   const navigate = useNavigate();
   const location = useLocation();
-  const paths = [
+  const data = [
     { path: "/teams", name: "Teams" },
     { path: location.pathname, name: rest.name },
   ];
   return (
     <CardContainer>
       <Header>
-        <Breadcrumbs data={paths} />
+        <Breadcrumbs data={data} />
         <Icons>
           <Link to={`/teams/${rest.id}/edit`}>
             <EditIcon />
@@ -38,7 +38,7 @@ export const TeamInfo = ({ ...rest }: TeamInfoProps) => {
               onClick={() =>
                 dispatch(
                   deleteTeam({
-                    params: { id: Number(id) },
+                    params: { id: rest.id },
                     onSuccess: () => {
                       navigate("/");
                     },
