@@ -29,7 +29,7 @@ export const MyDropzone = ({ onChange, defaultValue, error }: IProps) => {
           const result = fr.result as string;
           setFile(result);
           onChange?.(files[0]);
-          toast.success("Image was uploaded!");
+          toast.success("Image loaded!");
         };
         fr.readAsDataURL(files[0]);
       }

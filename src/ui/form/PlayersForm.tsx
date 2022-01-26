@@ -38,6 +38,7 @@ interface IProps {
   data?: IGetPlayerResponse;
   isEdit?: boolean;
 }
+
 export const PlayersForm = ({ data, isEdit }: IProps) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();

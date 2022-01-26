@@ -8,8 +8,11 @@ export const StyledToastContainer = styled(ToastContainer)`
   .Toastify__toast--error {
     background-color: ${({ theme }) => theme.colors.lightRed};
   }
+  .Toastify__toast--success {
+    color: ${({ theme }) => theme.colors.red};
+  }
   .Toastify__toast-theme--light {
-    color: var(--toastify-color-light);
+    color: ${({ theme }) => theme.colors.red};
   }
   .Toastify__toast {
     min-height: 24px;
@@ -32,7 +35,7 @@ export const StyledToastContainer = styled(ToastContainer)`
     font-size: 16px;
     line-height: 24px;
   }
-  .Toastify__progress-bar--error {
+  .Toastify__progress-bar {
     background: var(--toastify-color-null);
   }
   .Toastify__zoom-enter {
