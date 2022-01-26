@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { getPlayer } from "../../modules/players/getPlayerThunk";
 import { PlayersForm } from "../../ui/form/PlayersForm";
 import { Layout } from "../../ui/layout/Layout";
-import { playerSelector } from "../player/Player";
+import { playerSelector } from "../player/player";
 
 export const EditPlayer = () => {
   const { id } = useParams();

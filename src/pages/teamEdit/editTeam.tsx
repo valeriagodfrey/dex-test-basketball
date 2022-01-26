@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { getTeam } from "../../modules/teams/getTeamThunk";
 import { TeamsForm } from "../../ui/form/TeamsForm";
 import { Layout } from "../../ui/layout/Layout";
-import { teamSelector } from "../team/Team";
+import { teamSelector } from "../team/team";
 
 export const EditTeam = () => {
   const { id } = useParams();

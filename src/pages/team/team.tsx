@@ -7,7 +7,7 @@ import { RootState } from "../../core/redux/store";
 import { getPlayers } from "../../modules/players/getPlayersThunk";
 import { getTeam } from "../../modules/teams/getTeamThunk";
 import { Layout } from "../../ui/layout/Layout";
-import { playersSelector } from "../players/PlayersList";
+import { playersSelector } from "../players/playersList";
 import { Roster } from "./components/roster/Roster";
 import { TeamInfo } from "./components/TeamInfo";
 
