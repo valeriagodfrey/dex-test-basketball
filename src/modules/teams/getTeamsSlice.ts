@@ -29,4 +29,4 @@ const getTeamsSlice = createSlice({
   },
 });
 
-export const { reducer: getTeamsReducer } = getTeamsSlice;
+export const { reducer: getTeamsListReducer } = getTeamsSlice;
