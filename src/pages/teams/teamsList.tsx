@@ -17,7 +17,7 @@ import { CustomSelect } from "../../ui/select/CustomSelect";
 import { IOption } from "../../ui/select/data";
 import { TeamItem } from "./components/TeamItem";
 
-const teamsSelector = (state: RootState) => state.getTeams;
+const teamsSelector = (state: RootState) => state.getTeamsList;
 
 export const TeamsList = () => {
   const dispatch = useDispatch();
