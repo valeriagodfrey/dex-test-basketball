@@ -1,19 +1,15 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import { ProfileIcon } from "../../assets/icons/ProfileIcon";
 import logo from "../../assets/images/logo.png";
 import { media } from "../../assets/theme/media";
-import { RootState } from "../../core/redux/store";
 import { Drawer } from "../drawer/Drawer";
 import { Hamburger } from "../hamburger/Hamburger";
 
-const authorizationSelector = (state: RootState) => state.authorization.content?.name;
-
 export const Header = () => {
-  const userName = useSelector(authorizationSelector);
+  const userName = localStorage.getItem("userName");
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
   return (

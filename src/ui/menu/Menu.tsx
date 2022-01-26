@@ -28,6 +28,8 @@ export const Menu = () => {
         <SignOut
           onClick={() => {
             localStorage.removeItem("token");
+            localStorage.removeItem("userName");
+            localStorage.removeItem("avatarUrl");
             window.dispatchEvent(new Event("storage"));
           }}
         >

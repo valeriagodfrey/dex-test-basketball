@@ -8,7 +8,7 @@ import { SignOutIcon } from "../../assets/icons/SignOutIcon";
 import { media } from "../../assets/theme/media";
 
 interface Props {
-  userName?: string;
+  userName: string | null;
   visible?: boolean;
   onClick?: () => void;
 }

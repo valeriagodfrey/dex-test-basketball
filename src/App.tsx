@@ -5,11 +5,10 @@ import { useCallback, useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { Navigate, Routes } from "react-router";
 import { BrowserRouter, Route } from "react-router-dom";
-import { PersistGate } from "redux-persist/integration/react";
 import styled, { ThemeProvider } from "styled-components";
 
 import { theme } from "./assets/theme/theme";
-import { persistor, store } from "./core/redux/store";
+import { store } from "./core/redux/store";
 import { Authorization } from "./pages/authorization/authorization";
 import { Registration } from "./pages/authorization/registration";
 import { Page404 } from "./pages/page404";
@@ -42,49 +41,47 @@ function App() {
   }, [onChangeStorage]);
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <ThemeProvider theme={theme}>
-          <StyledToastContainer
-            position="top-right"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss={true}
-            draggable
-            pauseOnHover
-          />
-          <BrowserRouter>
-            {token !== null ? (
-              <PrivatePages>
-                <Header />
-                <Menu />
-                <Routes>
-                  <Route path="/teams" element={<TeamsList />} />
-                  <Route path="/players" element={<PlayersList />} />
-                  <Route path="/authorization" element={<Navigate to="/teams" />} />
-                  <Route path="/registration" element={<Navigate to="/teams" />} />
-                  <Route path="/" element={<Navigate to="/teams" />} />
-                  <Route path="/teams/add" element={<AddTeam />} />
-                  <Route path="/teams/:id" element={<Team />} />
-                  <Route path="/teams/:id/edit" element={<EditTeam />} />
-                  <Route path="/players/add" element={<AddPlayer />} />
-                  <Route path="/players/:id" element={<Player />} />
-                  <Route path="/players/:id/edit" element={<EditPlayer />} />
-                  <Route path="*" element={<Page404 />} />
-                </Routes>
-              </PrivatePages>
-            ) : (
+      <ThemeProvider theme={theme}>
+        <StyledToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss={true}
+          draggable
+          pauseOnHover
+        />
+        <BrowserRouter>
+          {token !== null ? (
+            <PrivatePages>
+              <Header />
+              <Menu />
               <Routes>
-                <Route path="/authorization" element={<Authorization />} />
-                <Route path="/registration" element={<Registration />} />
-                <Route path="*" element={<Navigate to="/authorization" />} />
+                <Route path="/teams" element={<TeamsList />} />
+                <Route path="/players" element={<PlayersList />} />
+                <Route path="/authorization" element={<Navigate to="/teams" />} />
+                <Route path="/registration" element={<Navigate to="/teams" />} />
+                <Route path="/" element={<Navigate to="/teams" />} />
+                <Route path="/teams/add" element={<AddTeam />} />
+                <Route path="/teams/:id" element={<Team />} />
+                <Route path="/teams/:id/edit" element={<EditTeam />} />
+                <Route path="/players/add" element={<AddPlayer />} />
+                <Route path="/players/:id" element={<Player />} />
+                <Route path="/players/:id/edit" element={<EditPlayer />} />
+                <Route path="*" element={<Page404 />} />
               </Routes>
-            )}
-          </BrowserRouter>
-        </ThemeProvider>
-      </PersistGate>
+            </PrivatePages>
+          ) : (
+            <Routes>
+              <Route path="/authorization" element={<Authorization />} />
+              <Route path="/registration" element={<Registration />} />
+              <Route path="*" element={<Navigate to="/authorization" />} />
+            </Routes>
+          )}
+        </BrowserRouter>
+      </ThemeProvider>
     </Provider>
   );
 }
