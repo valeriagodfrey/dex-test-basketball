@@ -1,11 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import { fetchAuthorizationReducer } from "../../modules/authorization/authorizationSlise";
-import { addPlayersReducer } from "../../modules/players/addPlayersSlice";
-import { deletePlayerReducer } from "../../modules/players/deletePlayerSlice";
-import { getPlayerReducer } from "../../modules/players/getPlayerSlice";
-import { getPlayersReducer } from "../../modules/players/getPlayersSlice";
-import { updatePlayersReducer } from "../../modules/players/updatePlayersSlice";
+import { fetchAuthorizationReducer } from "../../modules/authorization/authorizationSlice";
+import { getPlayersListReducer } from "../../modules/players/getPlayersSlice";
+import { playerReducer } from "../../modules/players/playerSlices";
 import { getPositionsReducer } from "../../modules/positions/getPositionsSlice";
 import { addTeamsReducer } from "../../modules/teams/addTeamsSlice";
 import { deleteTeamReducer } from "../../modules/teams/deleteTeamSlice";
@@ -21,11 +18,8 @@ export const store = configureStore({
     addTeams: addTeamsReducer,
     deleteTeam: deleteTeamReducer,
     updateTeams: updateTeamsReducer,
-    getPlayers: getPlayersReducer,
-    getPlayer: getPlayerReducer,
-    addPlayers: addPlayersReducer,
-    updatePlayers: updatePlayersReducer,
-    deletePLayers: deletePlayerReducer,
+    player: playerReducer,
+    getPlayersList: getPlayersListReducer,
     getPositions: getPositionsReducer,
   },
 });

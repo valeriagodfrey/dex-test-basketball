@@ -4,11 +4,11 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import { RootState } from "../../core/redux/store";
-import { getPlayer } from "../../modules/players/getPlayerThunk";
+import { getPlayer } from "../../modules/players/playerThunks";
 import { Layout } from "../../ui/layout/Layout";
 import { PlayerInfo } from "./components/PlayerInfo";
 
-export const playerSelector = (state: RootState) => state.getPlayer;
+export const playerSelector = (state: RootState) => state.player;
 
 export const Player = () => {
   const { id } = useParams();

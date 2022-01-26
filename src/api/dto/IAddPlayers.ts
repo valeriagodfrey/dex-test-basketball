@@ -1,4 +1,4 @@
-export type IAddPlayersRequest = {
+export type IAddPlayerRequest = {
   name: string;
   number: number;
   position: string;
@@ -9,7 +9,7 @@ export type IAddPlayersRequest = {
   avatarUrl: string;
 };
 
-export type IAddPlayersResponse = {
+export type IAddPlayerResponse = {
   name: string;
   number: number;
   position: string;

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import { getPlayer } from "../../modules/players/getPlayerThunk";
+import { getPlayer } from "../../modules/players/playerThunks";
 import { PlayersForm } from "../../ui/form/PlayersForm";
 import { Layout } from "../../ui/layout/Layout";
 import { playerSelector } from "../player/player";

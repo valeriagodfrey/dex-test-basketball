@@ -7,7 +7,7 @@ import { EditIcon } from "../../../assets/icons/EditIcon";
 import player from "../../../assets/images/player.png";
 import { media } from "../../../assets/theme/media";
 import { calculateAge } from "../../../core/helpers/calculateAge";
-import { deletePlayer } from "../../../modules/players/deletePlayerThunk";
+import { deletePlayer } from "../../../modules/players/playerThunks";
 import { Breadcrumbs } from "../../../ui/breadcrumbs/Breadcrumbs";
 
 interface PlayerInfoProps {

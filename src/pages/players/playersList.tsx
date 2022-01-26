@@ -20,7 +20,7 @@ import { CustomSelect } from "../../ui/select/CustomSelect";
 import { IOption } from "../../ui/select/data";
 import { PlayerItem } from "./components/PlayerItem";
 
-export const playersSelector = (state: RootState) => state.getPlayers;
+export const playersSelector = (state: RootState) => state.getPlayersList;
 
 export const PlayersList = () => {
   const dispatch = useDispatch();

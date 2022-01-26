@@ -4,13 +4,13 @@ import { IGetPlayersResponse } from "../../api/dto/IGetPlayers";
 import { ContentLoading } from "../../common/loading";
 import { getPlayers } from "./getPlayersThunk";
 
-export type GetPlayersState = ContentLoading<IGetPlayersResponse | undefined>;
-const initialState: GetPlayersState = {
+export type GetPlayersListState = ContentLoading<IGetPlayersResponse | undefined>;
+const initialState: GetPlayersListState = {
   content: undefined,
   status: "init",
 };
 
-const getPlayersSlice = createSlice({
+const getPlayersListSlice = createSlice({
   name: "getPlayers",
   initialState,
   reducers: {},
@@ -29,4 +29,4 @@ const getPlayersSlice = createSlice({
   },
 });
 
-export const { reducer: getPlayersReducer } = getPlayersSlice;
+export const { reducer: getPlayersListReducer } = getPlayersListSlice;

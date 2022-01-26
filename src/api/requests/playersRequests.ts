@@ -1,7 +1,7 @@
 import { stringifyUrl } from "query-string";
 
 import { baseRequest } from "../baseRequest";
-import { IAddPlayersRequest, IAddPlayersResponse } from "../dto/IAddPlayers";
+import { IAddPlayerRequest, IAddPlayerResponse } from "../dto/IAddPlayers";
 import {
   IGetPlayerParams,
   IGetPlayerResponse,
@@ -10,8 +10,8 @@ import {
 } from "../dto/IGetPlayers";
 import { IGetPositionsResponse } from "../dto/IGetPositions";
 
-export const addPlayersRequest = (params: IAddPlayersRequest) =>
-  baseRequest<IAddPlayersRequest, IAddPlayersResponse>({
+export const addPlayerRequest = (params: IAddPlayerRequest) =>
+  baseRequest<IAddPlayerRequest, IAddPlayerResponse>({
     url: "/api/Player/Add",
     method: "POST",
     params,
@@ -44,8 +44,8 @@ export const getPositionsRequest = () =>
     method: "GET",
   });
 
-export const updatePlayersRequest = (params: IAddPlayersRequest) =>
-  baseRequest<IAddPlayersRequest, IAddPlayersResponse>({
+export const updatePlayersRequest = (params: IAddPlayerRequest) =>
+  baseRequest<IAddPlayerRequest, IAddPlayerResponse>({
     url: "/api/Player/Update",
     method: "PUT",
     params,

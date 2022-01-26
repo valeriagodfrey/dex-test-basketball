@@ -7,8 +7,7 @@ import styled from "styled-components";
 
 import { IGetPlayerResponse } from "../../api/dto/IGetPlayers";
 import { media } from "../../assets/theme/media";
-import { addPlayers } from "../../modules/players/addPlayersThunk";
-import { updatePlayers } from "../../modules/players/updatePlayersThunk";
+import { addPlayer, updatePlayer } from "../../modules/players/playerThunks";
 import { getPositionsSelector } from "../../modules/positions/getPositionsSelector";
 import { getPositions } from "../../modules/positions/getPositionsThunk";
 import { saveImage } from "../../modules/saveImage/saveImageThunk";
@@ -69,7 +68,7 @@ export const PlayersForm = ({ data, isEdit }: IProps) => {
 
   const teams = useSelector(getTeamsOptionsSelector);
 
-  const action = isEdit ? updatePlayers : addPlayers;
+  const action = isEdit ? updatePlayer : addPlayer;
 
   const onSubmit = (params: FormProps) =>
     dispatch(
